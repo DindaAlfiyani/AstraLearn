@@ -3,84 +3,64 @@
     Layout = "_Layout";
 }
 
-        <div class="pagetitle">
-            <h1>Data Pelatihan</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Pages</li>
-                    <li class="breadcrumb-item active">Data Pelatihan</li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
-
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
-
-        <section class="section">
-            <div class="row">
-                <!--untuk lebar card-->
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <hr />
-                                <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_pelatihan">
-                                    <i class="fas fa-plus fa-sm"></i>Tambah Data Pelatihan
-                                </button>
-                            <table class="table datatable">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kode Pelatihan</th>
-                                        <th scope="col">Klasifikasi Pelatihan</th>
-                                        <th scope="col">Nama Pelatihan</th>
-                                        <th scope="col">Jumlah Peserta</th>
-                                        <th scope="col">Jumlah Section</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr data-id="1">
-                                        <!-- Add data-id attribute to store anggotaId -->
-                                        <td>1</td>
-                                        <td>PLT001</td>
-                                        <td>Teknik Informatika</td>
-                                        <td>Bahasa C#</td>
-                                        <td>60</td>
-                                        <td>15</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-danger delete-button"><i class="bi bi-exclamation-octagon"></i></button>
-                                            <a asp-controller="DataPelatihan" asp-action="Edit" class="btn btn-primary btn-sm"><i class="bi bi-exclamation-triangle"></i></a>
-                                        </td>
-                                    </tr>
-                                    <!-- Add more rows as needed -->
-                                </tbody>
-
-                            </table>
-                            <!-- End Table with stripped rows -->
-                            @if (TempData["SuccesMessage"] != null)
-                            {
-                                <div class="row">
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <i class="bi bi-check-circle me-1"></i>
-                                        <strong>Sukses!</strong>@TempData["SuccessMessage"]
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                </div>
-                            }
-
-
+<section class="section">
+    <div class="pagetitle">
+        <h1>Data Pelatihan</h1>
+    </div><!-- End Page Title -->
+    <div class="row">
+        <!-- untuk lebar card -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <hr />
+                    <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_pelatihan">
+                        <i class="fas fa-plus fa-sm"></i>Tambah Data Pelatihan
+                    </button>
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Kode Pelatihan</th>
+                                <th scope="col">Klasifikasi Pelatihan</th>
+                                <th scope="col">Nama Pelatihan</th>
+                                <th scope="col">Jumlah Peserta</th>
+                                <th scope="col">Jumlah Section</th>
+                                <th scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-id="1">
+                                <!-- Add data-id attribute to store anggotaId -->
+                                <td>1</td>
+                                <td>PLT001</td>
+                                <td>Teknik Informatika</td>
+                                <td>Bahasa C#</td>
+                                <td>60</td>
+                                <td>15</td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger delete-button"><i class="bi bi-exclamation-octagon"></i></button>
+                                    <a asp-controller="DataPelatihan" asp-action="Edit" class="btn btn-primary btn-sm"><i class="bi bi-exclamation-triangle"></i></a>
+                                </td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+                    @if (TempData["SuccesMessage"] != null)
+                    {
+                        <div class="row">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="bi bi-check-circle me-1"></i>
+                                <strong>Sukses!</strong>@TempData["SuccessMessage"]
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
+        </div>
+    </div>
 
-
-    <!-- Modal -->
     <!-- Modal -->
     <div class="modal fade" id="tambah_pelatihan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -97,36 +77,30 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label class="control-label">Kode Pelatihan</label>
-                            <!-- Add the "name" attribute to match the property in your model -->
                             <input name="KodeKlasifikasi" class="form-control" />
                             <span class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Kode Pengguna</label>
-                            <!-- Add the "name" attribute to match the property in your model -->
                             <input name="NamaKlasifikasi" class="form-control" />
                             <span class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Kode Klasifikasi</label>
-                            <!-- Add the "name" attribute to match the property in your model -->
                             <input name="NamaKlasifikasi" class="form-control" />
                             <span class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Nama Pelatihan</label>
-                            <!-- Add the "name" attribute to match the property in your model -->
                             <input name="NamaKlasifikasi" class="form-control" />
                             <span class="text-danger"></span>
                         </div>
                         <br>
                         <div class="form-group">
-                            <!-- Use the "type" attribute to submit the form -->
                             <input type="submit" value="Create" class="btn btn-primary" />
                         </div>
                         <br>
                         <div class="form-group">
-                            <!-- Use the "button" element to close the modal without submitting the form -->
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -134,9 +108,18 @@
             </div>
         </div>
     </div>
-
 </section>
+<style>
+    .section {
+        min-height: 78vh;
+        display: flex;
+        flex-direction: column;
+    }
 
+    .container-fluid {
+        flex: 1;
+    }
+</style>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         $(".delete-button").click(function () {
@@ -158,10 +141,8 @@
                         url: "/Buku/Delete/" + bukuId,
                         type: "POST",
                         success: function (data) {
-                            // Tampilkan pesan sukses jika diperlukan
                             if (data.success) {
                                 Swal.fire("Sukses!", data.message, "success");
-                                // Refresh halaman setelah menghapus
                                 location.reload();
                             } else {
                                 Swal.fire("Gagal!", data.message, "error");
