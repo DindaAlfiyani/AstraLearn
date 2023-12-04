@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Admin - Kelola Akses";
+    Layout = "_Layout";
+}
+
+
+        <div class="pagetitle">
+            <h1>Kelola Akses</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item">Pages</li>
+                    <li class="breadcrumb-item active">Kelola Akses</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <div class="search-bar">
+            <form class="search-form d-flex align-items-center" method="POST" action="#">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+        </div><!-- End Search Bar -->
+
+        <section class="section">
+            <div class="row">
+                <!--untuk lebar card-->
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <hr />
+
+                            <!-- Table with stripped rows -->
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nama Pengguna</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Hak Akses</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-id="1">
+                                        <!-- Add data-id attribute to store anggotaId -->
+                                        <td>1</td>
+                                        <td>nanacantik@gmail.com</td>
+                                        <td>Peserta c</td>
+                                        <td>001</td>
+                                        <td>
+                                            <a asp-controller="KelolaAkses" asp-action="Edit" class="btn btn-primary btn-sm"><i class="bi bi-exclamation-triangle"></i></a>
+                                        </td>
+                                    </tr>
+                                    <!-- Add more rows as needed -->
+                                </tbody>
+
+                            </table>
+                            <!-- End Table with stripped rows -->
+                            @if (TempData["SuccesMessage"] != null)
+                            {
+                                <div class="row">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <i class="bi bi-check-circle me-1"></i>
+                                        <strong>Sukses!</strong>@TempData["SuccessMessage"]
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="modal fade" id="updModalFile" tabindex="-1" role="dialog" aria-labelledby="updModalFileLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-md" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="updModalFileLabel">Pengumpulan Tugas</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p style="font-size: 12px;">
+                                                Berkas harus berformat .jpg, .png, .zip, .rar, .pdf, .docx, .pptx, .xlsx, atau .txt dengan ukuran berkas maksimal 5MB.
+                                            </p>
+                                            <input type="file" name="ctl00$MainContent$tugasUpload" id="tugasUpload" class="form-control" onchange="if (!window.__cfRLUnblockHandlers) return false; valBerkas(this, &#39;materi&#39;);" data-cf-modified-dbdcc75093db955e883bb913-="" />
+                                            <br />
+                                            <p style="font-size: 12px; color: red;">Berkas yang akan di terima adalah berkas yang diunggah terakhir. Jika ada beberapa berkas yang di unggah, pastikan untuk dijadikan format .zip . </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input name="ctl00$MainContent$txtConfrimtkm" type="text" id="txtConfrimtkm" class="hidden-xs-up" />
+                                            <input name="ctl00$MainContent$txtConfrimRde" type="text" id="txtConfrimRde" class="hidden-xs-up" />
+                                            <input name="ctl00$MainContent$txtConfrimJenisTugas" type="text" id="txtConfrimJenisTugas" class="hidden-xs-up" />
+                                            <input name="ctl00$MainContent$txtConfrimTugas" type="text" id="txtConfrimTugas" class="hidden-xs-up" />
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                            <a id="MainContent_LinkUploadTugas" class="btn btn-primary" href="javascript:__doPostBack(&#39;ctl00$MainContent$LinkUploadTugas&#39;,&#39;&#39;)">Konfirmasi</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <script>
+                                // Tunggu hingga DOM siap
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    // Pilih tombol berdasarkan id
+                                    var btnTambahAnggota = document.getElementById("btnTambahAnggota");
+
+                                    // Tambahkan event listener klik pada tombol
+                                    btnTambahAnggota.addEventListener("click", function () {
+                                        // Tampilkan modal
+                                        $('#updModalFile').modal('show');
+                                    });
+                                });
+                            </script>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

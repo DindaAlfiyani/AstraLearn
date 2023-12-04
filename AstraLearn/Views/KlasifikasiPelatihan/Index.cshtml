@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "Admin - Klasifikasi Pelatihan";
+    Layout = "_Layout";
+}
+
+
+        <div class="pagetitle">
+            <h1>Klasifikasi Pelatihan</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item">Pages</li>
+                    <li class="breadcrumb-item active">Klasifikasi Pelatihan</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="container-fluid">
+        <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_klasifikasi">
+            <i class="fas fa-plus fa-sm"></i>Tambah Klasifikasi
+        </button>
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Klasifikasi</th>
+                            <th scope="col">Pelatihan</th>
+                            <th scope="col">Kode Klasifikasi</th>
+                            <th scope="col">Jumlah Pelatihan</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+            <tbody>
+                <tr data-id="1">
+                    <!-- Add data-id attribute to store anggotaId -->
+                    <td>1</td>
+                    <td>Teknik Informatika</td>
+                    <td>Bahasa c</td>
+                    <td>KLS001</td>
+                    <td>1</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger delete-button"><i class="bi bi-exclamation-octagon"></i></button>
+                        <a asp-controller="KlasifikasiPelatihan" asp-action="Edit" class="btn btn-primary btn-sm"><i class="bi bi-exclamation-triangle"></i></a>
+                    </td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+
+
+                </table>
+</div>
+
+        <!-- Modal -->
+            <!-- Modal -->
+            <div class="modal fade" id="tambah_klasifikasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">FORM TAMBAH KLASIFIKASI</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Add the necessary attributes for model binding in ASP.NET Core -->
+                            <form asp-controller="KlasifikasiPelatihan" asp-action="Create" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label class="control-label">Kode Klasifikasi</label>
+                                    <!-- Add the "name" attribute to match the property in your model -->
+                                    <input name="KodeKlasifikasi" class="form-control" />
+                                    <span class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Nama Klasifikasi</label>
+                                    <!-- Add the "name" attribute to match the property in your model -->
+                                    <input name="NamaKlasifikasi" class="form-control" />
+                                    <span class="text-danger"></span>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <!-- Use the "type" attribute to submit the form -->
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <!-- Use the "button" element to close the modal without submitting the form -->
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $(".delete-button").click(function () {
+            var bukuId = $(this).data("id");
+
+            Swal.fire({
+                title: "Hapus Buku?",
+                text: "Apakah anda ingin menghapus buku ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya",
+                cancelButtonText: "Tidak"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Mengirimkan permintaan menghapus ke kontrol
+                    $.ajax({
+                        url: "/Buku/Delete/" + bukuId,
+                        type: "POST",
+                        success: function (data) {
+                            // Tampilkan pesan sukses jika diperlukan
+                            if (data.success) {
+                                Swal.fire("Sukses!", data.message, "success");
+                                // Refresh halaman setelah menghapus
+                                location.reload();
+                            } else {
+                                Swal.fire("Gagal!", data.message, "error");
+                            }
+                        },
+                        error: function () {
+                            Swal.fire("Error!", "Terjadi kesalahan.", "error");
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+
