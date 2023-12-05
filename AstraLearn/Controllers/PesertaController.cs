@@ -28,5 +28,10 @@ namespace AstraLearn.Controllers
         {
             return View();
         }
+
+        public IActionResult Section()
+        {
+            return View();
+        }
     }
 }
