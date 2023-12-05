@@ -149,7 +149,7 @@
         });
 
 
-        function simpanForm() {
+        function tambahKlasifikasi() {
             var namaKlasifikasi = $("#NamaKlasifikasi").val();
             var deskripsiKlasifikasi = $("#DeskripsiKlasifikasi").val();
             if (!namaKlasifikasi.trim()) {
@@ -182,14 +182,14 @@
                     notifikasiTambahSukses();
                 },
                 error: function () {
-                    // Tambahkan penanganan kesalahan jika diperlukan
+                    
                 }
             });
         }
 
         $("#myForm").submit(function (e) {
             e.preventDefault();
-            simpanForm();
+            tambahKlasifikasi();
         });
 
         $(document).on("click", ".delete-button", function () {
@@ -245,7 +245,7 @@
             });
         });
 
-        function updateForm() {
+        function ubahKlasifikasi() {
             var namaKlasifikasi = $("#EditNamaKlasifikasi").val();
             var deskripsiKlasifikasi = $("#EditDeskripsiKlasifikasi").val();
 
@@ -286,10 +286,10 @@
 
         $("#editForm").submit(function (e) {
             e.preventDefault();
-            updateForm();
+            ubahKlasifikasi();
         });
 
-
+            
         function notifikasiTambahSukses() {
             Swal.fire({
                 title: "Sukses!",
@@ -325,5 +325,9 @@
                 location.reload();
             });
         }
+
+        $('#edit_klasifikasi .close').on('click', function () {
+            $('#edit_klasifikasi').modal('hide');
+        });
     });
 </script>
