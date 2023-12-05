@@ -70,11 +70,11 @@
     </div>
 
     <!-- Edit Modal -->
-    <div class="modal fade" id="edit_klasifikasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="edit_pelatihan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">FORM EDIT KLASIFIKASI</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">FORM EDIT PELATIHAN</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -83,14 +83,20 @@
                     <form id="editForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="EditNamaPelatihan">Nama Klasifikasi</label>
+                            <label class="control-label" for="EditNamaPelatihan">Nama Pelatihan</label>
                             <input id="EditNamaPelatihan" name="EditNamaPelatihan" class="form-control" />
                             <span class="text-danger" id="errorEditNamaPelatihan"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditDeskripsiPelatihan">Deskripsi Klasifikasi</label>
+                            <label class="control-label" for="EditDeskripsiPelatihan">Deskripsi Pelatihan</label>
                             <input id="EditDeskripsiPelatihan" name="EditDeskripsiPelatihan" class="form-control" />
                             <span class="text-danger" id="errorEditDeskripsiPelatihan"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="EditKlasifikasiPelatihan">Klasifikasi Pelatihan</label>
+                            <select id="EditKlasifikasiPelatihan" name="EditKlasifikasiPelatihan" class="form-control">
+                                <!-- Options will be dynamically populated -->
+                            </select>
                         </div>
                         <br>
                         <div class="form-group">
@@ -195,31 +201,33 @@
             var deskripsiPelatihan = $("#DeskripsiPelatihan").val();
             var klasifikasiPelatihan = $("#KlasifikasiPelatihan").val();
             if (!namaPelatihan.trim()) {
-                $("#errorNamaPelatihan").text("Nama Klasifikasi tidak boleh kosong.");
+                $("#errorNamaPelatihan").text("Nama Pelatihan tidak boleh kosong.");
                 return;
             } else {
                 $("#errorNamaPelatihan").text("");
             }
 
             if (!deskripsiPelatihan.trim()) {
-                $("#errorDeskripsiPelatihan").text("Deskripsi Klasifikasi tidak boleh kosong.");
+                $("#errorDeskripsiPelatihan").text("Deskripsi Pelatihan tidak boleh kosong.");
                 return;
             } else {
                 $("#errorDeskripsiPelatihan").text("");
             }
 
             var data = {
+                id_pelatihan: 0,
                 id_pengguna: 1,
                 id_klasifikasi: klasifikasiPelatihan,
                 nama_pelatihan: namaPelatihan,
                 deskripsi_pelatihan: deskripsiPelatihan,
-                jumlah_pelatihan: 0
+                jumlah_pelatihan: 0,
+                nama_klasifikasi: namaPelatihan
             };
 
             console.log(data);
 
             $.ajax({
-                url: rootHost + '/KlasifikasiPelatihan/InsertKlasifikasiPelatihan',
+                url: rootHost + '/Pelatihan/InsertPelatihan',
                 method: "post",
                 data: JSON.stringify(data),
                 contentType: "application/json",
@@ -234,15 +242,28 @@
 
         $("#myForm").submit(function (e) {
             e.preventDefault();
-            tambahKlasifikasi();
+            tambahPelatihan();
         });
 
+        function hapusPelatihan() {
+            $.ajax({
+                url: rootHost + '/Pelatihan/DeletePelatihan?id=' + pelatihanId,
+                type: "POST",
+                success: function (data) {
+                    notifikasiHapusSukses();
+                },
+                error: function () {
+                    Swal.fire("Error!", "Terjadi kesalahan.", "error");
+                }
+            });
+        }
+
         $(document).on("click", ".delete-button", function () {
-            klasifikasiId = $(this).closest('tr').data("id");
+            pelatihanId = $(this).closest('tr').data("id");
 
             Swal.fire({
-                title: "Hapus Klasifikasi?",
-                text: "Apakah anda ingin menghapus klasifikasi ini?",
+                title: "Hapus Pelatihan?",
+                text: "Apakah anda ingin menghapus pelatihan ini?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -251,32 +272,24 @@
                 cancelButtonText: "Tidak"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $.ajax({
-                        url: rootHost + '/KlasifikasiPelatihan/DeleteKlasifikasiPelatihan?id=' + klasifikasiId,
-                        type: "POST",
-                        success: function (data) {
-                            notifikasiHapusSukses();
-                        },
-                        error: function () {
-                            Swal.fire("Error!", "Terjadi kesalahan.", "error");
-                        }
-                    });
+                    hapusPelatihan();
                 }
             });
         });
 
         $('#dataTable').on('click', 'button.edit-button', function () {
-            klasifikasiId = $(this).data('id');
+            pelatihanId = $(this).data('id');
             $.ajax({
-                url: rootHost + '/KlasifikasiPelatihan/GetKlasifikasiPelatihan?id=' + klasifikasiId,
+                url: rootHost + '/Pelatihan/GetPelatihan?id=' + pelatihanId,
                 type: 'GET',
                 success: function (response) {
                     if (response && response.data) {
                         var data = response.data;
 
                         $('#edit_klasifikasi').modal('show');
-                        $('#EditNamaPelatihan').val(data.nama_klasifikasi);
-                        $('#EditDeskripsiPelatihan').val(data.deskripsi);
+                        $('#EditNamaPelatihan').val(data.nama_pelatihan);
+                        $('#EditDeskripsiPelatihan').val(data.deskripsi_pelatihan);
+                        loadKlasifikasi2(data.id_klasifikasi);
                     } else {
                         console.error("Invalid response format:", response);
                         Swal.fire('Error!', 'Terjadi kesalahan dalam format respons.', 'error');
@@ -289,36 +302,77 @@
             });
         });
 
+        function loadKlasifikasi2(a) {
+            $.ajax({
+                url: rootHost + '/KlasifikasiPelatihan/GetAllKlasifikasiPelatihan',
+                method: 'get',
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.status === 200 && response.data) {
+                        var klasifikasiData = response.data;
+
+                        // Clear existing options in the dropdown
+                        $('#EditKlasifikasiPelatihan').empty();
+
+                        // Append options to the dropdown
+                        klasifikasiData.forEach(function (item) {
+                            var option = $('<option>', {
+                                value: item.id_klasifikasi,
+                                text: item.nama_klasifikasi
+                            });
+
+                            // Set the selected attribute for the matching ID
+                            if (item.id_klasifikasi === a) {
+                                option.attr('selected', 'selected');
+                            }
+
+                            $('#EditKlasifikasiPelatihan').append(option);
+                        });
+                    } else {
+                        console.error("Invalid response format:", response);
+                    }
+                },
+                error: function () {
+                    console.error("Failed to load classification data.");
+                }
+            });
+        }
+
         function ubahKlasifikasi() {
             var namaPelatihan = $("#EditNamaPelatihan").val();
             var deskripsiPelatihan = $("#EditDeskripsiPelatihan").val();
-
+            var klasifikasiPelatihan = $("#EditKlasifikasiPelatihan").val();
             if (!namaPelatihan.trim()) {
-                $("#errorEditNamaPelatihan").text("Nama Klasifikasi tidak boleh kosong.");
+                $("#errorEditNamaPelatihan").text("Nama Pelatihan tidak boleh kosong.");
                 return;
             } else {
                 $("#errorEditNamaPelatihan").text("");
             }
 
             if (!deskripsiPelatihan.trim()) {
-                $("#errorEditDeskripsiPelatihan").text("Deskripsi Klasifikasi tidak boleh kosong.");
+                $("#errorEditDeskripsiPelatihan").text("Deskripsi Pelatihan tidak boleh kosong.");
                 return;
             } else {
                 $("#errorEditDeskripsiPelatihan").text("");
             }
 
             var data = {
-                id_klasifikasi: klasifikasiId, // Use the ID obtained when clicking the edit button
-                nama_klasifikasi: namaPelatihan,
-                deskripsi: deskripsiPelatihan,
-                jumlah_pelatihan: 0
+                id_pelatihan: pelatihanId,
+                id_pengguna: 1,
+                id_klasifikasi: klasifikasiPelatihan,
+                nama_pelatihan: namaPelatihan,
+                deskripsi_pelatihan: deskripsiPelatihan,
+                jumlah_pelatihan: 0,
+                nama_klasifikasi: namaPelatihan
             };
+
             console.log(data);
+
             $.ajax({
-                url: rootHost + '/KlasifikasiPelatihan/UpdateKlasifikasiPelatihan',
-                method: 'post',
+                url: rootHost + '/Pelatihan/UpdatePelatihan',
+                method: "post",
                 data: JSON.stringify(data),
-                contentType: 'application/json',
+                contentType: "application/json",
                 success: function (data) {
                     notifikasiUpdateSukses();
                 },
@@ -337,7 +391,7 @@
         function notifikasiTambahSukses() {
             Swal.fire({
                 title: "Sukses!",
-                text: "Data Klasifikasi Pelatihan berhasil ditambahkan.",
+                text: "Data Pelatihan berhasil ditambahkan.",
                 icon: "success",
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "OK"
