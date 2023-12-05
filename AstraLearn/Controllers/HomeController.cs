@@ -27,6 +27,8 @@ namespace AstraLearn.Controllers
                 //membuat sesi berdasarkan key-value berikut
                 HttpContext.Session.SetString("Identity", serializedModel);
                 HttpContext.Session.SetString("Peran", user.HakAkses);
+                // Contoh penggunaan session untuk menyimpan informasi bahwa pengguna telah login
+                HttpContext.Session.SetString("IsLoggedIn", "true");
                 return RedirectToAction("Index", "Peserta");
             }
             if (user.Username == username && user.Password == password && user.HakAkses == "Admin")
@@ -34,6 +36,8 @@ namespace AstraLearn.Controllers
                 //membuat sesi berdasarkan key-value berikut
                 HttpContext.Session.SetString("Identity", serializedModel);
                 HttpContext.Session.SetString("Peran", user.HakAkses);
+                // Contoh penggunaan session untuk menyimpan informasi bahwa pengguna telah login
+                HttpContext.Session.SetString("IsLoggedIn", "true");
                 return RedirectToAction("Index", "Admin");
             }
             if (user.Username == username && user.Password == password && user.HakAkses == "Pelatih")
@@ -41,6 +45,8 @@ namespace AstraLearn.Controllers
                 //membuat sesi berdasarkan key-value berikut
                 HttpContext.Session.SetString("Identity", serializedModel);
                 HttpContext.Session.SetString("Peran", user.HakAkses);
+                // Contoh penggunaan session untuk menyimpan informasi bahwa pengguna telah login
+                HttpContext.Session.SetString("IsLoggedIn", "true");
                 return RedirectToAction("Index", "Pelatih");
             }
             else
@@ -49,6 +55,17 @@ namespace AstraLearn.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        public IActionResult CaraBelajar()
+        {
+            // Check if user is authenticated
+            bool isLoggedIn = User.Identity.IsAuthenticated;
+
+            // Pass the login status to the view
+            ViewBag.IsLoggedIn = isLoggedIn;
+
+            return View();
+        }
+
         public IActionResult Index()
         {
             Response.Cookies.Delete(".AspNetCore.Session");
@@ -67,16 +84,23 @@ namespace AstraLearn.Controllers
 
         public IActionResult CaraDapatSertifikat()
         {
-            return View();
-        }
+            // Check if user is authenticated
+            bool isLoggedIn = User.Identity.IsAuthenticated;
 
-        public IActionResult CaraBelajar()
-        {
+            // Pass the login status to the view
+            ViewBag.IsLoggedIn = isLoggedIn;
+
             return View();
         }
 
         public IActionResult Kelas()
         {
+            // Check if user is authenticated
+            bool isLoggedIn = User.Identity.IsAuthenticated;
+
+            // Pass the login status to the view
+            ViewBag.IsLoggedIn = isLoggedIn;
+
             return View();
         }
 

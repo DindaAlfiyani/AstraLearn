@@ -5,21 +5,7 @@
 
         <div class="pagetitle">
             <h1>Data Soal</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Pages</li>
-                    <li class="breadcrumb-item active">Data Soal</li>
-                </ol>
-            </nav>
         </div><!-- End Page Title -->
-
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
 
         <section class="section">
             <div class="row">
@@ -119,11 +105,11 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         $(".delete-button").click(function () {
-            var bukuId = $(this).data("id");
+            var soalId = $(this).data("id");
 
             Swal.fire({
                 title: "Hapus Buku?",
-                text: "Apakah anda ingin menghapus buku ini?",
+                text: "Apakah anda ingin menghapus Soal ini?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -134,7 +120,7 @@
                 if (result.isConfirmed) {
                     // Mengirimkan permintaan menghapus ke kontrol
                     $.ajax({
-                        url: "/Buku/Delete/" + bukuId,
+                        url: "/Soal/Delete/" + soalId,
                         type: "POST",
                         success: function (data) {
                             // Tampilkan pesan sukses jika diperlukan

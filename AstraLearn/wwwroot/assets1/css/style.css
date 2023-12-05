@@ -330,6 +330,7 @@ h4,
 h5,
 h6 {
   font-family: "Nunito", sans-serif;
+
 }
 
 /*--------------------------------------------------------------
@@ -354,12 +355,13 @@ h6 {
   margin-bottom: 10px;
 }
 
-.pagetitle h1 {
-  font-size: 24px;
-  margin-bottom: 0;
-  font-weight: 600;
-  color: #012970;
-}
+    .pagetitle h1 {
+        font-size: 48px;
+        font-family: "Poppins", sans-serif;
+        margin-bottom: 0;
+        color: #012970;
+        font-weight: bold;
+    }
 
     .pagetitle p {
         font-size: 24px;
