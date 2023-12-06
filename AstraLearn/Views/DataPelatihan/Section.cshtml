@@ -139,7 +139,6 @@
         var pelatihanId;
         var IdPelatihan = $("#idPelatihan").val();
 
-        console.log(IdPelatihan);
         new DataTable('#dataTable', {
             ajax: {
                 url: rootHost + '/Section/GetAllSectionsById?id=' + IdPelatihan,
@@ -168,7 +167,7 @@
                     render: function (data, type, row, index) {
                         const deleteButton = '<button class="btn btn-sm btn-danger delete-button"><i class="bi bi-trash"></i></button>';
                         const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pelatihan" data-id="' + row.id_pelatihan + '"><i class="bi bi-exclamation-triangle"></i></button>';
-                        const updateHrefButton = '<button class="btn btn-primary btn-sm update-href-button" data-id="' + row.id_section + '"><i class="bi bi-exclamation-triangle"></i> Section</button>';
+                        const updateHrefButton = '<button class="btn btn-primary btn-sm update-href-button" data-id="' + row.id_section + '"><i class="bi bi-exclamation-triangle"></i> Soal</button>';
                         return editButton + " " + deleteButton + " " + updateHrefButton;
                     }
                 }

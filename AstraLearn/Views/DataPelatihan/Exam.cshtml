@@ -4,15 +4,15 @@
 }
 
 <div class="pagetitle">
-    <h1>Exercise</h1>
-    <h4>@(ViewBag.namaSection)</h4>
-    <input type="hidden" id="idPelatihan" value="@ViewBag.idSection" />
+    <h1>Exam</h1>
+    <h4>@(ViewBag.namaPelatihan)</h4>
+    <input type="hidden" id="idPelatihan" value="@ViewBag.idPelatihan" />
 </div>
 
 <section class="section">
     <div class="container-fluid">
         <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_exercise">
-            <i class="fas fa-plus fa-sm"></i>Tambah Exercise
+            <i class="fas fa-plus fa-sm"></i>Tambah Exam
         </button>
         <div class="table-responsive">
             <table class="table table-striped" style="width:100%" id="dataTable">
@@ -36,7 +36,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">FORM TAMBAH EXERCISE</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">FORM TAMBAH EXAM</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -100,7 +100,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">FORM EDIT EXERCISE</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">FORM EDIT EXAM</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -157,7 +157,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">FORM DETAIL EXERCISE</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">FORM DETAIL EXAM</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -222,10 +222,9 @@
         var exerciseId;
         var IdPelatihan = $("#idPelatihan").val();
 
-        console.log(IdPelatihan);
         new DataTable('#dataTable', {
             ajax: {
-                url: rootHost + '/Exercise/GetAllExercises?id=' + IdPelatihan,
+                url: rootHost + '/Exam/GetAllExams?id=' + IdPelatihan,
                 type: "GET",
                 dataSrc: function (data) {
                     return data.data;
@@ -255,7 +254,7 @@
                 }
             ],
             createdRow: function (row, data, dataIndex) {
-                $(row).attr('data-id', data.id_exercise);
+                $(row).attr('data-id', data.id_exam);
                 $(row).attr('data-type', 'pelatihan');
             }
         });
@@ -334,8 +333,8 @@
             }
 
             var data = {
-                id_exercise: 0,
-                id_section: IdPelatihan,
+                id_exam: 0,
+                id_pelatihan: IdPelatihan,
                 soal: soal,
                 pilgan1: pilgan1,
                 pilgan2: pilgan2,
@@ -346,7 +345,7 @@
             };
             console.log(data);
             $.ajax({
-                url: rootHost + '/Exercise/InsertExercise',
+                url: rootHost + '/Exam/InsertExam',
                 method: "post",
                 data: JSON.stringify(data),
                 contentType: "application/json",
@@ -386,7 +385,7 @@
 
         function hapusExercise() {
             $.ajax({
-                url: rootHost + '/Exercise/DeleteExercise?id=' + exerciseId,
+                url: rootHost + '/Exam/DeleteExam?id=' + exerciseId,
                 type: "POST",
                 success: function (data) {
                     notifikasiHapusSukses();
@@ -401,7 +400,7 @@
             exerciseId = $(this).closest('tr').data("id");
 
             $.ajax({
-                url: rootHost + '/Exercise/GetExercise?id=' + exerciseId,
+                url: rootHost + '/Exam/GetExam?id=' + exerciseId,
                 type: 'GET',
                 success: function (response) {
                     if (response && response.data) {
@@ -449,7 +448,7 @@
             exerciseId = $(this).closest('tr').data("id");
 
             $.ajax({
-                url: rootHost + '/Exercise/GetExercise?id=' + exerciseId,
+                url: rootHost + '/Exam/GetExam?id=' + exerciseId,
                 type: 'GET',
                 success: function (response) {
                     if (response && response.data) {
@@ -552,8 +551,8 @@
             }
 
             var data = {
-                id_exercise: exerciseId,
-                id_section: IdPelatihan,
+                id_exam: exerciseId,
+                id_pelatihan: IdPelatihan,
                 soal: soal,
                 pilgan1: pilgan1,
                 pilgan2: pilgan2,
@@ -564,7 +563,7 @@
             };
 
             $.ajax({
-                url: rootHost + '/Exercise/UpdateExercise',
+                url: rootHost + '/Exam/UpdateExam',
                 method: "post",
                 data: JSON.stringify(data),
                 contentType: "application/json",
@@ -585,7 +584,7 @@
         function notifikasiTambahSukses() {
             Swal.fire({
                 title: "Sukses!",
-                text: "Data Exercise berhasil ditambahkan.",
+                text: "Data Exam berhasil ditambahkan.",
                 icon: "success",
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "OK"
@@ -597,7 +596,7 @@
         function notifikasiUpdateSukses() {
             Swal.fire({
                 title: "Sukses!",
-                text: "Data Exercise Pelatihan berhasil diubah.",
+                text: "Data Exam Pelatihan berhasil diubah.",
                 icon: "success",
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "OK"
@@ -609,7 +608,7 @@
         function notifikasiHapusSukses() {
             Swal.fire({
                 title: "Sukses!",
-                text: "Data Exercise Pelatihan berhasil dihapus.",
+                text: "Data Exam Pelatihan berhasil dihapus.",
                 icon: "success",
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "OK"

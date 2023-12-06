@@ -22,6 +22,7 @@
                         <th scope="col">Deskripsi Pelatihan</th>
                         <th scope="col">Klasifikasi Pelatihan</th>
                         <th scope="col">Jumlah Peserta</th>
+                        <th scope="col">Nilai Minimum</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -123,6 +124,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         var rootHost = "http://localhost:5180";
         var rootWebHost = "https://localhost:7157/Section/";
+        var rootWebHost2 = "https://localhost:7157/Exam/";
 
         var pelatihanId;
 
@@ -174,6 +176,7 @@
                 { data: 'deskripsi_pelatihan' },
                 { data: 'nama_klasifikasi' },
                 { data: 'jumlah_peserta' },
+                { data: 'nilai' },
                 { data: null }, // Tombol edit dan hapus
             ],
             columnDefs: [
@@ -184,12 +187,13 @@
                     }
                 },
                 {
-                    targets: 5,
+                    targets: 6,
                     render: function (data, type, row, index) {
                         const deleteButton = '<button class="btn btn-sm btn-danger delete-button"><i class="bi bi-trash"></i></button>';
                         const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pelatihan" data-id="' + row.id_pelatihan + '"><i class="bi bi-exclamation-triangle"></i></button>';
                         const updateHrefButton = '<button class="btn btn-primary btn-sm update-href-button" data-id="' + row.id_pelatihan + '"><i class="bi bi-exclamation-triangle"></i> Section</button>';
-                        return editButton + " " + deleteButton + " " + updateHrefButton;
+                        const updateHrefButton2 = '<button class="btn btn-primary btn-sm update-href-button2" data-id="' + row.id_pelatihan + '"><i class="bi bi-exclamation-triangle"></i> Exam</button>';
+                        return editButton + " " + deleteButton + " " + updateHrefButton + " " + updateHrefButton2;
                     }
                 },
             ],
@@ -205,8 +209,19 @@
             updateHref(namaPelatihan, idPelatihan);
         });
 
+        $('#dataTable').on('click', 'button.update-href-button2', function () {
+            var namaPelatihan = $(this).closest('tr').find('td:eq(1)').text(); // Assuming nama_pelatihan is in the second column
+            var idPelatihan = $(this).data('id');
+            updateHref2(namaPelatihan, idPelatihan);
+        });
+
         function updateHref(nama, id) {
             var newHref = rootWebHost + nama + '/' + id;
+            window.location.href = newHref;
+        }
+
+        function updateHref2(nama, id) {
+            var newHref = rootWebHost2 + nama + '/' + id;
             window.location.href = newHref;
         }
 
@@ -235,7 +250,8 @@
                 nama_pelatihan: namaPelatihan,
                 deskripsi_pelatihan: deskripsiPelatihan,
                 jumlah_pelatihan: 0,
-                nama_klasifikasi: namaPelatihan
+                nama_klasifikasi: namaPelatihan,
+                nilai: 0
             };
 
             console.log(data);
@@ -377,7 +393,8 @@
                 nama_pelatihan: namaPelatihan,
                 deskripsi_pelatihan: deskripsiPelatihan,
                 jumlah_pelatihan: 0,
-                nama_klasifikasi: namaPelatihan
+                nama_klasifikasi: namaPelatihan,
+                nilai: 0
             };
 
             console.log(data);

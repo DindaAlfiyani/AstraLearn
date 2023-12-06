@@ -27,5 +27,12 @@ namespace AstraLearn.Controllers
             ViewBag.namaSection = nama;
             return View();
         }
+        [Route("Exam/{nama}/{id}")]
+        public IActionResult Exam(string nama, int id)
+        {
+            ViewBag.idPelatihan = id;
+            ViewBag.namaPelatihan = nama;
+            return View();
+        }
     }
 }
