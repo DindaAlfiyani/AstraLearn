@@ -4,13 +4,16 @@
 }
 
 <div class="pagetitle">
-    <h1>Pelatihan</h1>
+    <h1>Section</h1>
+    <h4>@(ViewBag.namaPelatihan)</h4>
+    <input type="hidden" id="idPelatihan" value="@ViewBag.idSection" />
 </div>
+
 
 <section class="section">
     <div class="container-fluid">
-        <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_klasifikasi">
-            <i class="fas fa-plus fa-sm"></i>Tambah Pelatihan
+        <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_section">
+            <i class="fas fa-plus fa-sm"></i>Tambah Section
         </button>
         <!-- Table with stripped rows -->
         <div class="table-responsive">
@@ -18,10 +21,10 @@
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Nama Pelatihan</th>
-                        <th scope="col">Deskripsi Pelatihan</th>
-                        <th scope="col">Klasifikasi Pelatihan</th>
-                        <th scope="col">Jumlah Peserta</th>
+                        <th scope="col">Nama Section</th>
+                        <th scope="col">Video Pembelajaran</th>
+                        <th scope="col">Modul Pembelajaran</th>
+                        <th scope="col">Deskripsi</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -32,11 +35,12 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="tambah_klasifikasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Add Section Modal -->
+    <div class="modal fade" id="tambah_section" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">FORM TAMBAH PELATIHAN</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">FORM TAMBAH SECTION</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -45,19 +49,24 @@
                     <form id="myForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="NamaPelatihan">Nama Pelatihan</label>
-                            <input id="NamaPelatihan" name="NamaPelatihan" class="form-control" />
-                            <span class="text-danger" id="errorNamaPelatihan"></span>
+                            <label class="control-label" for="NamaSection">Nama Section</label>
+                            <input id="NamaSection" name="NamaSection" class="form-control" />
+                            <span class="text-danger" id="errorNamaSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="DeskripsiPelatihan">Deskripsi Pelatihan</label>
-                            <input id="DeskripsiPelatihan" name="DeskripsiPelatihan" class="form-control" />
-                            <span class="text-danger" id="errorDeskripsiPelatihan"></span>
+                            <label class="control-label" for="DeskripsiSection">Deskripsi Section</label>
+                            <input id="DeskripsiSection" name="DeskripsiSection" class="form-control" />
+                            <span class="text-danger" id="errorDeskripsiSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="KlasifikasiPelatihan">Klasifikasi Pelatihan</label>
-                            <select id="KlasifikasiPelatihan" name="KlasifikasiPelatihan" class="form-control">
-                            </select>
+                            <label class="control-label" for="VidioPembelajaran">Vidio Pembelajaran</label>
+                            <input id="VidioPembelajaran" name="VidioPembelajaran" class="form-control" />
+                            <span class="text-danger" id="errorVidioPembelajaran"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="ModulPembelajaran">Modul Pembelajaran</label>
+                            <input type="file" id="ModulPembelajaran" name="ModulPembelajaran" class="form-control" />
+                            <span class="text-danger" id="errorModulPembelajaran"></span>
                         </div>
                         <br>
                         <div class="form-group">
@@ -69,12 +78,12 @@
         </div>
     </div>
 
-    <!-- Edit Modal -->
-    <div class="modal fade" id="edit_pelatihan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Edit Section Modal -->
+    <div class="modal fade" id="edit_section" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">FORM EDIT PELATIHAN</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">FORM EDIT SECTION</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -83,20 +92,24 @@
                     <form id="editForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="EditNamaPelatihan">Nama Pelatihan</label>
-                            <input id="EditNamaPelatihan" name="EditNamaPelatihan" class="form-control" />
-                            <span class="text-danger" id="errorEditNamaPelatihan"></span>
+                            <label class="control-label" for="EditNamaSection">Nama Section</label>
+                            <input id="EditNamaSection" name="EditNamaSection" class="form-control" />
+                            <span class="text-danger" id="errorEditNamaSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditDeskripsiPelatihan">Deskripsi Pelatihan</label>
-                            <input id="EditDeskripsiPelatihan" name="EditDeskripsiPelatihan" class="form-control" />
-                            <span class="text-danger" id="errorEditDeskripsiPelatihan"></span>
+                            <label class="control-label" for="EditDeskripsiSection">Deskripsi Section</label>
+                            <input id="EditDeskripsiSection" name="EditDeskripsiSection" class="form-control" />
+                            <span class="text-danger" id="errorEditDeskripsiSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditKlasifikasiPelatihan">Klasifikasi Pelatihan</label>
-                            <select id="EditKlasifikasiPelatihan" name="EditKlasifikasiPelatihan" class="form-control">
-                                <!-- Options will be dynamically populated -->
-                            </select>
+                            <label class="control-label" for="EditVidioPembelajaran">Vidio Pembelajaran</label>
+                            <input id="EditVidioPembelajaran" name="EditVidioPembelajaran" class="form-control" />
+                            <span class="text-danger" id="errorEditVidioPembelajaran"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="EditModulPembelajaran">Modul Pembelajaran</label>
+                            <input type="file" id="EditModulPembelajaran" name="EditModulPembelajaran" class="form-control" />
+                            <span class="text-danger" id="errorEditModulPembelajaran"></span>
                         </div>
                         <br>
                         <div class="form-group">
@@ -122,47 +135,14 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var rootHost = "http://localhost:5180";
-        var rootWebHost = "https://localhost:7157/Section/";
-
+        var rootWebHost = "https://localhost:7157/Exercise/"
         var pelatihanId;
+        var IdPelatihan = $("#idPelatihan").val();
 
-        loadKlasifikasi();
-
-        function loadKlasifikasi() {
-            $.ajax({
-                url: rootHost + '/KlasifikasiPelatihan/GetAllKlasifikasiPelatihan',
-                method: 'get',
-                contentType: 'application/json',
-                success: function (response) {
-                    if (response.status === 200 && response.data) {
-                        var klasifikasiData = response.data;
-
-                        // Clear existing options in the dropdown
-                        $('#KlasifikasiPelatihan').empty();
-
-                        // Append options to the dropdown
-                        klasifikasiData.forEach(function (item) {
-                            $('#KlasifikasiPelatihan').append(
-                                $('<option>', {
-                                    value: item.id_klasifikasi,
-                                    text: item.nama_klasifikasi
-                                })
-                            );
-                        });
-                    } else {
-                        console.error("Invalid response format:", response);
-                    }
-                },
-                error: function () {
-                    console.error("Failed to load classification data.");
-                }
-            });
-        }
-
-
+        console.log(IdPelatihan);
         new DataTable('#dataTable', {
             ajax: {
-                url: rootHost + '/Pelatihan/GetAllPelatihan',
+                url: rootHost + '/Section/GetAllSectionsById?id=' + IdPelatihan,
                 type: "GET",
                 dataSrc: function (data) {
                     return data.data;
@@ -170,11 +150,11 @@
             },
             columns: [
                 { data: null },
-                { data: 'nama_pelatihan' },
-                { data: 'deskripsi_pelatihan' },
-                { data: 'nama_klasifikasi' },
-                { data: 'jumlah_peserta' },
-                { data: null }, // Tombol edit dan hapus
+                { data: 'nama_section' },
+                { data: 'video_pembelajaran' },
+                { data: 'modul_pembelajaran' },
+                { data: 'deskripsi' },
+                { data: null },
             ],
             columnDefs: [
                 {
@@ -188,10 +168,10 @@
                     render: function (data, type, row, index) {
                         const deleteButton = '<button class="btn btn-sm btn-danger delete-button"><i class="bi bi-trash"></i></button>';
                         const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pelatihan" data-id="' + row.id_pelatihan + '"><i class="bi bi-exclamation-triangle"></i></button>';
-                        const updateHrefButton = '<button class="btn btn-primary btn-sm update-href-button" data-id="' + row.id_pelatihan + '"><i class="bi bi-exclamation-triangle"></i> Section</button>';
+                        const updateHrefButton = '<button class="btn btn-primary btn-sm update-href-button" data-id="' + row.id_section + '"><i class="bi bi-exclamation-triangle"></i> Section</button>';
                         return editButton + " " + deleteButton + " " + updateHrefButton;
                     }
-                },
+                }
             ],
             createdRow: function (row, data, dataIndex) {
                 $(row).attr('data-id', data.id_pelatihan);
@@ -200,9 +180,9 @@
         });
 
         $('#dataTable').on('click', 'button.update-href-button', function () {
-            var namaPelatihan = $(this).closest('tr').find('td:eq(1)').text(); // Assuming nama_pelatihan is in the second column
-            var idPelatihan = $(this).data('id');
-            updateHref(namaPelatihan, idPelatihan);
+            var nama = $(this).closest('tr').find('td:eq(1)').text();
+            var id = $(this).data('id');
+            updateHref(nama, id);
         });
 
         function updateHref(nama, id) {
@@ -210,38 +190,39 @@
             window.location.href = newHref;
         }
 
-        function tambahPelatihan() {
-            var namaPelatihan = $("#NamaPelatihan").val();
-            var deskripsiPelatihan = $("#DeskripsiPelatihan").val();
-            var klasifikasiPelatihan = $("#KlasifikasiPelatihan").val();
-            if (!namaPelatihan.trim()) {
-                $("#errorNamaPelatihan").text("Nama Pelatihan tidak boleh kosong.");
+        function tambahSection() {
+            var namaSection = $("#NamaSection").val();
+            var deskripsi = $("#DeskripsiSection").val();
+            var vidio = $("#VidioPembelajaran").val();
+            var modul = $("#ModulPembelajaran").val();
+            if (!namaSection.trim()) {
+                $("#errorNamaSection").text("Nama Section tidak boleh kosong.");
                 return;
             } else {
-                $("#errorNamaPelatihan").text("");
+                $("#errorNamaSection").text("");
             }
 
-            if (!deskripsiPelatihan.trim()) {
-                $("#errorDeskripsiPelatihan").text("Deskripsi Pelatihan tidak boleh kosong.");
+            if (!deskripsi.trim()) {
+                $("#errorDeskripsiSection").text("Deskripsi PelatihanSection tidak boleh kosong.");
                 return;
             } else {
-                $("#errorDeskripsiPelatihan").text("");
+                $("#errorDeskripsiSection").text("");
             }
 
             var data = {
-                id_pelatihan: 0,
-                id_pengguna: 1,
-                id_klasifikasi: klasifikasiPelatihan,
-                nama_pelatihan: namaPelatihan,
-                deskripsi_pelatihan: deskripsiPelatihan,
-                jumlah_pelatihan: 0,
-                nama_klasifikasi: namaPelatihan
+                id_section: 0,
+                id_pelatihan: IdPelatihan,
+                nama_section: namaSection,
+                video_pembelajaran: vidio,
+                modul_pembelajaran: 'a',
+                deskripsi: deskripsi,
+                isi_modul: $("#ModulPembelajaran")[0].files[0]
             };
 
             console.log(data);
 
             $.ajax({
-                url: rootHost + '/Pelatihan/InsertPelatihan',
+                url: rootHost + '/Section/InsertSection',
                 method: "post",
                 data: JSON.stringify(data),
                 contentType: "application/json",
@@ -256,7 +237,7 @@
 
         $("#myForm").submit(function (e) {
             e.preventDefault();
-            tambahPelatihan();
+            tambahSection();
         });
 
         function hapusPelatihan() {
