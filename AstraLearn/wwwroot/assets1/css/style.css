@@ -111,7 +111,7 @@
     }
 
 .btn-primary {
-    background-color: #555;
+    background-color: #008CBA;
     color: #ddd;
     border: 1px solid #ddd;
 }
@@ -145,8 +145,8 @@ body1 {
     position: relative;
     background-color: #fff;
     border-radius: 20px;
-    height: 150px; /* Adjusted height to 150px */
-    width: 150px; /* Adjusted width to 150px */
+    height: 1050px; /* Adjusted height to 150px */
+    width: 120px; /* Adjusted width to 150px */
     margin: 20px 0;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     padding: 10px; /* Adjusted padding to make it smaller */
@@ -631,6 +631,12 @@ h6 {
   padding: 0 0 15px 0;
   color: #3e4f6f;
   font-size: 15px;
+}
+
+.section .container-fluid .btn {
+    background-color: #008CBA;
+    color: #ddd;
+    border: 1px solid #ddd;
 }
 
 /* Breadcrumbs */
