@@ -26,7 +26,7 @@ namespace AstraLearn.Models
             User user = new User();
             try
             {
-                string query = "select * from tb_pengguna where username = @p1 AND password = @p2";
+                string query = "SELECT * FROM tb_pengguna WHERE username = @p1 AND password = @p2";
                 SqlCommand command = new SqlCommand(query, _connection);
                 command.Parameters.AddWithValue("@p1", username);
                 command.Parameters.AddWithValue("@p2", password);
@@ -46,18 +46,23 @@ namespace AstraLearn.Models
                 }
                 else
                 {
+                    // Set IdPengguna to 0 if user not found
                     user.IdPengguna = 0;
                 }
                 _connection.Close();
 
                 reader.Close();
-                _connection.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            finally
+            {
+                _connection.Close();
+            }
             return user;
         }
+
     }
 }

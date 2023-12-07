@@ -10,51 +10,63 @@ namespace AstraLearn.Controllers
     {
         private readonly UserRepository _userRepository;
 
-		public HomeController(IConfiguration configuration)
-		{
-			_userRepository = new UserRepository(configuration);
-		}
+        public HomeController(IConfiguration configuration)
+        {
+            _userRepository = new UserRepository(configuration);
+        }
 
         public IActionResult Login(string username, string password)
         {
             User user = _userRepository.getDataByUsername_Password(username, password);
 
-            //mengkonversi model menjadi data json
-            string serializedModel = JsonConvert.SerializeObject(user); //jso seperti string tetapi ada kurung kurawalnya
+            if (user.IdPengguna != 0)
+            {
+                // User found in the database
+                // Perform session setup and redirection based on user role
+                string serializedModel = JsonConvert.SerializeObject(user);
+                HttpContext.Session.SetString("Identity", serializedModel);
+                HttpContext.Session.SetString("Peran", user.HakAkses);
+                HttpContext.Session.SetString("IsLoggedIn", "true");
 
-            if (user.Username == username && user.Password == password && user.HakAkses == "Peserta")
-            {
-                //membuat sesi berdasarkan key-value berikut
-                HttpContext.Session.SetString("Identity", serializedModel);
-                HttpContext.Session.SetString("Peran", user.HakAkses);
-                // Contoh penggunaan session untuk menyimpan informasi bahwa pengguna telah login
-                HttpContext.Session.SetString("IsLoggedIn", "true");
-                return RedirectToAction("Index", "Peserta");
-            }
-            if (user.Username == username && user.Password == password && user.HakAkses == "Admin")
-            {
-                //membuat sesi berdasarkan key-value berikut
-                HttpContext.Session.SetString("Identity", serializedModel);
-                HttpContext.Session.SetString("Peran", user.HakAkses);
-                // Contoh penggunaan session untuk menyimpan informasi bahwa pengguna telah login
-                HttpContext.Session.SetString("IsLoggedIn", "true");
-                return RedirectToAction("Index", "Admin");
-            }
-            if (user.Username == username && user.Password == password && user.HakAkses == "Pelatih")
-            {
-                //membuat sesi berdasarkan key-value berikut
-                HttpContext.Session.SetString("Identity", serializedModel);
-                HttpContext.Session.SetString("Peran", user.HakAkses);
-                // Contoh penggunaan session untuk menyimpan informasi bahwa pengguna telah login
-                HttpContext.Session.SetString("IsLoggedIn", "true");
-                return RedirectToAction("Index", "Pelatih");
+                if (user.HakAkses == "Peserta")
+                {
+                    // Set success alert for successful login
+                    TempData["LoginSuccessMessage"] = "Login successful. Welcome, " + user.Username + "!";
+                    TempData["LoginSuccessType"] = "success";
+
+                    return RedirectToAction("Index", "Peserta");
+                }
+                else if (user.HakAkses == "Admin")
+                {
+                    // Set success alert for successful login
+                    TempData["LoginSuccessMessage"] = "Login successful. Welcome, " + user.Username + "!";
+                    TempData["LoginSuccessType"] = "success";
+
+                    return RedirectToAction("Index", "Admin");
+                }
+                else if (user.HakAkses == "Pelatih")
+                {
+                    // Set success alert for successful login
+                    TempData["LoginSuccessMessage"] = "Login successful. Welcome, " + user.Username + "!";
+                    TempData["LoginSuccessType"] = "success";
+
+                    return RedirectToAction("Index", "Pelatih");
+                }
             }
             else
             {
-                TempData["ErrorLogin"] = "Username / Password Salah!";
-                return RedirectToAction("Index", "Home");
+                // User not found in the database
+                TempData["AlertMessage"] = "Login failed. Please check your username and password.";
+                TempData["AlertType"] = "error";
+
+                // Redirect to the Index action to display the login form with the error message
+                return RedirectToAction("Index");
             }
+
+            // Default return statement (added to address the error)
+            return View();
         }
+
         public IActionResult CaraBelajar()
         {
             // Check if user is authenticated
