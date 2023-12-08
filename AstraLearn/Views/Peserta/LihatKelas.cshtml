@@ -36,28 +36,31 @@
 
             <form asp-controller="Peserta" asp-action="KelasPelatihan" method="post">
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" onclick="onIkutKelasClick()">Ikut Kelas</button>
+                    <button type="submit" class="btn btn-primary" onclick="changeIcon()">Selanjutnya</button>
                 </div>
             </form>
-
-            <script>
-                function onIkutKelasClick(event) {
-                    // Mencegah formulir dikirim secara langsung (jika diperlukan)
-                    event.preventDefault();
-
-                    // Lakukan operasi yang diperlukan sebelum mengirimkan formulir
-                    // Contoh: Menambahkan kelas CSS atau mengubah status pada elemen sidebar
-
-                    var sidebarItem = document.querySelector('.box'); // Ganti dengan selektor yang sesuai
-
-                    // Cek apakah kelas 'checked' sudah ada
-                    if (!sidebarItem.classList.contains('checked')) {
-                        // Tambahkan kelas untuk memberikan tanda centang
-                        sidebarItem.classList.add('checked');
-                    }
-
-                    // Lanjutkan dengan pengiriman formulir jika diperlukan
-                    // document.forms[0].submit(); // Aktifkan baris ini jika ingin melanjutkan pengiriman formulir
-                }
-            </script>
         </div>
+
+<!-- Pada halaman Buku -->
+<script>
+    // Cek apakah sudah pernah diklik sebelumnya
+    var isIconChanged = localStorage.getItem('iconChanged');
+
+    // Jika sudah diklik sebelumnya, ubah ikon
+    if (isIconChanged) {
+        var circleIcon = document.getElementById('circleIcon');
+        circleIcon.className = 'bi bi-check-circle-fill';
+    }
+
+    function changeIconAndNavigate() {
+        var circleIcon = document.getElementById('circleIcon');
+
+        // Ganti ikon menjadi bi-check-circle-fill
+        circleIcon.className = 'bi bi-check-circle-fill';
+
+        // Simpan status ikon di localStorage
+        localStorage.setItem('iconChanged', true);
+
+    }
+</script>
+

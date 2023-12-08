@@ -164,16 +164,14 @@
         <ul class="sidebar1-nav" id="sidebar1-nav">
             <li class="nav-item">
                 <a class="nav-link collapsed" asp-controller="Pelatih" asp-action="Index">
-                    <h5 class="ms-2 mb-0"><span>Selamat Datang</span>
-                        <small class="ms-2">1/1</small>
-                    </h5>
+                    <h5><span>Selamat Datang</span></h5>
+                    <i id="circleIcon" class="bi bi-circle" style="margin-left: 150px;"></i>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" asp-controller="" asp-action="">
-                    <h5 class="ms-2 mb-0"><span>Pengenalan Virtual Machine</span>
-                        <small class="ms-2">0/2</small>
-                    </h5>
+                    <h5><span>Pengenalan Virtual Machine</span></h5>
+                    <i id="circleIcon" class="bi bi-circle" style="margin-left: 150px;"></i>
                 </a>
             </li>
 
@@ -233,6 +231,30 @@
     <script src="~/assets1/js/popper.min.js"></script>
     <script src="~/assets1/js/bootstrap.min.js"></script>
     <script src="~/assets1/js/owl.carousel.min.js"></script>
+
+    <!-- Pada halaman Buku -->
+    <script>
+        // Cek apakah sudah pernah diklik sebelumnya
+        var isIconChanged = localStorage.getItem('iconChanged');
+
+        // Jika sudah diklik sebelumnya, ubah ikon
+        if (isIconChanged) {
+            var circleIcon = document.getElementById('circleIcon');
+            circleIcon.className = 'bi bi-check-circle-fill';
+        }
+
+        function changeIconAndNavigate() {
+            var circleIcon = document.getElementById('circleIcon');
+
+            // Ganti ikon menjadi bi-check-circle-fill
+            circleIcon.className = 'bi bi-check-circle-fill';
+
+            // Simpan status ikon di localStorage
+            localStorage.setItem('iconChanged', true);
+
+        }
+    </script>
+
 
 </body>
 
