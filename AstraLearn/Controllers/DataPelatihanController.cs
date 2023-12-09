@@ -16,7 +16,7 @@ namespace AstraLearn.Controllers
         [Route("Section/{nama}/{id}")]
         public IActionResult Section(string nama, int id)
         {
-            ViewBag.idSection = id;
+            ViewBag.idPelatihan = id;
             ViewBag.namaPelatihan = nama;
             return View();
         }
@@ -32,6 +32,13 @@ namespace AstraLearn.Controllers
         {
             ViewBag.idPelatihan = id;
             ViewBag.namaPelatihan = nama;
+            return View();
+        }
+        [Route("SectionView/{id}/{id1}")]
+        public IActionResult SectionView(int id, int id1)
+        {
+            ViewBag.idSection = id;
+            ViewBag.idPelatihan = id1;
             return View();
         }
     }

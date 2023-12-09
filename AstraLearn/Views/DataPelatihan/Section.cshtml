@@ -1,22 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Pelatih - Pelatihan";
-    Layout = "_Layout";
+    Layout = "_LayoutSectionPelatih";
 }
 
 <div class="pagetitle">
     <h1>Section</h1>
     <h4>@(ViewBag.namaPelatihan)</h4>
-    <input type="hidden" id="idPelatihan" value="@ViewBag.idSection" />
+    <input type="hidden" id="idPelatihan" value="@ViewBag.idPelatihan" />
 </div>
 
 
 <section class="section">
     <div class="container-fluid">
-        <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_section">
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#tambah_section">
             <i class="fas fa-plus fa-sm"></i>Tambah Section
         </button>
         <!-- Table with stripped rows -->
-        <div class="table-responsive">
+        @*<div class="table-responsive">
             <table class="table table-striped" style="width:100%" id="dataTable">
                 <thead>
                     <tr>
@@ -31,7 +31,7 @@
                 <tbody>
                 </tbody>
             </table>
-        </div>
+        </div>*@
     </div>
 
     <!-- Modal -->
@@ -131,6 +131,27 @@
     .container-fluid {
         flex: 1;
     }
+
+    .pagetitle {
+        text-align: center;
+        margin-top: 50px; /* Adjust the margin-top value as needed */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pagetitle h1,
+    .pagetitle h4 {
+        margin: 10px 0; /* Adjust the margin as needed */
+    }
+
+    .pagetitle button {
+        margin-top: 10px; /* Adjust the margin-top value between buttons as needed */
+    }
+
+    #idPelatihan {
+        margin-top: 10px; /* Adjust the margin-top value for the input as needed */
+    }
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -139,7 +160,7 @@
         var pelatihanId;
         var IdPelatihan = $("#idPelatihan").val();
 
-        new DataTable('#dataTable', {
+        @*new DataTable('#dataTable', {
             ajax: {
                 url: rootHost + '/Section/GetAllSectionsById?id=' + IdPelatihan,
                 type: "GET",
@@ -176,7 +197,7 @@
                 $(row).attr('data-id', data.id_pelatihan);
                 $(row).attr('data-type', 'pelatihan');
             }
-        });
+        });*@
 
         $('#dataTable').on('click', 'button.update-href-button', function () {
             var nama = $(this).closest('tr').find('td:eq(1)').text();
@@ -189,55 +210,96 @@
             window.location.href = newHref;
         }
 
-        function tambahSection() {
-            var namaSection = $("#NamaSection").val();
-            var deskripsi = $("#DeskripsiSection").val();
-            var vidio = $("#VidioPembelajaran").val();
-            var modul = $("#ModulPembelajaran").val();
-            if (!namaSection.trim()) {
-                $("#errorNamaSection").text("Nama Section tidak boleh kosong.");
-                return;
-            } else {
-                $("#errorNamaSection").text("");
-            }
+        function uploadFile(file) {
+    var formData = new FormData();
+    formData.append("file", file);
 
-            if (!deskripsi.trim()) {
-                $("#errorDeskripsiSection").text("Deskripsi PelatihanSection tidak boleh kosong.");
-                return;
-            } else {
-                $("#errorDeskripsiSection").text("");
-            }
-
-            var data = {
-                id_section: 0,
-                id_pelatihan: IdPelatihan,
-                nama_section: namaSection,
-                video_pembelajaran: vidio,
-                modul_pembelajaran: 'a',
-                deskripsi: deskripsi,
-                isi_modul: $("#ModulPembelajaran")[0].files[0]
-            };
-
-            console.log(data);
-
-            $.ajax({
-                url: rootHost + '/Section/InsertSection',
-                method: "post",
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                success: function (data) {
-                    notifikasiTambahSukses();
-                },
-                error: function () {
-
-                }
-            });
+    $.ajax({
+        url: rootHost + '/Section/UploadFile',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            // Handle success, if needed
+            console.log("File uploaded successfully");
+        },
+        error: function () {
+            // Handle error, if needed
+            console.log("Error uploading file");
         }
+    });
+}
 
-        $("#myForm").submit(function (e) {
-            e.preventDefault();
-            tambahSection();
-        });
+function extractYouTubeVideoId(url) {
+        // The regular expression to match YouTube video URLs
+        var regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+
+        // Use regex to extract the video ID
+        var match = url.match(regex);
+
+        // If there is a match, return the video ID, otherwise return null
+        return match ? match[1] : null;
+    }
+
+$("#myForm").submit(function (e) {
+    e.preventDefault();
+
+    var namaSection = $("#NamaSection").val();
+    var deskripsi = $("#DeskripsiSection").val();
+    var vidio = $("#VidioPembelajaran").val();
+    var modul = $("#ModulPembelajaran")[0].files[0];
+
+    if (!namaSection.trim()) {
+        $("#errorNamaSection").text("Nama Section tidak boleh kosong.");
+        return;
+    } else {
+        $("#errorNamaSection").text("");
+    }
+
+    if (!deskripsi.trim()) {
+        $("#errorDeskripsiSection").text("Deskripsi PelatihanSection tidak boleh kosong.");
+        return;
+    } else {
+        $("#errorDeskripsiSection").text("");
+    }
+
+    // Extract YouTube Video ID from the vidio URL
+    var videoId = extractYouTubeVideoId(vidio);
+
+    if (videoId) {
+        // If it's a valid YouTube URL, set the video ID in the data object
+        vidio = videoId;
+    }
+
+    if (modul) {
+        uploadFile(modul); // Upload the selected file
+    }
+
+    var data = {
+        id_section: 0,
+        id_pelatihan: IdPelatihan,
+        nama_section: namaSection,
+        video_pembelajaran: vidio,
+        modul_pembelajaran: modul ? modul.name : null,
+        deskripsi: deskripsi
+    };
+
+    $.ajax({
+        url: rootHost + '/Section/InsertSection',
+        method: "post",
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (data) {
+            notifikasiTambahSukses();
+        },
+        error: function () {
+            // Handle error
+        }
+    });
+});
+
+
 
         function hapusPelatihan() {
             $.ajax({
