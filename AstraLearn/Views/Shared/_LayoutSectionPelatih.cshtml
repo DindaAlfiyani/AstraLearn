@@ -46,7 +46,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Swipper CSS -->
-    <link href="~/assets/css/swiper-bundle.min.css" rel="stylesheet">   
+    <link href="~/assets/css/swiper-bundle.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <!-- Required meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -163,9 +165,8 @@
 
         <ul class="sidebar1-nav" id="sidebar1-nav">
             <li class="nav-item">
-                    <a class="nav-link collapsed" asp-controller="KlasifikasiPelatihan" asp-action="Index">
-                        <i class="bi bi-card-list"></i>
-                        <h5 class="ms-2 mb-0"><span>Klasifikasi Pelatihan</span></h5>
+                <a class="nav-link collapsed" data-toggle="modal" data-target="#tambah_section">    
+                        <h5 class="ms-2 mb-0"><span>Tambah Section</span></h5>
                     </a>
                 </li>
         </ul>
@@ -253,6 +254,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         var rootHost = "http://localhost:5180";
         var rootWebHost = "https://localhost:7157/SectionView/";
+        var rootWebHost2 = "https://localhost:7157/DataPelatihan/Index"
         var IdPelatihan = $("#idPelatihan").val();
 
         function loadSideBar() {
@@ -274,21 +276,39 @@
         }
 
         function updateSidebar(sections) {
-        var sidebarNav = $("#sidebar1-nav");
+            var sidebarNav = $("#sidebar1-nav");
 
-        sections.forEach(function (section, index) {
-            var listItem = $("<li>").addClass("nav-item");
-            var link = $("<a>")
+            sections.forEach(function (section, index) {
+                var listItem = $("<li>").addClass("nav-item");
+                var link = $("<a>")
+                    .addClass("nav-link collapsed")
+                    .attr("href", "#")  // Set a placeholder href for now
+                    .html("<h5 class='ms-2 mb-0'><span>" + (index + 1) + ". " + section.nama_section + "</span></h5>")
+                    .click(function () {
+                        updateHref(section.id_section, section.id_pelatihan);
+                    });
+
+                listItem.append(link);
+                sidebarNav.append(listItem);
+            });
+
+            // Add a "Back" button
+            var backListItem = $("<li>").addClass("nav-item");
+            var backButton = $("<a>")
                 .addClass("nav-link collapsed")
                 .attr("href", "#")  // Set a placeholder href for now
-                .html("<h5 class='ms-2 mb-0'><span>" + (index + 1) + ". " + section.nama_section + "</span></h5>")
+                .html("<h5 class='ms-2 mb-0'><span>Kembali</span></h5>")
                 .click(function () {
-                    updateHref(section.id_section, section.id_pelatihan);
+                    // Handle the back button click event
+                    goBack();
                 });
 
-            listItem.append(link);
-            sidebarNav.append(listItem);
-        });
+            backListItem.append(backButton);
+            sidebarNav.append(backListItem);
+    }
+
+    function goBack() {
+        window.location.href = rootWebHost2;
     }
 
     function updateHref(id, id1) {
