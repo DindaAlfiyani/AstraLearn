@@ -9,9 +9,9 @@
 
 <section class="section">
     <div class="container-fluid">
-        <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_klasifikasi">
-            <i class="fas fa-plus fa-sm"></i>Tambah Pelatihan
-        </button>
+            <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_klasifikasi" style="background-color: #066CBB">
+                <i class="fas fa-plus fa-sm"></i>Tambah Pelatihan
+            </button>
         <!-- Table with stripped rows -->
         <div class="table-responsive">
             <table class="table table-striped" style="width:100%" id="dataTable">
@@ -37,7 +37,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: #464646; font-family: 'Poppins', sans-serif; font-weight: bold;">Form Tambah Pelatihan</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #464646; font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 30px;">Form Tambah Pelatihan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -51,12 +51,12 @@
                             <span class="text-danger" id="errorNamaPelatihan"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="DeskripsiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">Deskripsi Pelatihan</label>
+                            <label class="control-label" for="DeskripsiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Deskripsi Pelatihan</label>
                             <input id="DeskripsiPelatihan" name="DeskripsiPelatihan" class="form-control" />
                             <span class="text-danger" id="errorDeskripsiPelatihan"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="KlasifikasiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">Klasifikasi Pelatihan</label>
+                            <label class="control-label" for="KlasifikasiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Klasifikasi Pelatihan</label>
                             <select id="KlasifikasiPelatihan" name="KlasifikasiPelatihan" class="form-control">
                             </select>
                         </div>
@@ -75,7 +75,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">FORM EDIT PELATIHAN</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #464646; font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 30px;">Form Edit Pelatihan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -84,17 +84,17 @@
                     <form id="editForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="EditNamaPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">Nama Pelatihan</label>
+                            <label class="control-label" for="EditNamaPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Nama Pelatihan</label>
                             <input id="EditNamaPelatihan" name="EditNamaPelatihan" class="form-control" />
                             <span class="text-danger" id="errorEditNamaPelatihan"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditDeskripsiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">Deskripsi Pelatihan</label>
+                            <label class="control-label" for="EditDeskripsiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Deskripsi Pelatihan</label>
                             <input id="EditDeskripsiPelatihan" name="EditDeskripsiPelatihan" class="form-control" />
                             <span class="text-danger" id="errorEditDeskripsiPelatihan"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditKlasifikasiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">Klasifikasi Pelatihan</label>
+                            <label class="control-label" for="EditKlasifikasiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Klasifikasi Pelatihan</label>
                             <select id="EditKlasifikasiPelatihan" name="EditKlasifikasiPelatihan" class="form-control">
                                 <!-- Options will be dynamically populated -->
                             </select>
@@ -189,10 +189,10 @@
                 {
                     targets: 6,
                     render: function (data, type, row, index) {
-                        const deleteButton = '<button class="btn btn-sm btn-danger delete-button"><i class="bi bi-trash"></i></button>';
-                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pelatihan" data-id="' + row.id_pelatihan + '"><i class="bi bi-exclamation-triangle"></i></button>';
-                        const updateHrefButton = '<button class="btn btn-primary btn-sm update-href-button" data-id="' + row.id_pelatihan + '"><i class="bi bi-exclamation-triangle"></i> Section</button>';
-                        const updateHrefButton2 = '<button class="btn btn-primary btn-sm update-href-button2" data-id="' + row.id_pelatihan + '"><i class="bi bi-exclamation-triangle"></i> Exam</button>';
+                        const deleteButton = '<button class="btn btn-sm btn-danger delete-button" style="background-color:#BB0000"><i class="bi bi-trash"></i></button>';
+                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pelatihan" data-id="' + row.id_pelatihan + '" style="background-color: #066CBB"><i class="bi bi-exclamation-triangle"></i></button>';
+                        const updateHrefButton = '<button class="btn btn-primary btn-sm update-href-button" data-id="' + row.id_pelatihan + '" style="background-color: #004576">Section</button>';
+                        const updateHrefButton2 = '<button class="btn btn-primary btn-sm update-href-button2" data-id="' + row.id_pelatihan + '" style="background-color: #062841"> Exam</button>';
                         return editButton + " " + deleteButton + " " + updateHrefButton + " " + updateHrefButton2;
                     }
                 },

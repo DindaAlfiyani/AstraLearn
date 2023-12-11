@@ -19,9 +19,10 @@
             <p id="deskripsiSection" class="lead mb-4" style="max-width: 1800px; word-wrap: break-word;" style="font-weight: bold;"></p>
         </div>
         <div class="button-container mt-3">
-            <button class="btn btn-primary edit-btn">Ubah</button>
-            <button class="btn btn-danger delete-btn">Hapus</button>
-            <button class="btn btn-secondary update-href-btn">Exercise</button>
+            <button class="btn btn-primary edit-btn" style="background-color: #066CBB">Ubah</button>
+            <button class="btn btn-danger delete-btn" style="background-color:#BB0000">Hapus</button>
+            <button class="btn btn-danger modul-btn" style="background-color: #004576">Lihat Modul</button>
+            <button class="btn btn-secondary update-href-btn" style="background-color: #062841">Exercise</button>
         </div>
         <div id="pdfContainer">
 
@@ -32,7 +33,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">FORM TAMBAH SECTION</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #464646; font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 30px;">Form Tambah Section</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -41,22 +42,22 @@
                     <form id="myForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="NamaSection">Nama Section</label>
+                            <label class="control-label" for="NamaSection" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Nama Section</label>
                             <input id="NamaSection" name="NamaSection" class="form-control" />
                             <span class="text-danger" id="errorNamaSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="DeskripsiSection">Deskripsi Section</label>
+                            <label class="control-label" for="DeskripsiSection" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Deskripsi Section</label>
                             <input id="DeskripsiSection" name="DeskripsiSection" class="form-control" />
                             <span class="text-danger" id="errorDeskripsiSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="VidioPembelajaran">Vidio Pembelajaran</label>
+                            <label class="control-label" for="VidioPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Vidio Pembelajaran</label>
                             <input id="VidioPembelajaran" name="VidioPembelajaran" class="form-control" />
                             <span class="text-danger" id="errorVidioPembelajaran"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="ModulPembelajaran">Modul Pembelajaran</label>
+                            <label class="control-label" for="ModulPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Modul Pembelajaran</label>
                             <input type="file" id="ModulPembelajaran" name="ModulPembelajaran" class="form-control" />
                             <span class="text-danger" id="errorModulPembelajaran"></span>
                         </div>
@@ -74,7 +75,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">FORM EDIT SECTION</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #464646; font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 30px;">Form Edit Section</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -83,22 +84,22 @@
                     <form id="editForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="EditNamaSection">Nama Section</label>
+                            <label class="control-label" for="EditNamaSection" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Nama Section</label>
                             <input id="EditNamaSection" name="EditNamaSection" class="form-control" />
                             <span class="text-danger" id="errorEditNamaSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditDeskripsiSection">Deskripsi Section</label>
+                            <label class="control-label" for="EditDeskripsiSection" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Deskripsi Section</label>
                             <input id="EditDeskripsiSection" name="EditDeskripsiSection" class="form-control" />
                             <span class="text-danger" id="errorEditDeskripsiSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditVidioPembelajaran">Vidio Pembelajaran</label>
+                            <label class="control-label" for="EditVidioPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Vidio Pembelajaran</label>
                             <input id="EditVidioPembelajaran" name="EditVidioPembelajaran" class="form-control" />
                             <span class="text-danger" id="errorEditVidioPembelajaran"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditModulPembelajaran">Modul Pembelajaran</label>
+                            <label class="control-label" for="EditModulPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Modul Pembelajaran</label>
                             <input type="file" id="EditModulPembelajaran" name="EditModulPembelajaran" class="form-control" />
                             <span class="text-danger" id="errorEditModulPembelajaran"></span>
                         </div>
@@ -180,8 +181,9 @@
         var IdPelatihan = $("#idPelatihan").val();
         var IdSection = $("#idSection").val();
         var NamaSection;
+        var NamaModul;
         var linkYt = "https://www.youtube.com/embed/";
-        var pdfDirectory = "E:/AstraLearn/AstraLearn/Upload";
+        var pdfDirectory = "/Upload/";
 
         // ... (your existing code)
 
@@ -199,6 +201,7 @@
                         $("#videoContainer").attr("src", linkYt + data.video_pembelajaran);
                         $("#deskripsiSection").text(data.deskripsi);
                         NamaSection = data.nama_section;
+                        NamaModul = data.modul_pembelajaran;
                         // Generate and display PDF
                         generateAndDisplayPDF(data.modul_pembelajaran);
                     } else {
@@ -225,6 +228,12 @@
         $(document).on("click", ".update-href-btn", function () {
             var newHref = rootWebHost2 + NamaSection + '/' + IdSection + '/' + IdPelatihan;
             window.location.href = newHref;
+        });
+
+        $(document).on("click", ".modul-btn", function () {
+            var pdfUrl = pdfDirectory + NamaModul;
+
+            window.open(pdfUrl, '_blank');
         });
 
         $("#myForm").submit(function (e) {

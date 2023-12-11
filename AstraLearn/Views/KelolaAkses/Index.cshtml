@@ -31,7 +31,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">FORM EDIT PENGUNA</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #464646; font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 30px;">Form Edit Hak Akses</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -39,15 +39,15 @@
                 <div class="modal-body">
                     <form id="editForm">
                         <div class="form-group">
-                            <label class="control-label" for="EditUsername">Username</label>
+                            <label class="control-label" for="EditUsername" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Username</label>
                             <input id="EditUsername" name="EditUsername" class="form-control" readonly />
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditNama">Nama</label>
+                            <label class="control-label" for="EditNama" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Nama</label>
                             <input id="EditNama" name="EditNama" class="form-control" readonly/>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditHakAkses">Hak Akses</label>
+                            <label class="control-label" for="EditHakAkses" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Hak Akses</label>
                             <select id="EditHakAkses" name="EditHakAkses" class="form-control">
                             </select>
                         </div>
@@ -102,7 +102,7 @@
                 {
                     targets: 4,
                     render: function (data, type, row, index) {
-                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pengguna" data-id="' + row.id_pengguna + '"><i class="bi bi-exclamation-triangle"></i></button>';
+                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pengguna" data-id="' + row.id_pengguna + '" style="background-color: #066CBB"><i class="bi bi-exclamation-triangle"></i></button>';
                         return editButton;
                     }
                 }
