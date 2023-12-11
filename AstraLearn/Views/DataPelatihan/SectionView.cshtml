@@ -18,14 +18,13 @@
         <div class="desk-container">
             <p id="deskripsiSection" class="lead mb-4" style="max-width: 1800px; word-wrap: break-word;" style="font-weight: bold;"></p>
         </div>
-        <!-- PDF Viewer -->
-        <div class="pdf-container">
-            <iframe id="pdfIframe" src="" width="100%" height="600px" frameborder="0"></iframe>
-        </div>
         <div class="button-container mt-3">
             <button class="btn btn-primary edit-btn">Ubah</button>
             <button class="btn btn-danger delete-btn">Hapus</button>
             <button class="btn btn-secondary update-href-btn">Exercise</button>
+        </div>
+        <div id="pdfContainer">
+
         </div>
     </div>
 
@@ -182,7 +181,9 @@
         var IdSection = $("#idSection").val();
         var NamaSection;
         var linkYt = "https://www.youtube.com/embed/";
-        var pdfDirectory = "E:/Upload";
+        var pdfDirectory = "E:/AstraLearn/AstraLearn/Upload";
+
+        // ... (your existing code)
 
         function loadForm() {
             $.ajax({
@@ -197,11 +198,9 @@
                         $("#namaSection").text(data.nama_section);
                         $("#videoContainer").attr("src", linkYt + data.video_pembelajaran);
                         $("#deskripsiSection").text(data.deskripsi);
-                        NamaSection = data.nama_section;
-                        // If you want to handle the PDF as well, update the PDF container
-                        var pdfIframe = $("#pdfIframe");
-                        var pdfFileName = data.modul_pembelajaran || "Default.pdf"; // Use modul_pembelajaran if available, otherwise use "Default.pdf"
-                        pdfIframe.attr("src", pdfDirectory + "/" + pdfFileName);
+
+                        // Generate and display PDF
+                        generateAndDisplayPDF(data.modul_pembelajaran);
                     } else {
                         console.error("Failed to load section data.");
                     }
@@ -212,8 +211,20 @@
             });
         }
 
+        function generateAndDisplayPDF(data) {
+            var iframe = $("<iframe>")
+                .attr("id", "modul")
+                .attr("src", pdfDirectory + data)
+                .attr("width", "100%")
+                .attr("height", "500px")
+                .css("border", "none");
+
+            // Append iframe to the container with ID "pdfContainer"
+            $("#pdfContainer").append(iframe);
+        }
+
         $(document).on("click", ".update-href-btn", function () {
-            var newHref = rootWebHost2 + NamaSection + '/' + IdSection;
+            var newHref = rootWebHost2 + NamaSection + '/' + IdSection + '/' + IdPelatihan;
             window.location.href = newHref;
         });
 

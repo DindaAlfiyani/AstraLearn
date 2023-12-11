@@ -26,7 +26,10 @@ namespace AstraLearn.Controllers
                 string serializedModel = JsonConvert.SerializeObject(user);
                 HttpContext.Session.SetString("Identity", serializedModel);
                 HttpContext.Session.SetString("Peran", user.HakAkses);
+                HttpContext.Session.SetString("User", user.NamaLengkap);
+                HttpContext.Session.SetInt32("Id", user.IdPengguna);
                 HttpContext.Session.SetString("IsLoggedIn", "true");
+                HttpContext.Session.SetString("loggedInUserId", "true");
 
                 if (user.HakAkses == "Peserta")
                 {

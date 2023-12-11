@@ -6,7 +6,8 @@
 <div class="pagetitle">
     <h1>Exercise</h1>
     <h4>@(ViewBag.namaSection)</h4>
-    <input type="hidden" id="idPelatihan" value="@ViewBag.idSection" />
+    <input type="hidden" id="idSection" value="@ViewBag.idSection" />
+    <input type="hidden" id="idPelatihan" value="@ViewBag.idPelatihan" />
 </div>
 
 <section class="section">
@@ -220,12 +221,11 @@
     document.addEventListener('DOMContentLoaded', function () {
         var rootHost = "http://localhost:5180";
         var exerciseId;
-        var IdPelatihan = $("#idPelatihan").val();
+        var IdSection = $("#idSection").val();
 
-        console.log(IdPelatihan);
         new DataTable('#dataTable', {
             ajax: {
-                url: rootHost + '/Exercise/GetAllExercises?id=' + IdPelatihan,
+                url: rootHost + '/Exercise/GetAllExercises?id=' + IdSection,
                 type: "GET",
                 dataSrc: function (data) {
                     return data.data;
@@ -335,7 +335,7 @@
 
             var data = {
                 id_exercise: 0,
-                id_section: IdPelatihan,
+                id_section: IdSection,
                 soal: soal,
                 pilgan1: pilgan1,
                 pilgan2: pilgan2,
@@ -553,7 +553,7 @@
 
             var data = {
                 id_exercise: exerciseId,
-                id_section: IdPelatihan,
+                id_section: IdSection,
                 soal: soal,
                 pilgan1: pilgan1,
                 pilgan2: pilgan2,

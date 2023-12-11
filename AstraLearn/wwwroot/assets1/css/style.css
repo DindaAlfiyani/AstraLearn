@@ -360,9 +360,10 @@ h6 {
 # Main
 --------------------------------------------------------------*/
 #main {
-  margin-top: 100px;
-  padding: 20px 30px;
-  transition: all 0.3s;
+    margin-top: 100px;
+    padding: 20px 30px;
+    padding-bottom: 100px;
+    transition: all 0.3s;
 }
 
 @media (max-width: 1199px) {
@@ -1011,14 +1012,14 @@ h6 {
     top: 8px !important;
 }
 
-    .header-nav .profile .dropdown-header1 h6 {
+    .header-nav .profile .dropdown-header h6 {
         font-size: 18px;
         margin-bottom: 0;
         font-weight: 600;
         color: #444444;
     }
 
-    .header-nav .profile .dropdown-header1 span {
+    .header-nav .profile .dropdown-header span {
         font-size: 14px;
     }
 
@@ -1999,15 +2000,15 @@ h6 {
     max-width: 50%;
   }
 }
-
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 .footer {
-  padding: 20px 0;
-  font-size: 14px;
-  transition: all 0.3s;
-  border-top: 1px solid #cddfff;
+    height: 20px;
+    padding: 20px 0;
+    font-size: 14px;
+    transition: all 0.3s;
+    border-top: 1px solid #cddfff;
 }
 
 .footer .copyright {

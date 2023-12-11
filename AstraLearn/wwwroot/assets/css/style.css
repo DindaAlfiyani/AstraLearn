@@ -677,10 +677,12 @@ h6 {
         margin-bottom: 0;
         font-weight: 600;
         color: #444444;
+        text-align: center;
     }
 
     .header1-nav .profile .dropdown-header1 span {
         font-size: 14px;
+        text-align: center;
     }
 
     .header1-nav .profile .dropdown-item {

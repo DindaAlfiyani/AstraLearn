@@ -20,9 +20,10 @@ namespace AstraLearn.Controllers
             ViewBag.namaPelatihan = nama;
             return View();
         }
-        [Route("Exercise/{nama}/{id}")]
-        public IActionResult Exercise(string nama, int id)
+        [Route("Exercise/{nama}/{id}/{id2}")]
+        public IActionResult Exercise(string nama, int id, int id2)
         {
+            ViewBag.idPelatihan = id2;
             ViewBag.idSection = id;
             ViewBag.namaSection = nama;
             return View();
