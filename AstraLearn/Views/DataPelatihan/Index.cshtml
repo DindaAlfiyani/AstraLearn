@@ -37,7 +37,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">FORM TAMBAH PELATIHAN</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #464646; font-family: 'Poppins', sans-serif; font-weight: bold;">Form Tambah Pelatihan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -46,17 +46,17 @@
                     <form id="myForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="NamaPelatihan">Nama Pelatihan</label>
+                            <label class="control-label" for="NamaPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Nama Pelatihan</label>
                             <input id="NamaPelatihan" name="NamaPelatihan" class="form-control" />
                             <span class="text-danger" id="errorNamaPelatihan"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="DeskripsiPelatihan">Deskripsi Pelatihan</label>
+                            <label class="control-label" for="DeskripsiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">Deskripsi Pelatihan</label>
                             <input id="DeskripsiPelatihan" name="DeskripsiPelatihan" class="form-control" />
                             <span class="text-danger" id="errorDeskripsiPelatihan"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="KlasifikasiPelatihan">Klasifikasi Pelatihan</label>
+                            <label class="control-label" for="KlasifikasiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">Klasifikasi Pelatihan</label>
                             <select id="KlasifikasiPelatihan" name="KlasifikasiPelatihan" class="form-control">
                             </select>
                         </div>
@@ -75,7 +75,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">FORM EDIT PELATIHAN</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">FORM EDIT PELATIHAN</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -84,17 +84,17 @@
                     <form id="editForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="EditNamaPelatihan">Nama Pelatihan</label>
+                            <label class="control-label" for="EditNamaPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">Nama Pelatihan</label>
                             <input id="EditNamaPelatihan" name="EditNamaPelatihan" class="form-control" />
                             <span class="text-danger" id="errorEditNamaPelatihan"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditDeskripsiPelatihan">Deskripsi Pelatihan</label>
+                            <label class="control-label" for="EditDeskripsiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">Deskripsi Pelatihan</label>
                             <input id="EditDeskripsiPelatihan" name="EditDeskripsiPelatihan" class="form-control" />
                             <span class="text-danger" id="errorEditDeskripsiPelatihan"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditKlasifikasiPelatihan">Klasifikasi Pelatihan</label>
+                            <label class="control-label" for="EditKlasifikasiPelatihan" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: bold;">Klasifikasi Pelatihan</label>
                             <select id="EditKlasifikasiPelatihan" name="EditKlasifikasiPelatihan" class="form-control">
                                 <!-- Options will be dynamically populated -->
                             </select>
@@ -212,7 +212,8 @@
         $('#dataTable').on('click', 'button.update-href-button2', function () {
             var namaPelatihan = $(this).closest('tr').find('td:eq(1)').text(); // Assuming nama_pelatihan is in the second column
             var idPelatihan = $(this).data('id');
-            updateHref2(namaPelatihan, idPelatihan);
+            var nilaiMinimum = $(this).closest('tr').find('td:eq(5)').text();
+            updateHref2(namaPelatihan, idPelatihan, nilaiMinimum);
         });
 
         function updateHref(nama, id) {
@@ -220,8 +221,8 @@
             window.location.href = newHref;
         }
 
-        function updateHref2(nama, id) {
-            var newHref = rootWebHost2 + nama + '/' + id;
+        function updateHref2(nama, id, a) {
+            var newHref = rootWebHost2 + nama + '/' + id + '/' + a;
             window.location.href = newHref;
         }
 

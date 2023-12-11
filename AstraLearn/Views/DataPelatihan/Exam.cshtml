@@ -7,6 +7,7 @@
     <h1>Exam</h1>
     <h4>@(ViewBag.namaPelatihan)</h4>
     <input type="hidden" id="idPelatihan" value="@ViewBag.idPelatihan" />
+    <h4>Nilai Minimum : @(ViewBag.nilaiMinimum)</h4>
 </div>
 
 <section class="section">
@@ -30,8 +31,6 @@
         </div>
     </div>
 
-    <!--<!-- Modal -->
-    <!-- Add Exercise Modal -->
     <div class="modal fade" id="tambah_exercise" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

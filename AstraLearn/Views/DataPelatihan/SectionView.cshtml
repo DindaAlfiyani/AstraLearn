@@ -198,7 +198,7 @@
                         $("#namaSection").text(data.nama_section);
                         $("#videoContainer").attr("src", linkYt + data.video_pembelajaran);
                         $("#deskripsiSection").text(data.deskripsi);
-
+                        NamaSection = data.nama_section;
                         // Generate and display PDF
                         generateAndDisplayPDF(data.modul_pembelajaran);
                     } else {
@@ -219,7 +219,6 @@
                 .attr("height", "500px")
                 .css("border", "none");
 
-            // Append iframe to the container with ID "pdfContainer"
             $("#pdfContainer").append(iframe);
         }
 
