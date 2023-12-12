@@ -587,8 +587,10 @@ h6 {
     }
 
     .header1-nav .nav-profile span {
-        font-size: 14px;
+        font-size: 24px;
         font-weight: 600;
+        font-family: "Poppins", sans-serif;
+        margin: 10px;
     }
 
 .header1-nav .badge-number {
@@ -681,8 +683,10 @@ h6 {
     }
 
     .header1-nav .profile .dropdown-header1 span {
-        font-size: 14px;
-        text-align: center;
+        font-size: 24px;
+        font-weight: 600;
+        font-family: "Poppins", sans-serif;
+        margin: 10px;
     }
 
     .header1-nav .profile .dropdown-item {

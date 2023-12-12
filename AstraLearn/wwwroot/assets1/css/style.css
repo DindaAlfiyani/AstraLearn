@@ -352,8 +352,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Nunito", sans-serif;
-
+    /*font-family: "Nunito", sans-serif;*/
+    font-family: "Poppins", sans-serif;
 }
 
 /*--------------------------------------------------------------
@@ -361,6 +361,15 @@ h6 {
 --------------------------------------------------------------*/
 #main {
     margin-top: 100px;
+    padding: 20px 30px;
+    padding-bottom: 100px;
+    transition: all 0.3s;
+}
+
+.main1 {
+    margin-top: 100px;
+    margin-left: 410px;
+    width: 1450px;
     padding: 20px 30px;
     padding-bottom: 100px;
     transition: all 0.3s;
@@ -656,10 +665,11 @@ h6 {
     border-radius: 15px;
 }
 .breadcrumb {
-  font-size: 14px;
-  font-family: "Nunito", sans-serif;
-  color: #899bbd;
-  font-weight: 600;
+    font-size: 14px;
+    /*font-family: "Nunito", sans-serif;*/
+    font-family: "Poppins", sans-serif;
+    color: #899bbd;
+    font-weight: 600;
 }
 
 .breadcrumb a {
@@ -927,9 +937,17 @@ h6 {
     }
 
     .header-nav .nav-profile span {
-        font-size: 14px;
+        font-size: 24px;
         font-weight: 600;
+        font-family: "Poppins", sans-serif;
+        margin: 10px;
+        /*box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);*/ /* Menambahkan box shadow dengan warna dan ukuran tertentu */
+        /*border: 1px solid #ddd;*/ /* Mengganti border-block-color dengan border */
+        /*border-radius: 10px;
+        padding: 5px;
+        display: inline-block;*/
     }
+    
 
 .header-nav .badge-number {
     position: absolute;
@@ -1020,7 +1038,8 @@ h6 {
     }
 
     .header-nav .profile .dropdown-header span {
-        font-size: 14px;
+        font-size: 20px;
+        font-family: "Poppins", sans-serif;
     }
 
     .header-nav .profile .dropdown-item {
@@ -1099,14 +1118,16 @@ h6 {
     color: #012970;
 }
 
-    .header1-nav .nav-profile img {
-        max-height: 36px;
-    }
+.header1-nav .nav-profile img {
+    max-height: 36px;
+}
 
-    .header1-nav .nav-profile span {
-        font-size: 14px;
-        font-weight: 600;
-    }
+.header-nav .nav-profile span {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+    margin: 10px;
+}
 
 .header1-nav .badge-number {
     position: absolute;
@@ -1318,6 +1339,11 @@ h6 {
   margin-right: 10px;
   color: #4154f1;
 }
+    .sidebar-nav .nav-link span {
+        font-size: 18px;
+        margin-right: 10px;
+        font-family: "Poppins", sans-serif;
+    }
 
 .sidebar-nav .nav-link.collapsed {
   color: #012970;
@@ -1358,7 +1384,6 @@ h6 {
   font-size: 14px;
   font-weight: 600;
   color: #012970;
-  transition: 0.3;
   padding: 10px 0 10px 40px;
   transition: 0.3s;
 }

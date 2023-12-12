@@ -53,9 +53,26 @@
         <header id="header1" class="header1 fixed-top d-flex align-items-center">
 
             <div class="d-flex align-items-center justify-content-between">
-                <a href="index.html" class="logo d-flex align-items-center">
-                    <img src="~/assets/img/Logo_AstraLearn.png" alt="">
-                </a>
+                @if (@Context.Session.GetString("Peran") == "Pelatih")
+                {
+                    <a class="nav-link collapsed logo d-flex align-items-center" asp-controller="Pelatih" asp-action="Index">
+                        <img src="~/assets/img/Logo_AstraLearn.png" alt="">
+                    </a>
+                }
+
+                @if (@Context.Session.GetString("Peran") == "Admin")
+                {
+                    <a class="nav-link collapsed logo d-flex align-items-center" asp-controller="Admin" asp-action="Index">
+                        <img src="~/assets/img/Logo_AstraLearn.png" alt="">
+                    </a>
+                }
+
+                @if (@Context.Session.GetString("Peran") == "Peserta")
+                {
+                    <a class="nav-link collapsed logo d-flex align-items-center" asp-controller="Peserta" asp-action="Index">
+                        <img src="~/assets/img/Logo_AstraLearn.png" alt="">
+                    </a>
+                }
             </div><!-- End Logo -->
 
             <nav class="header1-nav ms-auto">
@@ -76,7 +93,7 @@
 
                         <a class="nav-link nav-profile d-flex align-items-center" href="#">
                             <span class="d-none d-md-block">@IsLoggedIn </span>
-                            <span class="d-none d-md-block">@loggedInUserId </span>
+                            @*<span class="d-none d-md-block">@loggedInUserId </span>*@
                         </a>
 
                         <!-- End Profile Image Icon -->
