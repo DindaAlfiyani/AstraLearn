@@ -21,11 +21,8 @@
         <div class="button-container mt-3">
             <button class="btn btn-primary edit-btn" style="background-color: #066CBB">Ubah</button>
             <button class="btn btn-danger delete-btn" style="background-color:#BB0000">Hapus</button>
-            <button class="btn btn-danger modul-btn" style="background-color: #004576">Lihat Modul</button>
+            <button class="btn btn-danger modul-btn" style="background-color: #004576">Unduh Modul</button>
             <button class="btn btn-secondary update-href-btn" style="background-color: #062841">Exercise</button>
-        </div>
-        <div id="pdfContainer">
-
         </div>
     </div>
 
@@ -183,7 +180,8 @@
         var NamaSection;
         var NamaModul;
         var linkYt = "https://www.youtube.com/embed/";
-        var pdfDirectory = "/Upload/";
+        var pdfDirectory = "https://localhost:7157/assets/Upload/";
+
 
         // ... (your existing code)
 
@@ -202,8 +200,6 @@
                         $("#deskripsiSection").text(data.deskripsi);
                         NamaSection = data.nama_section;
                         NamaModul = data.modul_pembelajaran;
-                        // Generate and display PDF
-                        generateAndDisplayPDF(data.modul_pembelajaran);
                     } else {
                         console.error("Failed to load section data.");
                     }
@@ -212,17 +208,6 @@
                     console.error("Failed to load section data.");
                 }
             });
-        }
-
-        function generateAndDisplayPDF(data) {
-            var iframe = $("<iframe>")
-                .attr("id", "modul")
-                .attr("src", pdfDirectory + data)
-                .attr("width", "100%")
-                .attr("height", "500px")
-                .css("border", "none");
-
-            $("#pdfContainer").append(iframe);
         }
 
         $(document).on("click", ".update-href-btn", function () {
@@ -398,7 +383,6 @@
             $("#EditNamaSection").val(namaSection);
             $("#EditDeskripsiSection").val(deskripsiSection);
             $("#EditVidioPembelajaran").val(videoPembelajaran);
-
             $('#edit_section').modal('show');
         });
 
