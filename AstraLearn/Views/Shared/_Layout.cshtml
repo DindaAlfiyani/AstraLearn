@@ -35,6 +35,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     @*<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
@@ -205,11 +207,12 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" asp-controller="Home" asp-action="Index">
+                    <a id="logoutLink" class="nav-link collapsed" asp-controller="Home" asp-action="Index">
                         <i class="bi bi-box-arrow-right"></i>
                         <h5 class="ms-2 mb-0"><span>Logout</span></h5>
-                </a>
-            </li>
+                    </a>
+                </li>
+
             }
 
             @if (@Context.Session.GetString("Peran") == "Admin")
@@ -251,12 +254,11 @@
                 <!-- End Dashboard Nav -->
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" asp-controller="Home" asp-action="Index">
+                    <a id="logoutLink" class="nav-link collapsed" asp-controller="Home" asp-action="Index">
                         <i class="bi bi-box-arrow-right"></i>
                         <h5 class="ms-2 mb-0"><span>Logout</span></h5>
                     </a>
                 </li>
-
                 <!-- End Dashboard Nav -->
             }
 
@@ -281,7 +283,7 @@
                 <!-- End Dashboard Nav -->
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" asp-controller="Home" asp-action="Index">
+                    <a id="logoutLink" class="nav-link collapsed" asp-controller="Home" asp-action="Index">
                         <i class="bi bi-box-arrow-right"></i>
                         <h5 class="ms-2 mb-0"><span>Logout</span></h5>
                     </a>
@@ -317,6 +319,33 @@
             Designed by <a href="https://bootstrapmade.com/">LabibGaming</a>
         </div>
     </footer><!-- End Footer -->
+
+    <script>
+        // Fungsi untuk menampilkan notifikasi SweetAlert
+        function showLogoutConfirmation() {
+            Swal.fire({
+                title: 'Apakah Anda yakin ingin keluar?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak',
+            }).then((result) => {
+                // Jika user mengklik "Ya", redirect ke Home/Index
+                if (result.isConfirmed) {
+                    window.location.href = '/Home/Index';
+                }
+            });
+        }
+
+        // Menambahkan event handler untuk klik pada link Logout
+        document.getElementById('logoutLink').addEventListener('click', function (event) {
+            // Mencegah aksi default (navigasi langsung)
+            event.preventDefault();
+
+            // Memanggil fungsi notifikasi sebelum logout
+            showLogoutConfirmation();
+        });
+    </script>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

@@ -570,7 +570,7 @@ h6 {
 
 .card-icon1 > i {
     color: #006CBB;
-    font-size: 5em; /* Sesuaikan ukuran font sesuai keinginan Anda */
+    font-size: 4em; /* Sesuaikan ukuran font sesuai keinginan Anda */
     width: 80px; /* Sesuaikan ukuran sesuai keinginan Anda */
     height: 80px;
 }
@@ -621,7 +621,7 @@ h6 {
 
 .ps-3 > h1 {
     margin-top: 30px;
-    font-size: 30px;
+    font-size: 80px;
     color: #006CBB;
 }
 
