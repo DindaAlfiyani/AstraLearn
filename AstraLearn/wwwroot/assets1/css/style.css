@@ -747,6 +747,7 @@ h6 {
   border-bottom: 2px solid #4154f1;
 }
 
+
 /*--------------------------------------------------------------
 # Top Bar
 --------------------------------------------------------------*/
@@ -1362,11 +1363,11 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #4154f1;
+  color: #006CBB;
   transition: 0.3;
   background: #f6f9ff;
   padding: 10px 15px;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 .sidebar-nav .nav-link i {
@@ -1380,22 +1381,30 @@ h6 {
         font-family: "Poppins", sans-serif;
     }
 
-.sidebar-nav .nav-link.collapsed {
-  color: #012970;
-  background: #fff;
-}
+    .sidebar-nav .nav-link.collapsed {
+        color: #006CBB;
+        background: #fff;
+    }
 
-.sidebar-nav .nav-link.collapsed i {
-  color: #899bbd;
+ .sidebar-nav .nav-link.collapsed i {
+  color: #006CBB;
 }
 
 .sidebar-nav .nav-link:hover {
-  color: #4154f1;
-  background: #f6f9ff;
+  color: #012970;
+  background: #cfe2ff;
+}
+.sidebar-nav .nav-link.active {
+  color: #012970;
+  background: #cfe2ff;
 }
 
 .sidebar-nav .nav-link:hover i {
-  color: #4154f1;
+ color: #012970;
+ }
+
+.sidebar-nav .nav-link:hover h5 {
+  color: #012970;
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {
@@ -1430,14 +1439,14 @@ h6 {
   border-radius: 50%;
 }
 
-.sidebar-nav .nav-content a:hover,
-.sidebar-nav .nav-content a.active {
-  color: #4154f1;
-}
+    .sidebar-nav .nav-content a:hover,
+    .sidebar-nav .nav-content a.active {
+        color: #012970;
+    }
 
-.sidebar-nav .nav-content a.active i {
-  background-color: #4154f1;
-}
+        .sidebar-nav .nav-content a.active i {
+            background-color: #012970;
+        }
 
 /*--------------------------------------------------------------
 # Sidebar1

@@ -182,7 +182,7 @@
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
-        <ul class="sidebar-nav" id="sidebar-nav">
+        <ul class="sidebar-nav active" id="sidebar-nav">
             @if (@Context.Session.GetString("Peran") == "Pelatih")
             {
                 <li class="nav-item">
@@ -264,6 +264,13 @@
 
             @if (@Context.Session.GetString("Peran") == "Peserta")
             {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" asp-controller="Peserta" asp-action="Dashboard">
+                        <i class="bi bi-house-door-fill"></i>
+                        <h5 class="ms-2 mb-0"><span>Dashboard</span></h5>
+                    </a>
+                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link collapsed" asp-controller="Peserta" asp-action="Index">
                         <i class="bi bi-receipt"></i>
