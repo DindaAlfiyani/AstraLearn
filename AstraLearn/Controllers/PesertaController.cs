@@ -29,11 +29,22 @@ namespace AstraLearn.Controllers
             return View();
         }
 
-        [Route("MengikutiPelatihan/{id}/{id2}")]
-        public IActionResult Section(int id, int id2)
+        [Route("MengikutiPelatihan/{id}/{id2}/{id3}/{nama}")]
+        public IActionResult Section(int id, int id2, int id3, string nama)
         {
             ViewBag.idPelatihan = id;
             ViewBag.idSection = id2;
+            ViewBag.idPembantu = id3;
+            ViewBag.namaPelatihan = nama;
+            return View();
+        }
+
+        [Route("SebelumMengikutiPelatihan/{id}/{id2}/{nama}")]
+        public IActionResult Welcome(int id, int id2, string nama)
+        {
+            ViewBag.idPelatihan = id;
+            ViewBag.idSection = id2;
+            ViewBag.namaPelatihan = nama;
             return View();
         }
 

@@ -42,6 +42,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var rootHost = "http://localhost:5180";
+        var rootWebHost = "https://localhost:7157/SebelumMengikutiPelatihan/";
         var pelatihanId;
 
         new DataTable('#dataTable', {
@@ -84,6 +85,7 @@
 
         $('#dataTable').on('click', 'button.btn-ikuti', function () {
             pelatihanId = $(this).closest('tr').data("id");
+            var namaPelatihan = $(this).closest('tr').find('td:eq(1)').text();
             var data = {
                 id_mengikuti: 0,
                 id_pengguna: 4,
@@ -100,13 +102,13 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
-                    console.log('a');
+                    var newHref = rootWebHost + pelatihanId + '/0/' + namaPelatihan;
+                    window.location.href = newHref;
                 },
                 error: function () {
                     console.error("Error fetching data.");
                 }
             });
         });
-
     });
 </script>

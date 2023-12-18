@@ -307,17 +307,43 @@
     document.addEventListener('DOMContentLoaded', function () {
         var rootHost = "http://localhost:5180";
         var rootWebHost = "https://localhost:7157/MengikutiPelatihan/";
-        var rootWebHost2 = "https://localhost:7157/DataPelatihan/Index";
+        var rootWebHost2 = "https://localhost:7157/Peserta/Kelas";
         var IdPelatihan = $("#idPelatihan").val();
+        var idPembantu;
 
-        function loadSideBar() {
+        function loadRiwayat() {
+            $.ajax({
+                url: rootHost + '/MengikutiPelatihan/GetMengikutiPelatihan?id_pengguna=4&id_pelatihan=' + IdPelatihan,
+                method: 'get',
+                contentType: 'application/json',
+                success: function (response) {
+                    loadSideBar(response.data.riwayat_section);
+                    console.log(response.data.riwayat_section);
+                },
+                error: function () {
+                    console.error("Failed to load sections data.");
+                }
+            });
+        }
+
+        function loadSideBar(riwayat) {
+            var nama = $("#namaPelatihan").val();
             $.ajax({
                 url: rootHost + '/Section/GetAllSectionsById?id=' + IdPelatihan,
                 method: 'get',
                 contentType: 'application/json',
                 success: function (response) {
                     if (response.status === 200) {
-                        updateSidebar(response.data);
+                        for (var i = 0; i < riwayat; i++) {
+                            sideBarDone(response.data[i], nama, i, response.data[i + 1]);
+                        }
+
+                        updateSidebar(response.data[riwayat], nama, riwayat, response.data[riwayat + 1]);
+
+                        for (var i = riwayat + 1; i < response.data.length; i++) {
+                            updateSidebar2(response.data[i], nama, i, response.data[i + 1]);
+                        }
+                        addButtonBack();
                     } else {
                         console.error("Failed to load sections data.");
                     }
@@ -328,33 +354,69 @@
             });
         }
 
-        function updateSidebar(sections) {
+        function sideBarDone(section, nama, index, section2) {
             var sidebarNav = $("#sidebar1-nav");
-            sections.forEach(function (section, index) {
-                var listItem = $("<li>").addClass("nav-item");
-                var link = $("<a>")
-                    .addClass("nav-link collapsed")
-                    .attr("href", "#")  // Set a placeholder href for now
-                    .click(function () {
-                        updateHref(section.id_section, section.id_pelatihan);
-                    });
+            var listItem = $("<li>").addClass("nav-item");
+            var link = $("<a>")
+                .addClass("nav-link collapsed")
+                .attr("href", "#")
+                .click(function () {
+                    updateHref(section.id_section, section.id_pelatihan, nama, section2.id_section);
+                });
 
-                var icon = $("<i>").addClass("bi bi-circle");
-                var h5 = $("<h5>").addClass("ms-2 mb-0").html(icon).append((index + 1) + ". " + section.nama_section);
+            var icon = $("<i>").addClass("bi bi-check-circle-fill");
+            var h5 = $("<h5>").addClass("ms-2 mb-0").html(icon).append((index + 1) + ". " + section.nama_section);
 
-                link.append(h5);
+            link.append(h5);
+            listItem.append(link);
+            sidebarNav.append(listItem);
+        }
 
-                listItem.append(link);
-                sidebarNav.append(listItem);
-            });
+        function updateSidebar(section, nama, index, section2) {
+            var sidebarNav = $("#sidebar1-nav");
+            var listItem = $("<li>").addClass("nav-item");
+            var link = $("<a>")
+                .addClass("nav-link collapsed")
+                .attr("href", "#")
+                .click(function () {
+                    updateHref(section.id_section, section.id_pelatihan, nama, section2.id_section);
+                });
 
-            // Add a "Back" button
+            var icon = $("<i>").addClass("bi bi-circle");
+            var h5 = $("<h5>").addClass("ms-2 mb-0").html(icon).append((index + 1) + ". " + section.nama_section);
+
+            link.append(h5);
+            listItem.append(link);
+            sidebarNav.append(listItem);
+        }
+
+        function updateSidebar2(section, nama, index, section2) {
+            var sidebarNav = $("#sidebar1-nav");
+            var listItem = $("<li>").addClass("nav-item");
+            var link = $("<a>")
+                .addClass("nav-link collapsed")
+                .attr("href", "javascript:void(0)");
+
+            var icon = $("<i>").addClass("bi bi-circle");
+            var h5 = $("<h5>")
+                .addClass("ms-2 mb-0 text-muted")  // Tambahkan kelas "text-muted" untuk warna abu-abu
+                .html(icon)
+                .append((index + 1) + ". " + section.nama_section);
+
+            link.append(h5);
+            listItem.append(link);
+            sidebarNav.append(listItem);
+        }
+
+
+
+        function addButtonBack(){
+            var sidebarNav = $("#sidebar1-nav");
             var backListItem = $("<li>").addClass("nav-item");
             var backButton = $("<a>")
                 .addClass("nav-link collapsed")
-                .attr("href", "#")  // Set a placeholder href for now
+                .attr("href", "#")
                 .click(function () {
-                    // Handle the back button click event
                     goBack();
                 })
                 .html("<i class='bi bi-arrow-left'></i><h5 class='ms-2 mb-0'>Kembali</h5>");
@@ -367,12 +429,12 @@
             window.location.href = rootWebHost2;
         }
 
-        function updateHref(id, id1) {
-            var newHref = rootWebHost + id1 + "/" + id;
+        function updateHref(id, id1, id2, nama) {
+            var newHref = rootWebHost + id1 + "/" + id + "/" + id2 + "/" + nama;
             window.location.href = newHref;
         }
 
-        loadSideBar();
+        loadRiwayat();
     });
 </script>
 
