@@ -1,53 +1,135 @@
 ﻿@{
-    ViewData["Title"] = "Kelas - Pelatihan";
+    ViewData["Title"] = "Pelatih - Pelatihan";
     Layout = "_LayoutSection";
 }
 
-<!-- ======= Breadcrumbs ======= -->
+<input type="hidden" id="idPelatihan" value="@ViewBag.idPelatihan" />
+<input type="hidden" id="idSection" value="@ViewBag.idSection" />
+
 <section id="breadcrumbs" class="breadcrumbs">
-    <div class="container">
-        <div class="d-flex justify-content-center py-4">
-            <div class="section-title">
-                <span><h1>Bahasa C</h1></span>
-            </div>
-        </div><!-- End Logo -->
-
-
-    </div>
-</section><!-- End Breadcrumbs -->
-
-<div class="container mt-sm-5 my-1">
-    <div class="question ml-sm-5 pl-sm-5 pt-2">
-        <div class="py-2 h5"><b>Q. which option best describes your job role?</b></div>
-        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-            <label class="options">
-                Small Business Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Nonprofit Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Journalist or Activist
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Other
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
+    <div class="container-fluid">
+        <!-- Video YouTube -->
+        <div class="nama-container">
+            <h1 id="namaSection" class="display-4 mb-4" style="font-weight: bold;"></h1>
+        </div>
+        <div class="video-container">
+            <iframe id="videoContainer" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="desk-container">
+            <p id="deskripsiSection" class="lead mb-4" style="max-width: 1800px; word-wrap: break-word;" style="font-weight: bold;"></p>
+        </div>
+        <div class="button-container mt-3">
+            <button class="btn btn-danger modul-btn" style="background-color: #004576">Unduh Modul</button>
+            <button class="btn btn-secondary update-href-btn" style="background-color: #062841">Exercise</button>
         </div>
     </div>
-    <div class="d-flex align-items-center pt-3">
-        <div id="prev">
-            <button class="btn btn-primary">Previous</button>
-        </div>
-        <div class="ml-auto mr-sm-5">
-            <button class="btn btn-success">Next</button>
-        </div>
-    </div>
-</div>
+</section>
+
+<style>
+    .video-container {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    .pdf-container {
+        width: 100%;
+        max-width: 800px;
+        margin-top: 20px;
+    }
+
+    /* Additional styles for larger headers and text */
+    h2.display-4 {
+        font-size: 2.5rem; /* Adjust the font size as needed */
+    }
+
+    p.lead {
+        font-size: 1.25rem; /* Adjust the font size as needed */
+    }
+
+    .button-container {
+        margin-bottom: 40px; /* Sesuaikan dengan seberapa besar ruang yang diinginkan */
+    }
+
+    .nama-container {
+        color: dodgerblue;
+        margin-top: 40px;
+        margin-bottom: 40px; /* Sesuaikan dengan seberapa besar ruang yang diinginkan */
+    }
+
+    .desk-container {
+        margin-top: 40px;
+        margin-bottom: 40px; /* Sesuaikan dengan seberapa besar ruang yang diinginkan */
+    }
+
+    .btn-danger {
+        color: #fff; /* Warna teks */
+        background-color: #dc3545; /* Warna latar belakang - merah */
+        border-color: #dc3545; /* Warna border - merah */
+    }
+
+    .btn-primary {
+        color: #fff; /* Warna teks */
+        background-color: #007bff; /* Warna latar belakang - biru */
+        border-color: #007bff; /* Warna border - biru */
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        var rootHost = "http://localhost:5180";
+        var rootWebHost = "https://localhost:7157/SectionView/";
+        var rootWebHost2 = "https://localhost:7157/Exercise/"
+        var IdPelatihan = $("#idPelatihan").val();
+        var IdSection = $("#idSection").val();
+        var NamaModul;
+        var linkYt = "https://www.youtube.com/embed/";
+        var pdfDirectory = "https://localhost:7157/assets/Upload/";
+
+        function loadForm() {
+            $.ajax({
+                url: rootHost + '/Section/GetSection?id=' + IdSection,
+                method: 'get',
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.status === 200) {
+                        var data = response.data;
+
+                        // Update the HTML elements with the received data
+                        $("#namaSection").text(data.nama_section);
+                        $("#videoContainer").attr("src", linkYt + data.video_pembelajaran);
+                        $("#deskripsiSection").text(data.deskripsi);
+                        NamaModul = data.modul_pembelajaran;
+                    } else {
+                        console.error("Failed to load section data.");
+                    }
+                },
+                error: function () {
+                    console.error("Failed to load section data.");
+                }
+            });
+        }
+
+        $(document).on("click", ".update-href-btn", function () {
+            var newHref = rootWebHost2 + NamaSection + '/' + IdSection + '/' + IdPelatihan;
+            window.location.href = newHref;
+        });
+
+        $(document).on("click", ".modul-btn", function () {
+            var pdfUrl = pdfDirectory + NamaModul;
+
+            window.open(pdfUrl, '_blank');
+        });
+
+        loadForm();
+    });
+</script>

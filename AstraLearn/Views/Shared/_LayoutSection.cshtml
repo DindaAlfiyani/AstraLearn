@@ -221,27 +221,7 @@
     <aside id="sidebar1" class="sidebar1">
 
         <ul class="sidebar1-nav" id="sidebar1-nav">
-            <li class="nav-item">
-                <a class="nav-link collapsed" asp-controller="Pelatih" asp-action="Index">
-                    <div style="display: flex; align-items: center;">
-                        <div>
-                            <h5><span>Selamat Datang</span></h5>
-                        </div>
-                        <div style="position: relative; margin-right: px;">
-                            <!-- Lingkaran dengan ikon centang -->
-                            <i id="circleIcon" class="bi bi-circle" style="margin-left: 150px;"></i>
-                        </div>
-                    </div>
-                </a>
-            </li>
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" asp-controller="" asp-action="">
-                    <h5><span>Pengenalan Virtual Machine</span></h5>
-                    <i id="circleIcon" class="bi bi-check-circle-fill" style="margin-left: 150px;"></i>
-                </a>
-            </li>
+            
 
         </ul>
 
@@ -323,5 +303,77 @@
 
 
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var rootHost = "http://localhost:5180";
+        var rootWebHost = "https://localhost:7157/MengikutiPelatihan/";
+        var rootWebHost2 = "https://localhost:7157/DataPelatihan/Index";
+        var IdPelatihan = $("#idPelatihan").val();
+
+        function loadSideBar() {
+            $.ajax({
+                url: rootHost + '/Section/GetAllSectionsById?id=' + IdPelatihan,
+                method: 'get',
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.status === 200) {
+                        updateSidebar(response.data);
+                    } else {
+                        console.error("Failed to load sections data.");
+                    }
+                },
+                error: function () {
+                    console.error("Failed to load sections data.");
+                }
+            });
+        }
+
+        function updateSidebar(sections) {
+            var sidebarNav = $("#sidebar1-nav");
+            sections.forEach(function (section, index) {
+                var listItem = $("<li>").addClass("nav-item");
+                var link = $("<a>")
+                    .addClass("nav-link collapsed")
+                    .attr("href", "#")  // Set a placeholder href for now
+                    .click(function () {
+                        updateHref(section.id_section, section.id_pelatihan);
+                    });
+
+                var icon = $("<i>").addClass("bi bi-circle");
+                var h5 = $("<h5>").addClass("ms-2 mb-0").html(icon).append((index + 1) + ". " + section.nama_section);
+
+                link.append(h5);
+
+                listItem.append(link);
+                sidebarNav.append(listItem);
+            });
+
+            // Add a "Back" button
+            var backListItem = $("<li>").addClass("nav-item");
+            var backButton = $("<a>")
+                .addClass("nav-link collapsed")
+                .attr("href", "#")  // Set a placeholder href for now
+                .click(function () {
+                    // Handle the back button click event
+                    goBack();
+                })
+                .html("<i class='bi bi-arrow-left'></i><h5 class='ms-2 mb-0'>Kembali</h5>");
+
+            backListItem.append(backButton);
+            sidebarNav.append(backListItem);
+        }
+
+        function goBack() {
+            window.location.href = rootWebHost2;
+        }
+
+        function updateHref(id, id1) {
+            var newHref = rootWebHost + id1 + "/" + id;
+            window.location.href = newHref;
+        }
+
+        loadSideBar();
+    });
+</script>
 
 </html>
