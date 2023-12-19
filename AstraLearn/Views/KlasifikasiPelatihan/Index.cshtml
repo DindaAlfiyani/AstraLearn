@@ -43,17 +43,17 @@
                     <form id="myForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="NamaKlasifikasi" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Nama Klasifikasi</label>
+                            <label class="control-label" for="NamaKlasifikasi" style="color: #066CBB; font-family: 'Poppins', sans-serif; ">Nama Klasifikasi*:</label>
                             <input id="NamaKlasifikasi" name="NamaKlasifikasi" class="form-control" />
                             <span class="text-danger" id="errorNamaKlasifikasi"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="DeskripsiKlasifikasi" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Deskripsi Klasifikasi</label>
+                            <label class="control-label" for="DeskripsiKlasifikasi" style="color: #066CBB; font-family: 'Poppins', sans-serif; ">Deskripsi Klasifikasi*:</label>
                             <input id="DeskripsiKlasifikasi" name="DeskripsiKlasifikasi" class="form-control" />
                             <span class="text-danger" id="errorDeskripsiKlasifikasi"></span>
                         </div>
                         <br>
-                        <div class="form-group">
+                        <div class="form-group text-right">
                             <input type="submit" value="Tambah" id="buttonCreate" class="btn btn-primary" />
                         </div>
                     </form>
@@ -76,17 +76,17 @@
                     <form id="editForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="EditNamaKlasifikasi" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Nama Klasifikasi</label>
+                            <label class="control-label" for="EditNamaKlasifikasi" style="color: #066CBB; font-family: 'Poppins', sans-serif; ">Nama Klasifikasi*:</label>
                             <input id="EditNamaKlasifikasi" name="EditNamaKlasifikasi" class="form-control" />
                             <span class="text-danger" id="errorEditNamaKlasifikasi"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditDeskripsiKlasifikasi" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Deskripsi Klasifikasi</label>
+                            <label class="control-label" for="EditDeskripsiKlasifikasi" style="color: #066CBB; font-family: 'Poppins', sans-serif; ">Deskripsi Klasifikasi*:</label>
                             <input id="EditDeskripsiKlasifikasi" name="EditDeskripsiKlasifikasi" class="form-control" />
                             <span class="text-danger" id="errorEditDeskripsiKlasifikasi"></span>
                         </div>
                         <br>
-                        <div class="form-group">
+                        <div class="form-group text-right">
                             <input type="submit" value="Ubah" id="buttonUpdate" class="btn btn-primary" />
                         </div>
                     </form>

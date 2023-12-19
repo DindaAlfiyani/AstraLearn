@@ -299,7 +299,25 @@ section1 .card1 .about{
     opacity: 1;
     color: #e634d7;
 }
+.swiper-slide.card1 {
+    margin-right: 20px;
+    max-height: 400px;
+}
 
+    .swiper-slide.card1 .card1-content {
+        height: 100%;
+    }
+
+    .swiper-slide.card1 .image img {
+        max-height: 100%;
+    }
+
+    .swiper-slide.card1 .button {
+        position: absolute;
+        bottom: 20px; /* Sesuaikan dengan kebutuhan */
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
 /*--------------------------------------------------------------
 # Login
@@ -364,6 +382,15 @@ h6 {
     padding: 20px 30px;
     padding-bottom: 100px;
     transition: all 0.3s;
+}
+.main {
+    background-color: #f0f0f0;
+    margin-left: 405px;
+    width: 1570px;
+    padding: 20px 30px;
+    padding-bottom: 100px;
+    transition: all 0.3s;
+    border-radius: 15px;
 }
 
 .main1 {
@@ -912,6 +939,7 @@ h6 {
     list-style: none;
     font-size: 20px;
     font-family: "Poppins", sans-serif;
+    color: #006CBB;
     margin: 0;
     padding: 0;
 }
@@ -929,7 +957,6 @@ h6 {
         border: 0;
         margin-left: 10px;
     }
-
     .header-nav > ul > li > a:before {
         content: "";
         position: absolute;
@@ -937,7 +964,7 @@ h6 {
         height: 2px;
         bottom: -5px;
         left: 0;
-        background-color: #f6b024;
+        background-color: cornflowerblue;
         visibility: hidden;
         width: 0px;
         transition: all 0.3s ease-in-out 0s;
@@ -965,7 +992,7 @@ h6 {
 }
 
 .header-nav .nav-profile {
-    color: #012970;
+    color: #006CBB;
 }
 
     .header-nav .nav-profile img {
@@ -1277,7 +1304,7 @@ h6 {
 --------------------------------------------------------------*/
 .sidebar {
     position: fixed;
-    top: 60px;
+    top: 50px;
     left: 0;
     bottom: 0;
     width: 300px;
@@ -1290,6 +1317,7 @@ h6 {
     box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
     background-color: #fff;
     margin-top: 50px;
+    border-radius: 15px;
 }
 
 @media (max-width: 1199px) {
@@ -1621,6 +1649,12 @@ h6 {
 /*--------------------------------------------------------------
 # Dashboard
 --------------------------------------------------------------*/
+
+.dashboard {
+    padding : 30px;
+    margin-top : 30px;
+}
+
 /* Filter dropdown */
 .dashboard .filter {
   position: absolute;
