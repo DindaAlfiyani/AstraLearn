@@ -408,7 +408,23 @@
             sidebarNav.append(listItem);
         }
 
+        function buttonExam(section, nama, index) {
+            var sidebarNav = $("#sidebar1-nav");
+            var listItem = $("<li>").addClass("nav-item");
+            var link = $("<a>")
+                .addClass("nav-link collapsed")
+                .attr("href", "javascript:void(0)");
 
+            var icon = $("<i id='" + section.id_pelatihan + "'>").addClass("bi bi-circle");
+            var h5 = $("<h5>")
+                .addClass("ms-2 mb-0 text-muted")  // Tambahkan kelas "text-muted" untuk warna abu-abu
+                .html(icon)
+                .append((index + 1) + ". " + section.nama_section);
+
+            link.append(h5);
+            listItem.append(link);
+            sidebarNav.append(listItem);
+        }
 
         function addButtonBack(){
             var sidebarNav = $("#sidebar1-nav");

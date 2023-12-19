@@ -3,6 +3,23 @@
     Layout = "_LayoutSection";
 }
 
+<!-- Add modal HTML structure -->
+<div class="modal fade" id="scoreModal" tabindex="-1" role="dialog" aria-labelledby="scoreModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scoreModalLabel">Nilai Anda</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="scoreMessage"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <input type="hidden" id="idPelatihan" value="@ViewBag.idPelatihan" />
 <input type="hidden" id="namaPelatihan" value="@ViewBag.namaPelatihan" />
 <input type="hidden" id="idSection" value="@ViewBag.idSection" />
@@ -11,28 +28,22 @@
     <div class="container">
         <div class="d-flex justify-content-center py-4">
             <div class="section-title">
-                <span><h1>Bahasa C</h1></span>
+                <span><h1>Exercise</h1></span>
             </div>
         </div><!-- End Logo -->
-
-
     </div>
 </section><!-- End Breadcrumbs -->
 
 <div class="container mt-sm-5 my-1" id="exercise-container">
-    
     <br />
     <br />
-
 </div>
 <div class="d-flex align-items-center pt-3">
     <div class="ml-auto mr-sm-5">
-        <button class="btn btn-success">Next</button>
+        <button class="btn btn-success" id="submitBtn">Simpan Jawaban</button>
     </div>
 </div>
 <!-- Add this script after your existing script -->
-<!-- Add this script after your existing script -->
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
@@ -68,49 +79,51 @@
                 correctAnswers[index] = exercise.kunci_jawaban;
 
                 var exerciseHtml = `
-                                <div class="question ml-sm-5 pl-sm-5 pt-2">
-                                    <div class="py-2 h5"><b>Soal ${index + 1}: ${exercise.soal}</b></div>
-                                    <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-                                        <label class="options" data-correct="${exercise.kunci_jawaban}">
-                                            ${exercise.pilgan1}
-                                            <input type="radio" name="radio${index}" data-answer="${exercise.pilgan1}">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="options" data-correct="${exercise.kunci_jawaban}">
-                                            ${exercise.pilgan2}
-                                            <input type="radio" name="radio${index}" data-answer="${exercise.pilgan2}">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="options" data-correct="${exercise.kunci_jawaban}">
-                                            ${exercise.pilgan3}
-                                            <input type="radio" name="radio${index}" data-answer="${exercise.pilgan3}">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="options" data-correct="${exercise.kunci_jawaban}">
-                                            ${exercise.pilgan4}
-                                            <input type="radio" name="radio${index}" data-answer="${exercise.pilgan4}">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="options" data-correct="${exercise.kunci_jawaban}">
-                                            ${exercise.pilgan5}
-                                            <input type="radio" name="radio${index}" data-answer="${exercise.pilgan5}">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
+                            <div class="question ml-sm-5 pl-sm-5 pt-2">
+                                <div class="py-2 h5"><b>Soal ${index + 1}: ${exercise.soal}</b></div>
+                                <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
+                                    <label class="options" data-correct="${exercise.kunci_jawaban}">
+                                        ${exercise.pilgan1}
+                                        <input type="radio" name="radio${index}" data-answer="${exercise.pilgan1}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="options" data-correct="${exercise.kunci_jawaban}">
+                                        ${exercise.pilgan2}
+                                        <input type="radio" name="radio${index}" data-answer="${exercise.pilgan2}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="options" data-correct="${exercise.kunci_jawaban}">
+                                        ${exercise.pilgan3}
+                                        <input type="radio" name="radio${index}" data-answer="${exercise.pilgan3}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="options" data-correct="${exercise.kunci_jawaban}">
+                                        ${exercise.pilgan4}
+                                        <input type="radio" name="radio${index}" data-answer="${exercise.pilgan4}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="options" data-correct="${exercise.kunci_jawaban}">
+                                        ${exercise.pilgan5}
+                                        <input type="radio" name="radio${index}" data-answer="${exercise.pilgan5}">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </div>
-                                <br />
-                                <br />
-                            `;
+                            </div>
+                            <br />
+                            <br />
+                        `;
 
                 exerciseContainer.append(exerciseHtml);
             });
         }
 
         // Add click event for the "Next" button
-        $(".btn-success").on("click", function () {
+        $("#submitBtn").on("click", function () {
             // Show confirmation dialog before checking answers
             showConfirmationDialog();
         });
+
+        var submitBtn = $("#submitBtn");
 
         function showConfirmationDialog() {
             Swal.fire({
@@ -128,6 +141,10 @@
 
                     // Check answers
                     checkAnswers();
+
+                    // Change the buttons
+                    submitBtn.hide();
+                    backBtn.show();
                 }
             });
         }
@@ -141,9 +158,11 @@
         }
 
         function checkAnswers() {
+            var totalQuestions = $(".question").length;
+            var correctCount = 0;
+
             // Loop through each question
             $(".question").each(function (index) {
-                var questionNumber = index + 1;
                 var selectedAnswer = selectedAnswers[index];
                 var correct = correctAnswers[index];
                 var isCorrect = selectedAnswer === correct;
@@ -160,6 +179,7 @@
                         if (isCorrect) {
                             $(this).css("color", "green");
                             $(this).append(checkmarkSpan); // Checkmark to the right
+                            correctCount++;
                         } else {
                             $(this).css("color", "red");
                             $(this).append(crossSpan); // Cross to the right
@@ -167,12 +187,19 @@
                     }
                 });
             });
+
+            var score = (correctCount / totalQuestions) * 100;
+
+            // Display the score in the modal
+            $("#scoreMessage").html("You scored " + score.toFixed(2) + "%");
+
+            // Show the modal
+            $("#scoreModal").modal('show');
+
+            // Disable radio buttons after submission
+            $(".question input[type='radio']").attr("disabled", true);
+
+            submitBtn.hide();
         }
     });
 </script>
-
-
-
-
-
-
