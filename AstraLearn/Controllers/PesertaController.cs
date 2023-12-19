@@ -29,12 +29,11 @@ namespace AstraLearn.Controllers
             return View();
         }
 
-        [Route("MengikutiPelatihan/{id}/{id2}/{id3}/{nama}")]
-        public IActionResult Section(int id, int id2, int id3, string nama)
+        [Route("MengikutiPelatihan/{id}/{id2}/{nama}")]
+        public IActionResult Section(int id, int id2, string nama)
         {
             ViewBag.idPelatihan = id;
             ViewBag.idSection = id2;
-            ViewBag.idPembantu = id3;
             ViewBag.namaPelatihan = nama;
             return View();
         }
@@ -53,8 +52,12 @@ namespace AstraLearn.Controllers
             return View();
         }
 
-        public IActionResult Exercise()
+        [Route("MengerjakanExercise/{id}/{id2}/{nama}")]
+        public IActionResult Exercise(int id, int id2, string nama)
         {
+            ViewBag.idPelatihan = id;
+            ViewBag.idSection = id2;
+            ViewBag.namaPelatihan = nama;
             return View();
         }
         public IActionResult Kelas()

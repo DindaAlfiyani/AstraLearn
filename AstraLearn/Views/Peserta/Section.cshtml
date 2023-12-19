@@ -6,9 +6,8 @@
 <input type="hidden" id="idPelatihan" value="@ViewBag.idPelatihan" />
 <input type="hidden" id="namaPelatihan" value="@ViewBag.namaPelatihan" />
 <input type="hidden" id="idSection" value="@ViewBag.idSection" />
-<input type="hidden" id="idPembantu" value="@ViewBag.idPembantu" />
 
-<section>
+<section id="breadcrumbs" class="breadcrumbs">
     <div class="container-fluid">
         <!-- Video YouTube -->
         <div class="nama-container">
@@ -87,18 +86,22 @@
     }
 </style>
 
+<!-- ... Bagian HTML lainnya ... -->
+<!-- ... Bagian HTML lainnya ... -->
+<!-- Bagian lain dari HTML -->
+
 <script>
     $(document).ready(function () {
         var rootHost = "http://localhost:5180";
-        var rootWebHost = "https://localhost:7157/MengikutiPelatihan/";
-        var rootWebHost2 = "https://localhost:7157/Exercise/"
+        var rootWebHost2 = "https://localhost:7157/MengerjakanExercise/";
         var IdPelatihan = $("#idPelatihan").val();
         var IdSection = $("#idSection").val();
-        var IdPembantu = $("#idPembantu").val()
         var NamaPelatihan = $("#namaPelatihan").val();
+        var idBerikutnya;
         var NamaModul;
         var linkYt = "https://www.youtube.com/embed/";
         var pdfDirectory = "https://localhost:7157/assets/Upload/";
+        $(".lanjut-btn").hide();
 
         function loadForm() {
             $.ajax({
@@ -114,6 +117,11 @@
                         $("#videoContainer").attr("src", linkYt + data.video_pembelajaran);
                         $("#deskripsiSection").text(data.deskripsi);
                         NamaModul = data.modul_pembelajaran;
+
+                        $("#videoContainer").on("ended", function () {
+                            console.log("Video selesai diputar");
+                            $(".lanjut-btn").show();
+                        });
                     } else {
                         console.error("Failed to load section data.");
                     }
@@ -125,12 +133,76 @@
         }
 
         $(document).on("click", ".update-href-btn", function () {
-            var newHref = rootWebHost2 + NamaSection + '/' + IdSection + '/' + IdPelatihan;
+            var newHref = rootWebHost2 + IdPelatihan + '/' + IdSection + '/' + NamaPelatihan;
             window.location.href = newHref;
         });
 
+        function loadVidio() {
+            console.log('b');
+            var video = document.getElementById('videoContainer');
+            console.log('a');
+            console.log(video);
+
+            // Periksa apakah video telah dimuat sebelum mencoba mengakses currentTime
+            if (video && video.readyState >= 2 && video.currentTime >= video.duration - 1) {
+                console.log("Video hampir selesai");
+                $(".lanjut-btn").show();
+            }
+        }
+
+        function tryLoadVidio() {
+            var video = document.getElementById('videoContainer');
+            if (video && video.readyState >= 2) {
+                loadVidio();
+            } else {
+                // Jika video belum sepenuhnya dimuat, tunggu hingga dimuat sebelum mencoba lagi
+                video.addEventListener('loadeddata', function () {
+                    tryLoadVidio();
+                });
+            }
+        }
+
+        function loadDataEverySecond() {
+            tryLoadVidio(); // Panggil pertama kali saat halaman dimuat
+            setInterval(tryLoadVidio, 1000); // Set interval untuk memanggil tryLoadVidio setiap 1000 milliseconds (1 detik)
+        }
+
+        function loadRiwayat() {
+            $.ajax({
+                url: rootHost + '/MengikutiPelatihan/GetMengikutiPelatihan?id_pengguna=4&id_pelatihan=' + IdPelatihan,
+                method: 'get',
+                contentType: 'application/json',
+                success: function (response) {
+                    loadId(response.data.riwayat_section);
+                },
+                error: function () {
+                    console.error("Failed to load sections data.");
+                }
+            });
+        }
+
+        function loadId(riwayat) {
+            $.ajax({
+                url: rootHost + '/Section/GetAllSectionsById?id=' + IdPelatihan,
+                method: 'get',
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.status === 200) {
+                        idBerikutnya = response.data[riwayat].id_section;
+                        var newHref = rootWebHost + IdPelatihan + '/' + idBerikutnya + '/' + NamaPelatihan;
+                        window.location.href = newHref;
+                    } else {
+                        console.error("Failed to load sections data.");
+                    }
+                },
+                error: function () {
+                    console.error("Failed to load sections data.");
+                }
+            });
+        }
+
         $(document).on("click", ".lanjut-btn", function () {
-            var namaPelatihan = $(this).closest('tr').find('td:eq(1)').text();
+            var namaPelatihan = $("#namaSection").text(); // Ambil teks dari elemen dengan ID namaSection
             var data = {
                 id_mengikuti: 0,
                 id_pengguna: 4,
@@ -138,7 +210,7 @@
                 riwayat_section: 0,
                 riwayat_nilai: 0,
                 rating: 0
-            }
+            };
 
             $.ajax({
                 url: rootHost + "/MengikutiPelatihan/UpdateMengikutiPelatihan",
@@ -147,22 +219,20 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
-                    var newHref = rootWebHost + IdPelatihan + '/' + IdSection + '/' + IdPembantu + '/' + NamaPelatihan;
-                    window.location.href = newHref;
+                    loadRiwayat();
                 },
                 error: function () {
                     console.error("Error fetching data.");
                 }
             });
-
         });
 
         $(document).on("click", ".modul-btn", function () {
             var pdfUrl = pdfDirectory + NamaModul;
-
             window.open(pdfUrl, '_blank');
         });
 
         loadForm();
+        loadDataEverySecond();
     });
 </script>

@@ -1,8 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Peserta - Exercise";
-    Layout = "_Layout";
+    Layout = "_LayoutSection";
 }
 
+<input type="hidden" id="idPelatihan" value="@ViewBag.idPelatihan" />
+<input type="hidden" id="namaPelatihan" value="@ViewBag.namaPelatihan" />
+<input type="hidden" id="idSection" value="@ViewBag.idSection" />
 <!-- ======= Breadcrumbs ======= -->
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
@@ -16,151 +19,160 @@
     </div>
 </section><!-- End Breadcrumbs -->
 
-<div class="container mt-sm-5 my-1">
-    <div class="question ml-sm-5 pl-sm-5 pt-2">
-        <div class="py-2 h5"><b>1. which option best describes your job role?</b></div>
-        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-            <label class="options">
-                Small Business Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Nonprofit Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Journalist or Activist
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Other
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-    </div>
+<div class="container mt-sm-5 my-1" id="exercise-container">
+    
     <br />
     <br />
-
-    <div class="question ml-sm-5 pl-sm-5 pt-2">
-        <div class="py-2 h5"><b>2. which option best describes your job role?</b></div>
-        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-            <label class="options">
-                Small Business Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Nonprofit Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Journalist or Activist
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Other
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-    </div>
-    <br />
-    <br />
-
-    <div class="question ml-sm-5 pl-sm-5 pt-2">
-        <div class="py-2 h5"><b>3. which option best describes your job role?</b></div>
-        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-            <label class="options">
-                Small Business Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Nonprofit Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Journalist or Activist
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Other
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-    </div>
-    <br />
-    <br />
-
-    <div class="question ml-sm-5 pl-sm-5 pt-2">
-        <div class="py-2 h5"><b>4. which option best describes your job role?</b></div>
-        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-            <label class="options">
-                Small Business Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Nonprofit Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Journalist or Activist
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Other
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-    </div>
-    <br />
-    <br />
-
-    <div class="question ml-sm-5 pl-sm-5 pt-2">
-        <div class="py-2 h5"><b>5. which option best describes your job role?</b></div>
-        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-            <label class="options">
-                Small Business Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Nonprofit Owner or Employee
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Journalist or Activist
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-            <label class="options">
-                Other
-                <input type="radio" name="radio">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-    </div>
-    <br />
-    <br />
-
-    <div class="d-flex align-items-center pt-3">
-        <div class="ml-auto mr-sm-5">
-            <button class="btn btn-success">Next</button>
-        </div>
-    </div>
 
 </div>
+<div class="d-flex align-items-center pt-3">
+    <div class="ml-auto mr-sm-5">
+        <button class="btn btn-success">Next</button>
+    </div>
+</div>
+<!-- Add this script after your existing script -->
+<!-- Add this script after your existing script -->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function () {
+        var IdPelatihan = $("#idPelatihan").val();
+        var IdSection = $("#idSection").val();
+        var NamaPelatihan = $("#namaPelatihan").val();
+        var rootHost = "http://localhost:5180";
+
+        // Store correct answers in an object for later comparison
+        var correctAnswers = {};
+
+        // Store selected answers for each question
+        var selectedAnswers = {};
+
+        $.ajax({
+            url: rootHost + '/Exercise/GetAllExercises?id=' + IdSection,
+            method: 'get',
+            contentType: 'application/json',
+            success: function (response) {
+                if (response.status === 200) {
+                    console.log(response);
+                    insertExerciseData(response.data);
+                }
+            }
+        });
+
+        function insertExerciseData(data) {
+            var exerciseContainer = $("#exercise-container");
+
+            data.forEach(function (exercise, index) {
+                // Store the correct answer for each exercise
+                correctAnswers[index] = exercise.kunci_jawaban;
+
+                var exerciseHtml = `
+                                <div class="question ml-sm-5 pl-sm-5 pt-2">
+                                    <div class="py-2 h5"><b>Soal ${index + 1}: ${exercise.soal}</b></div>
+                                    <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
+                                        <label class="options" data-correct="${exercise.kunci_jawaban}">
+                                            ${exercise.pilgan1}
+                                            <input type="radio" name="radio${index}" data-answer="${exercise.pilgan1}">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="options" data-correct="${exercise.kunci_jawaban}">
+                                            ${exercise.pilgan2}
+                                            <input type="radio" name="radio${index}" data-answer="${exercise.pilgan2}">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="options" data-correct="${exercise.kunci_jawaban}">
+                                            ${exercise.pilgan3}
+                                            <input type="radio" name="radio${index}" data-answer="${exercise.pilgan3}">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="options" data-correct="${exercise.kunci_jawaban}">
+                                            ${exercise.pilgan4}
+                                            <input type="radio" name="radio${index}" data-answer="${exercise.pilgan4}">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="options" data-correct="${exercise.kunci_jawaban}">
+                                            ${exercise.pilgan5}
+                                            <input type="radio" name="radio${index}" data-answer="${exercise.pilgan5}">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                            `;
+
+                exerciseContainer.append(exerciseHtml);
+            });
+        }
+
+        // Add click event for the "Next" button
+        $(".btn-success").on("click", function () {
+            // Show confirmation dialog before checking answers
+            showConfirmationDialog();
+        });
+
+        function showConfirmationDialog() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to change your answers after submission!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, submit!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Store selected answers
+                    storeSelectedAnswers();
+
+                    // Check answers
+                    checkAnswers();
+                }
+            });
+        }
+
+        function storeSelectedAnswers() {
+            // Loop through each question
+            $(".question").each(function (index) {
+                var selectedAnswer = $(this).find("input[name='radio" + index + "']:checked").data("answer");
+                selectedAnswers[index] = selectedAnswer;
+            });
+        }
+
+        function checkAnswers() {
+            // Loop through each question
+            $(".question").each(function (index) {
+                var questionNumber = index + 1;
+                var selectedAnswer = selectedAnswers[index];
+                var correct = correctAnswers[index];
+                var isCorrect = selectedAnswer === correct;
+
+                // Highlight selected answer and mark with checkmark or cross
+                $(this).find("label.options").each(function () {
+                    var optionText = $(this).text().trim(); // Trim extra spaces
+                    var checkmarkSpan = $("<span class='checkmark'>&#10004;</span>");
+                    var crossSpan = $("<span class='checkmark'>&#10008;</span>");
+
+                    if (optionText === selectedAnswer) {
+                        $(this).css("font-weight", "bold"); // Make text bold
+
+                        if (isCorrect) {
+                            $(this).css("color", "green");
+                            $(this).append(checkmarkSpan); // Checkmark to the right
+                        } else {
+                            $(this).css("color", "red");
+                            $(this).append(crossSpan); // Cross to the right
+                        }
+                    }
+                });
+            });
+        }
+    });
+</script>
+
+
+
+
+
+

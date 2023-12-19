@@ -229,7 +229,7 @@
 
     @*@RenderSection("scripts", required: false)*@
 
-    <main id="main1" class="main1" style="background-color: #f0f0f0">
+    <main id="main1" class="main1">
 
         <section class="section">
             @RenderBody()
@@ -335,13 +335,13 @@
                 success: function (response) {
                     if (response.status === 200) {
                         for (var i = 0; i < riwayat; i++) {
-                            sideBarDone(response.data[i], nama, i, response.data[i + 1]);
+                            sideBarDone(response.data[i], nama, i);
                         }
 
-                        updateSidebar(response.data[riwayat], nama, riwayat, response.data[riwayat + 1]);
+                        updateSidebar(response.data[riwayat], nama, riwayat);
 
                         for (var i = riwayat + 1; i < response.data.length; i++) {
-                            updateSidebar2(response.data[i], nama, i, response.data[i + 1]);
+                            updateSidebar2(response.data[i], nama, i);
                         }
                         addButtonBack();
                     } else {
@@ -354,17 +354,17 @@
             });
         }
 
-        function sideBarDone(section, nama, index, section2) {
+        function sideBarDone(section, nama, index) {
             var sidebarNav = $("#sidebar1-nav");
             var listItem = $("<li>").addClass("nav-item");
             var link = $("<a>")
                 .addClass("nav-link collapsed")
                 .attr("href", "#")
                 .click(function () {
-                    updateHref(section.id_section, section.id_pelatihan, nama, section2.id_section);
+                    updateHref(section.id_section, section.id_pelatihan, nama);
                 });
 
-            var icon = $("<i>").addClass("bi bi-check-circle-fill");
+            var icon = $("<i id='" + section.id_section + "'>").addClass("bi bi-check-circle-fill");
             var h5 = $("<h5>").addClass("ms-2 mb-0").html(icon).append((index + 1) + ". " + section.nama_section);
 
             link.append(h5);
@@ -372,17 +372,17 @@
             sidebarNav.append(listItem);
         }
 
-        function updateSidebar(section, nama, index, section2) {
+        function updateSidebar(section, nama, index) {
             var sidebarNav = $("#sidebar1-nav");
             var listItem = $("<li>").addClass("nav-item");
             var link = $("<a>")
                 .addClass("nav-link collapsed")
                 .attr("href", "#")
                 .click(function () {
-                    updateHref(section.id_section, section.id_pelatihan, nama, section2.id_section);
+                    updateHref(section.id_section, section.id_pelatihan, nama);
                 });
 
-            var icon = $("<i>").addClass("bi bi-circle");
+            var icon = $("<i id='" + section.id_section + "'>").addClass("bi bi-circle");
             var h5 = $("<h5>").addClass("ms-2 mb-0").html(icon).append((index + 1) + ". " + section.nama_section);
 
             link.append(h5);
@@ -390,14 +390,14 @@
             sidebarNav.append(listItem);
         }
 
-        function updateSidebar2(section, nama, index, section2) {
+        function updateSidebar2(section, nama, index) {
             var sidebarNav = $("#sidebar1-nav");
             var listItem = $("<li>").addClass("nav-item");
             var link = $("<a>")
                 .addClass("nav-link collapsed")
                 .attr("href", "javascript:void(0)");
 
-            var icon = $("<i>").addClass("bi bi-circle");
+            var icon = $("<i id='" + section.id_section + "'>").addClass("bi bi-circle");
             var h5 = $("<h5>")
                 .addClass("ms-2 mb-0 text-muted")  // Tambahkan kelas "text-muted" untuk warna abu-abu
                 .html(icon)
@@ -429,8 +429,8 @@
             window.location.href = rootWebHost2;
         }
 
-        function updateHref(id, id1, id2, nama) {
-            var newHref = rootWebHost + id1 + "/" + id + "/" + id2 + "/" + nama;
+        function updateHref(id, id1, nama) {
+            var newHref = rootWebHost + id1 + "/" + id + "/" + nama;
             window.location.href = newHref;
         }
 
