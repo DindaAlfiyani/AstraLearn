@@ -93,6 +93,7 @@
 <script>
     $(document).ready(function () {
         var rootHost = "http://localhost:5180";
+        var rootWebHost = "https://localhost:7157/MengikutiPelatihan/";
         var rootWebHost2 = "https://localhost:7157/MengerjakanExercise/";
         var IdPelatihan = $("#idPelatihan").val();
         var IdSection = $("#idSection").val();
@@ -101,7 +102,6 @@
         var NamaModul;
         var linkYt = "https://www.youtube.com/embed/";
         var pdfDirectory = "https://localhost:7157/assets/Upload/";
-        $(".lanjut-btn").hide();
 
         function loadForm() {
             $.ajax({
