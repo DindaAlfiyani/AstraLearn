@@ -1,401 +1,94 @@
 ﻿@{
-    ViewData["Title"] = "Peserta - Kelas Saya";
+    ViewData["Title"] = "Peserta - Pelatihan";
     Layout = "_Layout";
 }
 
+<div class="pagetitle">
+    <h1>Pelatihan</h1>
+</div>
 
-        <div class="pagetitle">
-            <h1 style="font-size: 48px; font-weight: bold; margin-top: 5px;">Kelas Saya</h1>
-        </div><!-- End Page Title -->
+<section class="section">
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table table-striped" style="width:100%" id="dataTable">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama Pelatihan</th>
+                        <th scope="col">Deskripsi Pelatihan</th>
+                        <th scope="col">Klasifikasi Pelatihan</th>
+                        <th scope="col">Jumlah Peserta</th>
+                        <th scope="col">Nilai Minimum</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<style>
+    .section {
+        min-height: 78vh;
+        display: flex;
+        flex-direction: column;
+    }
 
-        <section class="section">
-            <div class="row">
-                
-            </div>
-        </section>
+    .container-fluid {
+        flex: 1;
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var IdLogin = $("#idLogin").val();
+        var rootHost = "http://localhost:5180";
+        var rootWebHost = "https://localhost:7157/SebelumMengikutiPelatihan/";
+        var pelatihanId;
 
-
-        <body1>
-
-            <style>
-                .swiper-slide.card1 {
-                    margin-right: 20px; /* Ganti nilai ini sesuai kebutuhan jarak yang diinginkan */
-                    max-height: 400px;
+        new DataTable('#dataTable', {
+            ajax: {
+                url: rootHost + '/LanjutkanPelatihan/GetLanjutkanPelatihan?idPengguna=' + IdLogin,
+                type: "GET",
+                dataSrc: function (data) {
+                    return data.data;
                 }
-
-                    .swiper-slide.card1 .card1-content {
-                        height: 100%;
+            },
+            columns: [
+                { data: null },
+                { data: 'nama_pelatihan' },
+                { data: 'deksripsi_pelatihan' },
+                { data: 'nama_klasifikasi' },
+                { data: 'jumlah_peserta' },
+                { data: 'nilai' },
+                { data: null },
+            ],
+            columnDefs: [
+                {
+                    targets: 0,
+                    render: function (data, type, row, index) {
+                        return index.row + 1;
                     }
-
-                    .swiper-slide.card1 .image img {
-                        max-height: 100%;
+                },
+                {
+                    targets: 6,
+                    render: function (data, type, row, index) {
+                        const editButton = '<button class="btn btn-primary btn-ikuti" style="background-color: #066CBB">Lanjutkan Pelatihan</i></button>';
+                        return editButton;
                     }
-            </style>
+                },
+            ],
+            createdRow: function (row, data, dataIndex) {
+                $(row).attr('data-id', data.id_pelatihan);
+                $(row).attr('data-type', 'pelatihan');
+            }
+        });
 
-            <section1>
-                <div class="pagetitle" style="margin-left: 50px;">
-                    <p>Teknik Informasi</p>
-                </div>
-
-                <div class="swiper mySwiper Swiper1 container" id="swiper1">
-                    <div class="swiper-wrapper content">
-
-                        <div class="swiper-slide card1" id="card1_1">
-                            <div class="box2"></div>
-                            <div class="card1-content">
-                                <div class="image">
-                                    <img src="~/assets1/img/Logo_AstraLearn.png" alt="">
-                                </div>
-                                <div class="media-icons">
-                                    <i class="fab fa-facebook"></i>
-                                    <i class="fab fa-twitter"></i>
-                                    <i class="fab fa-github"></i>
-                                </div>
-                                <div class="name-profession">
-                                    <span class="name">Andrew James</span>
-                                    <span class="profession">Graphic Designer</span>
-                                </div>
-                                <div class="">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nobis sequi, nam tenetur magni.</p>
-                                </div>
-                                <div class="button b2">
-                                    <button class="aboutMe">Lihat Kelas</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide card1" id="card1_2">
-                            <div class="box2"></div>
-                            <div class="card1-content">
-                                <div class="image">
-                                    <img src="~/assets1/img/Logo_AstraLearn.png" alt="">
-                                </div>
-                                <div class="media-icons">
-                                    <i class="fab fa-facebook"></i>
-                                    <i class="fab fa-twitter"></i>
-                                    <i class="fab fa-github"></i>
-                                </div>
-                                <div class="name-profession">
-                                    <span class="name">Andrew James</span>
-                                    <span class="profession">Graphic Designer</span>
-                                </div>
-                                <div class="">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nobis sequi, nam tenetur magni.</p>
-                                </div>
-                                <div class="button b2">
-                                    <button class="aboutMe">About Me</button>
-                                    <button class="hireMe">Hire Me</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide card1" id="card1_3">
-                            <div class="box2"></div>
-                            <div class="card1-content">
-                                <div class="image">
-                                    <img src="~/assets1/img/Logo_AstraLearn.png" alt="">
-                                </div>
-                                <div class="media-icons">
-                                    <i class="fab fa-facebook"></i>
-                                    <i class="fab fa-twitter"></i>
-                                    <i class="fab fa-github"></i>
-                                </div>
-                                <div class="name-profession">
-                                    <span class="name">Andrew James</span>
-                                    <span class="profession">Graphic Designer</span>
-                                </div>
-                                <div class="">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nobis sequi, nam tenetur magni.</p>
-                                </div>
-                                <div class="button b2">
-                                    <button class="aboutMe">About Me</button>
-                                    <button class="hireMe">Hire Me</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide card1" id="card1_4">
-                            <div class="box2"></div>
-                            <div class="card1-content">
-                                <div class="image">
-                                    <img src="~/assets1/img/Logo_AstraLearn.png" alt="">
-                                </div>
-                                <div class="media-icons">
-                                    <i class="fab fa-facebook"></i>
-                                    <i class="fab fa-twitter"></i>
-                                    <i class="fab fa-github"></i>
-                                </div>
-                                <div class="name-profession">
-                                    <span class="name">Andrew James</span>
-                                    <span class="profession">Graphic Designer</span>
-                                </div>
-                                <div class="">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nobis sequi, nam tenetur magni.</p>
-                                </div>
-                                <div class="button b2">
-                                    <button class="aboutMe">About Me</button>
-                                    <button class="hireMe">Hire Me</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tambahkan id untuk elemen-elemen lainnya -->
-
-                    </div>
-
-                    <div class="swiper-pagination swiper-pagination1"></div>
-                </div>
-                <div class="swiper-button-next swiper-button-next1"></div>
-                <div class="swiper-button-prev swiper-button-prev1"></div>
-
-            </section1>
-
-            <section1>
-                <div class="pagetitle" style="margin-left: 50px;">
-                    <p>Teknik Elektro</p>
-                </div>
-
-                <div class="swiper mySwiper Swiper2 container" id="swiper2">
-                    <div class="swiper-wrapper content">
-
-                        <div class="swiper-slide card1" id="card2_1">
-                            <div class="box3"></div>
-                            <div class="card1-content">
-                                <div class="image">
-                                    <img src="~/assets1/img/Logo_AstraLearn.png" alt="">
-                                </div>
-                                <div class="media-icons">
-                                    <i class="fab fa-facebook"></i>
-                                    <i class="fab fa-twitter"></i>
-                                    <i class="fab fa-github"></i>
-                                </div>
-                                <div class="name-profession">
-                                    <span class="name">Andrew James</span>
-                                    <span class="profession">Graphic Designer</span>
-                                </div>
-                                <div class="">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nobis sequi, nam tenetur magni.</p>
-                                </div>
-                                <div class="button b3">
-                                    <button class="aboutMe">About Me</button>
-                                    <button class="hireMe">Hire Me</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide card1" id="card2_2">
-                            <div class="box3"></div>
-                            <div class="card1-content">
-                                <div class="image">
-                                    <img src="~/assets1/img/Logo_AstraLearn.png" alt="">
-                                </div>
-                                <div class="media-icons">
-                                    <i class="fab fa-facebook"></i>
-                                    <i class="fab fa-twitter"></i>
-                                    <i class="fab fa-github"></i>
-                                </div>
-                                <div class="name-profession">
-                                    <span class="name">Andrew James</span>
-                                    <span class="profession">Graphic Designer</span>
-                                </div>
-                                <div class="">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nobis sequi, nam tenetur magni.</p>
-                                </div>
-                                <div class="button b3">
-                                    <button class="aboutMe">About Me</button>
-                                    <button class="hireMe">Hire Me</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide card1" id="card2_3">
-                            <div class="box3"></div>
-                            <div class="card1-content">
-                                <div class="image">
-                                    <img src="~/assets1/img/Logo_AstraLearn.png" alt="">
-                                </div>
-                                <div class="media-icons">
-                                    <i class="fab fa-facebook"></i>
-                                    <i class="fab fa-twitter"></i>
-                                    <i class="fab fa-github"></i>
-                                </div>
-                                <div class="name-profession">
-                                    <span class="name">Andrew James</span>
-                                    <span class="profession">Graphic Designer</span>
-                                </div>
-                                <div class="">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nobis sequi, nam tenetur magni.</p>
-                                </div>
-                                <div class="button b3">
-                                    <button class="aboutMe">About Me</button>
-                                    <button class="hireMe">Hire Me</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide card1" id="card2_4">
-                            <div class="box3"></div>
-                            <div class="card1-content">
-                                <div class="image">
-                                    <img src="~/assets1/img/Logo_AstraLearn.png" alt="">
-                                </div>
-                                <div class="media-icons">
-                                    <i class="fab fa-facebook"></i>
-                                    <i class="fab fa-twitter"></i>
-                                    <i class="fab fa-github"></i>
-                                </div>
-                                <div class="name-profession">
-                                    <span class="name">Andrew James</span>
-                                    <span class="profession">Graphic Designer</span>
-                                </div>
-                                <div class="">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nobis sequi, nam tenetur magni.</p>
-                                </div>
-                                <div class="button b3">
-                                    <button class="aboutMe">About Me</button>
-                                    <button class="hireMe">Hire Me</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide card1" id="card2_5">
-                            <div class="box3"></div>
-                            <div class="card1-content">
-                                <div class="image">
-                                    <img src="~/assets1/img/Logo_AstraLearn.png" alt="">
-                                </div>
-                                <div class="media-icons">
-                                    <i class="fab fa-facebook"></i>
-                                    <i class="fab fa-twitter"></i>
-                                    <i class="fab fa-github"></i>
-                                </div>
-                                <div class="name-profession">
-                                    <span class="name">Andrew James</span>
-                                    <span class="profession">Graphic Designer</span>
-                                </div>
-                                <div class="">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nobis sequi, nam tenetur magni.</p>
-                                </div>
-                                <div class="button b3">
-                                    <button class="aboutMe">About Me</button>
-                                    <button class="hireMe">Hire Me</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tambahkan id untuk elemen-elemen lainnya -->
-
-                    </div>
-
-                    <div class="swiper-pagination swiper-pagination2"></div>
-                </div>
-                <div class="swiper-button-next swiper-button-next2"></div>
-                <div class="swiper-button-prev swiper-button-prev2"></div>
-            </section1>
-
-            <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    var swiper1 = new Swiper("#swiper1", {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
-                        grabCursor: true,
-                        slidesPerGroup: 1,
-                        loop: false,
-                        loopFillGroupWithBlank: true,
-                        pagination: {
-                            el: ".swiper-pagination1",
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: ".swiper-button-next1",
-                            prevEl: ".swiper-button-prev1",
-                        },
-                        controller: {
-                            control: "#swiper1",
-                        },
-                    });
-
-                    var swiper2 = new Swiper("#swiper2", {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
-                        grabCursor: true,
-                        slidesPerGroup: 1,
-                        loop: false,
-                        loopFillGroupWithBlank: true,
-                        pagination: {
-                            el: ".swiper-pagination2",
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: ".swiper-button-next2",
-                            prevEl: ".swiper-button-prev2",
-                        },
-                        controller: {
-                            control: "#swiper2",
-                        },
-                    });
-
-                    // Kontrol tambahan agar swiper tidak tergeser bersamaan saat tombol diklik
-                    swiper1.on('slideChange', function () {
-                        swiper2.slideTo(swiper1.activeIndex);
-                    });
-
-                    swiper2.on('slideChange', function () {
-                        swiper1.slideTo(swiper2.activeIndex);
-                    });
-                });
-            </script>
-
-
-
-            <style>
-                .swiper-container {
-                    position: relative;
-                }
-
-                .swiper-button-next1,
-                .swiper-button-prev1 {
-                    position: absolute;
-                    top: 65%;
-                    transform: translateY(-50%);
-                    font-size: 20px;
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                    z-index: 1;
-                }
-
-                .swiper-button-prev1 {
-                    left: 50px;
-                }
-
-                .swiper-button-next1 {
-                    right: 50px;
-                }
-
-                .swiper-container {
-                    position: relative;
-                }
-
-                .swiper-button-next2,
-                .swiper-button-prev2 {
-                    position: absolute;
-                    top: 70%;
-                    transform: translateY(-50%);
-                    font-size: 20px;
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                    z-index: 1;
-                }
-
-                .swiper-button-prev2 {
-                    left: 50px;
-                }
-
-                .swiper-button-next2 {
-                    right: 50px;
-                }
-            </style>
-
-        </body1>
+        $('#dataTable').on('click', 'button.btn-ikuti', function () {
+            pelatihanId = $(this).closest('tr').data("id");
+            var namaPelatihan = $(this).closest('tr').find('td:eq(1)').text();
+            var newHref = rootWebHost + pelatihanId + '/0/' + namaPelatihan;
+            window.location.href = newHref;
+        });
+    });
+</script>

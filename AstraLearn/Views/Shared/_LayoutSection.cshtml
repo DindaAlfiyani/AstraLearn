@@ -109,9 +109,9 @@
 
             <nav class="header-nav ms-auto">
                 <ul class="d-flex align-items-center">
-                    <li class="nav-item d-flex align-items-center"><a class="nav-link nav-icon" asp-controller="Home" asp-action="CaraBelajar">Cara Belajar</a></li>
-                    <li class="nav-item d-flex align-items-center"><a class="nav-link nav-icon" asp-controller="Home" asp-action="Kelas">Kelas</a></li>
-                    <li class="nav-item d-flex align-items-center"><a class="nav-link nav-icon" asp-controller="Home" asp-action="CaraDapatSertifikat">Cara Dapat Sertifikat</a></li>
+                    <li class="nav-item d-flex align-items-center"><a class="nav-link nav-icon" asp-controller="Home" asp-action="CaraBelajar" style="color: #006CBB; font-weight: 500;">Cara Belajar</a></li>
+                    <li class="nav-item d-flex align-items-center"><a class="nav-link nav-icon" asp-controller="Home" asp-action="Kelas" style="color: #006CBB; font-weight: 500;">Kelas</a></li>
+                    <li class="nav-item d-flex align-items-center"><a class="nav-link nav-icon" asp-controller="Home" asp-action="CaraDapatSertifikat" style="color: #006CBB; font-weight: 500;">Cara Dapat Sertifikat</a></li>
 
                     <li class="nav-item d-block d-lg-none">
                         <a class="nav-link nav-icon search-bar-toggle " href="#">
@@ -220,7 +220,7 @@
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar1" class="sidebar1">
 
-        <ul class="sidebar1-nav" id="sidebar1-nav">
+        <ul class="sidebar1-nav" id="sidebar1-nav" style="background-color: #EFF7FB;">
             
 
         </ul>
@@ -367,6 +367,9 @@
             var icon = $("<i id='" + section.id_section + "'>").addClass("bi bi-check-circle-fill");
             var h5 = $("<h5>").addClass("ms-2 mb-0").html(icon).append((index + 1) + ". " + section.nama_section);
 
+            // Menambahkan gaya font-weight dengan angka
+            h5.css("font-weight", "bold");
+
             link.append(h5);
             listItem.append(link);
             sidebarNav.append(listItem);
@@ -384,6 +387,9 @@
 
             var icon = $("<i id='" + section.id_section + "'>").addClass("bi bi-circle");
             var h5 = $("<h5>").addClass("ms-2 mb-0").html(icon).append((index + 1) + ". " + section.nama_section);
+
+            // Menambahkan gaya font-weight dengan angka
+            h5.css("font-weight", "bold");
 
             link.append(h5);
             listItem.append(link);
@@ -403,6 +409,9 @@
                 .html(icon)
                 .append((index + 1) + ". " + section.nama_section);
 
+            // Menambahkan gaya font-weight dengan angka
+            h5.css("font-weight", "bold");
+
             link.append(h5);
             listItem.append(link);
             sidebarNav.append(listItem);
@@ -421,6 +430,9 @@
                 .html(icon)
                 .append((index + 1) + ". " + section.nama_section);
 
+            // Menambahkan gaya font-weight dengan angka
+            h5.css("font-weight", "bold");
+
             link.append(h5);
             listItem.append(link);
             sidebarNav.append(listItem);
@@ -435,7 +447,7 @@
                 .click(function () {
                     goBack();
                 })
-                .html("<i class='bi bi-arrow-left'></i><h5 class='ms-2 mb-0'>Kembali</h5>");
+                .html("<i class='bi bi-arrow-left'></i><h5 class='ms-2 mb-0 font-weight-bold'>Kembali</h5>");
 
             backListItem.append(backButton);
             sidebarNav.append(backListItem);
