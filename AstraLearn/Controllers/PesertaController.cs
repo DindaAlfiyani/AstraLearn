@@ -24,8 +24,12 @@ namespace AstraLearn.Controllers
             return View();
         }
 
-        public IActionResult Exam()
+        [Route("MengerjakanExam/{id}/{id2}/{nama}")]
+        public IActionResult Exam(int id, int id2, string nama)
         {
+            ViewBag.idPelatihan = id;
+            ViewBag.idSection = id2;
+            ViewBag.namaPelatihan = nama;
             return View();
         }
 

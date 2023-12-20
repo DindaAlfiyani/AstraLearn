@@ -335,13 +335,25 @@
                 success: function (response) {
                     if (response.status === 200) {
                         for (var i = 0; i < riwayat; i++) {
-                            sideBarDone(response.data[i], nama, i);
+                            if(i <= riwayat-1){
+                                sideBarDone(response.data[i], nama, i);
+                            }
                         }
 
-                        updateSidebar(response.data[riwayat], nama, riwayat);
+                        i--;
 
-                        for (var i = riwayat + 1; i < response.data.length; i++) {
-                            updateSidebar2(response.data[i], nama, i);
+                        if (response.data.length > riwayat) {
+                            updateSidebar(response.data[riwayat], nama, riwayat);
+
+                            for (var i = riwayat + 1; i < response.data.length; i++) {
+                                updateSidebar2(response.data[i], nama, i);
+                            }
+                        }
+
+                        if (response.data.length < riwayat) {
+                            buttonExam2(response.data[1], nama, i++);
+                        } else {
+                            buttonExam(response.data[1], nama, i++);
                         }
                         addButtonBack();
                     } else {
@@ -355,25 +367,28 @@
         }
 
         function sideBarDone(section, nama, index) {
-            var sidebarNav = $("#sidebar1-nav");
-            var listItem = $("<li>").addClass("nav-item");
-            var link = $("<a>")
-                .addClass("nav-link collapsed")
-                .attr("href", "#")
-                .click(function () {
-                    updateHref(section.id_section, section.id_pelatihan, nama);
-                });
+            if (section && section.id_pelatihan != null) {
+                var sidebarNav = $("#sidebar1-nav");
+                var listItem = $("<li>").addClass("nav-item");
+                var link = $("<a>")
+                    .addClass("nav-link collapsed")
+                    .attr("href", "#")
+                    .click(function () {
+                        updateHref(section.id_section, section.id_pelatihan, nama);
+                    });
 
-            var icon = $("<i id='" + section.id_section + "'>").addClass("bi bi-check-circle-fill");
-            var h5 = $("<h5>").addClass("ms-2 mb-0").html(icon).append((index + 1) + ". " + section.nama_section);
+                var icon = $("<i id='" + section.id_section + "'>").addClass("bi bi-check-circle-fill");
+                var h5 = $("<h5>").addClass("ms-2 mb-0").html(icon).append((index + 1) + ". " + section.nama_section);
 
-            // Menambahkan gaya font-weight dengan angka
-            h5.css("font-weight", "bold");
+                // Menambahkan gaya font-weight dengan angka
+                h5.css("font-weight", "bold");
 
-            link.append(h5);
-            listItem.append(link);
-            sidebarNav.append(listItem);
+                link.append(h5);
+                listItem.append(link);
+                sidebarNav.append(listItem);
+            }
         }
+
 
         function updateSidebar(section, nama, index) {
             var sidebarNav = $("#sidebar1-nav");
@@ -417,7 +432,34 @@
             sidebarNav.append(listItem);
         }
 
+        function examMuted(section) {
+            var exam = 'Exam';
+            var sidebarNav = $("#sidebar1-nav");
+            var listItem = $("<li>").addClass("nav-item");
+            var link = $("<a>")
+                .addClass("nav-link collapsed text-muted") // Tambahkan kelas "text-muted" untuk warna abu-abu
+                .click(function () {
+                    // Panggil fungsi yang akan dijalankan saat tombol "Exam Muted" diklik
+                    onExamMutedButtonClick();
+                })
+                .attr("href", "javascript:void(0)")
+                .prop("disabled", true);
+
+            var icon = $("<i id='" + section.id_pelatihan + "'>").addClass("bi bi-circle");
+            var h5 = $("<h5>")
+                .addClass("ms-2 mb-0")
+                .html(icon)
+                .append(exam);
+
+            h5.css("font-weight", "bold");
+
+            link.append(h5);
+            listItem.append(link);
+            sidebarNav.append(listItem);
+        }
+
         function buttonExam(section, nama, index) {
+            var exam = 'Exam';
             var sidebarNav = $("#sidebar1-nav");
             var listItem = $("<li>").addClass("nav-item");
             var link = $("<a>")
@@ -428,7 +470,29 @@
             var h5 = $("<h5>")
                 .addClass("ms-2 mb-0 text-muted")  // Tambahkan kelas "text-muted" untuk warna abu-abu
                 .html(icon)
-                .append((index + 1) + ". " + section.nama_section);
+                .append(exam);
+
+            // Menambahkan gaya font-weight dengan angka
+            h5.css("font-weight", "bold");
+
+            link.append(h5);
+            listItem.append(link);
+            sidebarNav.append(listItem);
+        }
+
+        function buttonExam2(section, nama, index) {
+            var exam = 'Exam';
+            var sidebarNav = $("#sidebar1-nav");
+            var listItem = $("<li>").addClass("nav-item");
+            var link = $("<a>")
+                .addClass("nav-link collapsed")
+                .attr("href", "javascript:void(0)");
+
+            var icon = $("<i id='" + section.id_pelatihan + "'>").addClass("bi bi-check-circle-fill");
+            var h5 = $("<h5>")
+                .addClass("ms-2 mb-0 text-muted")  // Tambahkan kelas "text-muted" untuk warna abu-abu
+                .html(icon)
+                .append(exam);
 
             // Menambahkan gaya font-weight dengan angka
             h5.css("font-weight", "bold");
