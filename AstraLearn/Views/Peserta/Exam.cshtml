@@ -2,7 +2,13 @@
     ViewData["Title"] = "Peserta - Exercise";
     Layout = "_LayoutSection";
 }
-
+@if (Context.Session.GetString("User") != null)
+{
+    var IsLoggedIn = Context.Session.GetString("User");
+    var loggedInUserId = Context.Session.GetInt32("Id");
+    <input type="hidden" id="idLogin2" value="@loggedInUserId" />
+    <input type="hidden" id="namaPengguna2" value="@IsLoggedIn" />
+}
 <!-- Add modal HTML structure -->
 <div class="modal fade" id="scoreModal" tabindex="-1" role="dialog" aria-labelledby="scoreModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -52,10 +58,16 @@
 <script>
     $(document).ready(function () {
         var IdPelatihan = $("#idPelatihan").val();
+        console.log(IdPelatihan);
         var IdSection = $("#idSection").val();
+        var IdLogin = $("#idLogin2").val();
+        console.log(IdLogin);
         var nilaiMinimum;
-        var NamaPelatihan = $("#namaPelatihan").val();
+        var NamaPelatihan;
         var rootHost = "http://localhost:5180";
+        var NamaPengguna = $("#namaPengguna2").val();
+        var currentDate = new Date().toLocaleDateString('en-US', { day: '2-digit', month: 'long', year: 'numeric' });
+
 
         // Store correct answers in an object for later comparison
         var correctAnswers = {};
@@ -82,9 +94,11 @@
             success: function (response) {
                 if (response.status === 200) {
                     nilaiMinimum = response.data.nilai;
+                    NamaPelatihan = response.data.nama_pelatihan;
                 }
             }
         });
+
 
         function insertExerciseData(data) {
             var exerciseContainer = $("#exercise-container");
@@ -244,7 +258,10 @@
                         icon: 'success',
                     });
                 }, 5000);
-                
+
+                var rootWebHost3 = "https://localhost:7157/Sertifikat/" + NamaPengguna + "/" + NamaPelatihan + "/" + currentDate;
+
+                window.open(rootWebHost3, '_blank');
             }
         }
     });

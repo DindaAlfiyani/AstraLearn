@@ -32,7 +32,8 @@ namespace AstraLearn.Controllers
             return View();
         }
 
-        public IActionResult GeneratePdf()
+        [Route("Sertifikat/{nama}/{nama_pelatihan}/{tanggal}")]
+        public IActionResult GeneratePdf(string nama, string nama_pelatihan, string tanggal)
         {
             // Define a memory stream to store the PDF
             using (MemoryStream memoryStream = new MemoryStream())
@@ -58,7 +59,7 @@ namespace AstraLearn.Controllers
                     img2.ScaleAbsolute(PageSize.A4.Rotate().Width, PageSize.A4.Rotate().Height); // Adjust width and height to match the page
                     img2.SetAbsolutePosition(0, 0); // Set the position to the bottom-left corner
                     cb.AddImage(img2);
-                    content(cb);
+                    content(cb, nama, nama_pelatihan, tanggal);
                 }
                 else
                 {
@@ -74,24 +75,24 @@ namespace AstraLearn.Controllers
             }
         }
 
-        public void content(PdfContentByte cb)
+        public void content(PdfContentByte cb, string nama, string pelatihan, string tanggal)
         {
             // Title Text
             cb.BeginText();
             cb.SetFontAndSize(HeaderFont, 36);
 
-            // Set color and display "Nama Peserta"
+            // Set color and display "Nama Peserta", string n
             cb.SetColorFill(new BaseColor(System.Drawing.ColorTranslator.FromHtml("#53AFEF")));
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "Nama Peserta", 125, 345, 0);
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, nama, 125, 345, 0);
 
             // Reset color for subsequent text
             cb.SetColorFill(new BaseColor(System.Drawing.ColorTranslator.FromHtml("#0D61A8")));
 
             // Continue displaying other text
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "Nama Pelatihan", 125, 255, 0);
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, pelatihan, 125, 255, 0);
             cb.SetFontAndSize(ContentFont, 14);
             cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "..../AL/NMPLTHN/THNPLTHN", 250, 212, 0);
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "20 Desember 2023", 607, 165, 0);
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, tanggal, 607, 165, 0);
 
 
             cb.EndText();

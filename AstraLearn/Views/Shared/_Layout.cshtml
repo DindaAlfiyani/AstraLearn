@@ -96,7 +96,7 @@
 
             @if (@Context.Session.GetString("Peran") == "Peserta")
             {
-                <a class="nav-link collapsed logo d-flex align-items-center" asp-controller="Peserta" asp-action="Index">
+                <a class="nav-link collapsed logo d-flex align-items-center" asp-controller="Peserta" asp-action="Dashboard">
                     <img src="~/assets/img/Logo_AstraLearn.png" alt="">
                 </a>
             }
@@ -123,6 +123,7 @@
                     <a class="nav-link nav-profile d-flex align-items-center" href="#">
                         <span class="d-none d-md-block">|   @IsLoggedIn </span>
                         <input type="hidden" id="idLogin" value="@loggedInUserId" />
+                        <input type="hidden" id="namaPengguna" value="@IsLoggedIn" />
                     </a><!-- End Profile Image Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">

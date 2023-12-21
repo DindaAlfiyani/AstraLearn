@@ -37,7 +37,7 @@ namespace AstraLearn.Controllers
                     TempData["LoginSuccessMessage"] = "Login successful. Welcome, " + user.Username + "!";
                     TempData["LoginSuccessType"] = "success";
 
-                    return RedirectToAction("Index", "Peserta");
+                    return RedirectToAction("Dashboard", "Peserta");
                 }
                 else if (user.HakAkses == "Admin")
                 {
