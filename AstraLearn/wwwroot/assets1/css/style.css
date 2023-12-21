@@ -6,6 +6,11 @@
 * License: https://bootstrapmade.com/license/
 */
 
+.rounded-corner {
+    border-radius: 15px;
+    display: inline-block; /* Ensures that border-radius is applied */
+    padding: 5px; /* Optional: Add padding for a better appearance */
+}
 
 .box {
     background-color: #d3d3d4;

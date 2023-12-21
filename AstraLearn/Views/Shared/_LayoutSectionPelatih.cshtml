@@ -191,7 +191,7 @@
         <ul class="sidebar1-nav" id="sidebar1-nav">
             <li class="nav-item">
                 <a class="nav-link collapsed" data-toggle="modal" data-target="#tambah_section">    
-                        <h5 class="ms-2 mb-0" style="font-weight: bold; font-size: 24px;"><span>Tambah Section</span></h5>
+                        <h5 class="ms-2 mb-0" style="font-weight: bold; font-size: 24px; border-radius: 10px;"><span>Tambah Section</span></h5>
                     </a>
                 </li>
         </ul>
@@ -308,7 +308,7 @@
                 var link = $("<a>")
                     .addClass("nav-link collapsed")
                     .attr("href", "#")  // Set a placeholder href for now
-                    .html("<h5 class='ms-2 mb-0'><span>" + (index + 1) + ". " + section.nama_section + "</span></h5>")
+                    .html("<h5 class='ms-2 mb-0'><span class='rounded-corner'>" + (index + 1) + ". " + section.nama_section + "</span></h5>")
                     .click(function () {
                         updateHref(section.id_section, section.id_pelatihan);
                     });
@@ -326,11 +326,17 @@
                 .click(function () {
                     // Handle the back button click event
                     goBack();
+                })
+                .css({
+                    "background-color": "#006CBB",  // Set the background color to blue
+                    "color": "white",
+                    "border-radius": "10px"
                 });
 
             backListItem.append(backButton);
             sidebarNav.append(backListItem);
-    }
+        }
+
 
     function goBack() {
         window.location.href = rootWebHost2;

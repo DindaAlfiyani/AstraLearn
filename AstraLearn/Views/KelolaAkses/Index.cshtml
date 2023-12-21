@@ -102,10 +102,13 @@
                 {
                     targets: 4,
                     render: function (data, type, row, index) {
-                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pengguna" data-id="' + row.id_pengguna + '" style="background-color: #066CBB; border-radius: 5px;"><i class="bi bi-exclamation-triangle"></i></button>';
+                        const editButton = '<button class="btn btn-sm btn-warning mb-3 edit-button" data-toggle="modal" data-target="#ubah_nilai_minimum" data-id="' + row.id_pengguna + '" style="background-color: #066CBB; color:seashell; border-radius: 7px; font-size: 20px;">' +
+                            '<i class="fas fa-edit fa-sm"></i> Kelola Akses' +
+                            '</button>';
                         return editButton;
                     }
                 }
+
             ],
             createdRow: function (row, data, dataIndex) {
                 $(row).attr('data-id', data.id_pengguna);
