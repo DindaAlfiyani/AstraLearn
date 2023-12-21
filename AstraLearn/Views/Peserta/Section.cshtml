@@ -189,6 +189,7 @@
                 success: function (response) {
                     if (response.status === 200) {
                         idBerikutnya = response.data[riwayat].id_section;
+
                         var newHref = rootWebHost + IdPelatihan + '/' + idBerikutnya + '/' + NamaPelatihan;
                         window.location.href = newHref;
                     } else {

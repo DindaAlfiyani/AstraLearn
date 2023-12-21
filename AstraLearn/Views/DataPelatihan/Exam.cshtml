@@ -7,13 +7,16 @@
     <h1>Exam</h1>
     <h4>@(ViewBag.namaPelatihan)</h4>
     <input type="hidden" id="idPelatihan" value="@ViewBag.idPelatihan" />
-    <h4>Nilai Minimum : @(ViewBag.nilaiMinimum)</h4>
+    <h4 id="nilaiMinimum2">Nilai Minimum : @(ViewBag.nilaiMinimum)</h4>
 </div>
 
 <section class="section">
     <div class="container-fluid">
         <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_exercise">
             <i class="fas fa-plus fa-sm"></i>Tambah Exam
+        </button>
+        <button class="btn btn-sm btn-warning mb-3" data-toggle="modal" data-target="#ubah_nilai_minimum">
+            <i class="fas fa-edit fa-sm"></i> Ubah Nilai Minimum
         </button>
         <div class="table-responsive">
             <table class="table table-striped" style="width:100%" id="dataTable">
@@ -203,6 +206,30 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="ubah_nilai_minimum" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ubah Nilai Minimum</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="ubahNilaiForm">
+                        <div class="form-group">
+                            <label for="nilaiMinimum">Nilai Minimum</label>
+                            <input type="number" id="nilaiMinimum" name="nilaiMinimum" class="form-control" />
+                            <span class="text-danger" id="errorNilaiMinimum"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="button" value="Ubah" id="buttonUbahNilai" class="btn btn-warning" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <style>
     .section {
@@ -257,6 +284,30 @@
                 $(row).attr('data-type', 'pelatihan');
             }
         });
+
+        function loadNilai() {
+            $.ajax({
+                url: rootHost + '/Pelatihan/GetPelatihan?id=' + IdPelatihan,
+                type: 'GET',
+                success: function (response) {
+                    if (response.status === 200 && response.data) {
+                        var nilaiMinimumValue = response.data.nilai;
+                        console.log(nilaiMinimumValue);
+
+                        // Set the inner text of an element with ID "nilaiMinimum2"
+                        $('#nilaiMinimum2').text("nilai minimum = " + nilaiMinimumValue);
+                    } else {
+                        console.error('Invalid API response format:', response);
+                    }
+                },
+                error: function (error) {
+                    console.error('Error fetching nilaiMinimum:', error);
+                }
+            });
+        }
+
+
+        loadNilai();
 
         function tambahExercise() {
             var soal = $("#Soal").val();
@@ -623,5 +674,53 @@
         $('#info_exercise .close').on('click', function () {
             $('#info_exercise').modal('hide');
         });
+
+        function ubahNilaiMinimum() {
+            var nilaiMinimum = $("#nilaiMinimum").val();
+
+            if (!nilaiMinimum.trim()) {
+                $("#errorNilaiMinimum").text("Nilai Minimum tidak boleh kosong.");
+                return;
+            } else {
+                $("#errorNilaiMinimum").text("");
+            }
+
+            var idPelatihan = IdPelatihan;
+            var nilaiMinimum = nilaiMinimum;
+
+            $.ajax({
+                url: rootHost + '/Pelatihan/UpdateNilai?id=' + idPelatihan +'&nilai=' + nilaiMinimum,
+                method: "post",
+                success: function (data) {
+                    console.log(idPelatihan);
+                    console.log(nilaiMinimum);
+                    notifikasiUbahNilaiSukses();
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+        $("#ubahNilaiForm").submit(function (e) {
+            e.preventDefault();
+            ubahNilaiMinimum();
+        });
+
+        $(document).on("click", "#buttonUbahNilai", function () {
+            ubahNilaiMinimum();
+        });
+
+        function notifikasiUbahNilaiSukses() {
+            Swal.fire({
+                title: "Sukses!",
+                text: "Nilai Minimum berhasil diubah.",
+                icon: "success",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK"
+            }).then(() => {
+                location.reload();
+            });
+        }
     });
 </script>
