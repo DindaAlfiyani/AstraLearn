@@ -12,10 +12,10 @@
 
 <section class="section">
     <div class="container-fluid">
-        <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_exercise">
-            <i class="fas fa-plus fa-sm"></i>Tambah Exam
+        <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_exercise" style="background-color: #066CBB; color:seashell; border-radius: 7px; font-size: 20px;">
+            <i class="fas fa-plus fa-sm"></i> Tambah Exam
         </button>
-        <button class="btn btn-sm btn-warning mb-3" data-toggle="modal" data-target="#ubah_nilai_minimum">
+        <button class="btn btn-sm btn-warning mb-3" data-toggle="modal" data-target="#ubah_nilai_minimum" style="background-color: #066CBB; color:seashell; border-radius: 7px; font-size: 20px;">
             <i class="fas fa-edit fa-sm"></i> Ubah Nilai Minimum
         </button>
         <div class="table-responsive">
@@ -47,37 +47,37 @@
                     <form id="myForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="Soal">Soal</label>
+                            <label class="control-label" for="Soal" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Soal *</label>
                             <textarea id="Soal" name="Soal" class="form-control"></textarea>
                             <span class="text-danger" id="errorSoal"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="Pilgan1">Pilihan 1</label>
+                            <label class="control-label" for="Pilgan1" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 1 *</label>
                             <input id="Pilgan1" name="Pilgan1" class="form-control" />
                             <span class="text-danger" id="errorPilgan1"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="Pilgan2">Pilihan 2</label>
+                            <label class="control-label" for="Pilgan2" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 2 *</label>
                             <input id="Pilgan2" name="Pilgan2" class="form-control" />
                             <span class="text-danger" id="errorPilgan2"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="Pilgan3">Pilihan 3</label>
+                            <label class="control-label" for="Pilgan3" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 3 *</label>
                             <input id="Pilgan3" name="Pilgan3" class="form-control" />
                             <span class="text-danger" id="errorPilgan3"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="Pilgan4">Pilihan 4</label>
+                            <label class="control-label" for="Pilgan4" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 4 *</label>
                             <input id="Pilgan4" name="Pilgan4" class="form-control" />
                             <span class="text-danger" id="errorPilgan4"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="Pilgan5">Pilihan 5</label>
+                            <label class="control-label" for="Pilgan5" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 5 *</label>
                             <input id="Pilgan5" name="Pilgan5" class="form-control" />
                             <span class="text-danger" id="errorPilgan5"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="KunciJawaban">Kunci Jawaban</label>
+                            <label class="control-label" for="KunciJawaban" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Kunci Jawaban *</label>
                             <select id="KunciJawaban" name="KunciJawaban" class="form-control">
                                 <option value="pilgan1">Pilihan 1</option>
                                 <option value="pilgan2">Pilihan 2</option>
@@ -88,7 +88,7 @@
                             <span class="text-danger" id="errorKunciJawaban"></span>
                         </div>
                         <br>
-                        <div class="form-group">
+                        <div class="form-group text-right">
                             <input type="submit" value="Tambah" id="buttonCreate" class="btn btn-primary" />
                         </div>
                     </form>
@@ -111,43 +111,43 @@
                     <form id="editForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="EditSoal" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Soal</label>
+                            <label class="control-label" for="EditSoal" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Soal *</label>
                             <textarea id="EditSoal" name="EditSoal" class="form-control"></textarea>
                             <span class="text-danger" id="errorEditSoal"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditPilgan1" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Pilihan 1</label>
+                            <label class="control-label" for="EditPilgan1" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 1 *</label>
                             <input id="EditPilgan1" name="EditPilgan1" class="form-control" />
                             <span class="text-danger" id="errorEditPilgan1"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditPilgan2" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Pilihan 2</label>
+                            <label class="control-label" for="EditPilgan2" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 2 *</label>
                             <input id="EditPilgan2" name="EditPilgan2" class="form-control" />
                             <span class="text-danger" id="errorEditPilgan2"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditPilgan3" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Pilihan 3</label>
+                            <label class="control-label" for="EditPilgan3" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 3 *</label>
                             <input id="EditPilgan3" name="EditPilgan3" class="form-control" />
                             <span class="text-danger" id="errorEditPilgan3"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditPilgan4" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Pilihan 4</label>
+                            <label class="control-label" for="EditPilgan4" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 4 *</label>
                             <input id="EditPilgan4" name="EditPilgan4" class="form-control" />
                             <span class="text-danger" id="errorEditPilgan4"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditPilgan5" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Pilihan 5</label>
+                            <label class="control-label" for="EditPilgan5" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 5 *</label>
                             <input id="EditPilgan5" name="EditPilgan5" class="form-control" />
                             <span class="text-danger" id="errorEditPilgan5"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditKunciJawaban" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Kunci Jawaban</label>
+                            <label class="control-label" for="EditKunciJawaban" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Kunci Jawaban *</label>
                             <select id="EditKunciJawaban" name="EditKunciJawaban" class="form-control">
                             </select>
                             <span class="text-danger" id="errorEditKunciJawaban"></span>
                         </div>
                         <br>
-                        <div class="form-group">
+                        <div class="form-group text-right">
                             <input type="submit" value="Ubah" id="buttonUpdate" class="btn btn-primary" />
                         </div>
                     </form>
@@ -167,37 +167,37 @@
                 <div class="modal-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label class="control-label" for="InfoSoal" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Soal</label>
+                        <label class="control-label" for="InfoSoal" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Soal *</label>
                         <textarea id="InfoSoal" name="InfoSoal" class="form-control" readonly></textarea>
                         <span class="text-danger" id="errorInfoSoal"></span>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="InfoPilgan1" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Pilihan 1</label>
+                        <label class="control-label" for="InfoPilgan1" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 1 *</label>
                         <input id="InfoPilgan1" name="InfoPilgan1" class="form-control" readonly />
                         <span class="text-danger" id="errorInfoPilgan1"></span>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="InfoPilgan2" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Pilihan 2</label>
+                        <label class="control-label" for="InfoPilgan2" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 2 *</label>
                         <input id="InfoPilgan2" name="InfoPilgan2" class="form-control" readonly />
                         <span class="text-danger" id="errorInfoPilgan2"></span>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="InfoPilgan3" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Pilihan 3</label>
+                        <label class="control-label" for="InfoPilgan3" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 3 *</label>
                         <input id="InfoPilgan3" name="InfoPilgan3" class="form-control" readonly />
                         <span class="text-danger" id="errorInfoPilgan3"></span>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="InfoPilgan4" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Pilihan 4</label>
+                        <label class="control-label" for="InfoPilgan4" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 4 *</label>
                         <input id="InfoPilgan4" name="InfoPilgan4" class="form-control" readonly />
                         <span class="text-danger" id="errorInfoPilgan4"></span>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="InfoPilgan5" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Pilihan 5</label>
+                        <label class="control-label" for="InfoPilgan5" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Pilihan 5 *</label>
                         <input id="InfoPilgan5" name="InfoPilgan5" class="form-control" readonly />
                         <span class="text-danger" id="errorInfoPilgan5"></span>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="InfoKunciJawaban" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Kunci Jawaban</label>
+                        <label class="control-label" for="InfoKunciJawaban" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Kunci Jawaban *</label>
                         <select id="InfoKunciJawaban" name="InfoKunciJawaban" class="form-control" readonly>
                         </select>
                         <span class="text-danger" id="errorInfoKunciJawaban"></span>
@@ -222,8 +222,8 @@
                             <input type="number" id="nilaiMinimum" name="nilaiMinimum" class="form-control" />
                             <span class="text-danger" id="errorNilaiMinimum"></span>
                         </div>
-                        <div class="form-group">
-                            <input type="button" value="Ubah" id="buttonUbahNilai" class="btn btn-warning" />
+                        <div class="form-group text-right">
+                            <input type="button" value="Ubah" id="buttonUbahNilai" class="btn btn-primary" />
                         </div>
                     </form>
                 </div>
@@ -272,8 +272,8 @@
                 {
                     targets: 3,
                     render: function (data, type, row, index) {
-                        const deleteButton = '<button class="btn btn-sm btn-danger delete-button" style="background-color:#BB0000"><i class="bi bi-trash"></i></button>';
-                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_exercise" data-id="' + row.id_pelatihan + '" style="background-color: #066CBB"><i class="bi bi-exclamation-triangle"></i></button>';
+                        const deleteButton = '<button class="btn btn-sm btn-danger delete-button" style="background-color:#BB0000; border-radius: 5px;"><i class="bi bi-trash"></i></button>';
+                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_exercise" data-id="' + row.id_pelatihan + '" style="background-color: #066CBB border-radius: 5px;"><i class="bi bi-exclamation-triangle"></i></button>';
                         const editButton2 = '<button class="btn btn-primary btn-sm edit-button2" data-toggle="modal" data-target="#detail_exercise" data-id="' + row.id_pelatihan + '"><i class="bi bi-info-circle"></i></button>';
                         return editButton + " " + deleteButton + " " + editButton2;
                     }

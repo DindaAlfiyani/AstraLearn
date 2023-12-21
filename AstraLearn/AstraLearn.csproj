@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.14" />
+	  <PackageReference Include="Svg" Version="3.4.6" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />

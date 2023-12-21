@@ -309,6 +309,7 @@
         var rootWebHost = "https://localhost:7157/MengikutiPelatihan/";
         var rootWebHost2 = "https://localhost:7157/Peserta/Kelas";
         var IdPelatihan = $("#idPelatihan").val();
+        var rootWebHost3 = "https://localhost:7157/MengerjakanExam/";
         var idPembantu;
 
         function loadRiwayat() {
@@ -464,11 +465,14 @@
             var listItem = $("<li>").addClass("nav-item");
             var link = $("<a>")
                 .addClass("nav-link collapsed")
-                .attr("href", "javascript:void(0)");
+                .attr("href", "javascript:void(0)")
+                .click(function () {
+                    onExamButtonClick();
+                });
 
             var icon = $("<i id='" + section.id_pelatihan + "'>").addClass("bi bi-circle");
             var h5 = $("<h5>")
-                .addClass("ms-2 mb-0 text-muted")  // Tambahkan kelas "text-muted" untuk warna abu-abu
+                .addClass("ms-2 mb-0")  // Hapus kelas "text-muted" agar tidak abu-abu
                 .html(icon)
                 .append(exam);
 
@@ -486,11 +490,14 @@
             var listItem = $("<li>").addClass("nav-item");
             var link = $("<a>")
                 .addClass("nav-link collapsed")
-                .attr("href", "javascript:void(0)");
+                .attr("href", "javascript:void(0)")
+                .click(function () {
+                    onExamButtonClick();
+                });
 
             var icon = $("<i id='" + section.id_pelatihan + "'>").addClass("bi bi-check-circle-fill");
             var h5 = $("<h5>")
-                .addClass("ms-2 mb-0 text-muted")  // Tambahkan kelas "text-muted" untuk warna abu-abu
+                .addClass("ms-2 mb-0")  // Hapus kelas "text-muted" agar tidak abu-abu
                 .html(icon)
                 .append(exam);
 
@@ -500,6 +507,12 @@
             link.append(h5);
             listItem.append(link);
             sidebarNav.append(listItem);
+        }
+
+
+        function onExamButtonClick() {
+            var newHref = rootWebHost3 + IdPelatihan + '/' + 2 + '/Mengerjakan';
+            window.location.href = newHref;
         }
 
         function addButtonBack(){

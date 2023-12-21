@@ -7,23 +7,26 @@
 <input type="hidden" id="namaPelatihan" value="@ViewBag.namaPelatihan" />
 <input type="hidden" id="idSection" value="@ViewBag.idSection" />
 
-<section id="breadcrumbs" class="breadcrumbs">
+<section id="breadcrumbs" class="breadcrumbs" style="background-color: whitesmoke; border-radius: 15px; height: 900px; width: 1300px; margin-left: 30px;">
     <div class="container-fluid">
         <!-- Video YouTube -->
         <div class="nama-container">
-            <h1 id="namaSection" class="display-4 mb-4" style="font-weight: bold;"></h1>
+            <h1 id="namaSection" class="display-4 mb-4" style="color: #006CBB; font-weight: bold; padding-top: 5px;"></h1>
         </div>
         <div class="video-container">
-            <iframe id="videoContainer" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+            <iframe id="videoContainer" width="560" height="315" src="" frameborder="0" allowfullscreen style="border-radius: 15px; height: 555px; width: 1100px;"></iframe>
+            <div class="desk-container" style="border-radius: 15px; padding-top: 600px;">
+                <p id="deskripsiSection" class="lead mb-4" style="max-width: 1800px; word-wrap: break-word;" style="font-weight: bold;"></p>
+            </div>
+            <div class="button-container mt-3">
+                <button class="btn btn-danger modul-btn" style="background-color: #006CBB; border-radius: 10px; font-size: 20px;">
+                    Unduh Modul <i class="bi bi-arrow-down-circle-fill"></i>
+                </button>
+                <button class="btn btn-secondary update-href-btn" style="background-color: dodgerblue; border-radius: 10px; font-size: 20px;">Exercise</button>
+                <button class="btn btn-secondary lanjut-btn" style="background-color: #483D8B; border-radius: 10px; font-size: 20px;">Lanjutkan<i class='bi bi-arrow-right'></i></button>
+            </div>
         </div>
-        <div class="desk-container">
-            <p id="deskripsiSection" class="lead mb-4" style="max-width: 1800px; word-wrap: break-word;" style="font-weight: bold;"></p>
-        </div>
-        <div class="button-container mt-3">
-            <button class="btn btn-danger modul-btn" style="background-color: #004576">Unduh Modul</button>
-            <button class="btn btn-secondary update-href-btn" style="background-color: #062841">Exercise</button>
-            <button class="btn btn-secondary lanjut-btn" style="background-color: #483D8B">Lanjutkan<i class='bi bi-arrow-right'></i></button>
-        </div>
+        
     </div>
 </section>
 
@@ -86,22 +89,31 @@
     }
 </style>
 
-<!-- ... Bagian HTML lainnya ... -->
-<!-- ... Bagian HTML lainnya ... -->
-<!-- Bagian lain dari HTML -->
-
 <script>
     $(document).ready(function () {
         var rootHost = "http://localhost:5180";
         var rootWebHost = "https://localhost:7157/MengikutiPelatihan/";
         var rootWebHost2 = "https://localhost:7157/MengerjakanExercise/";
+        var rootWebHost3 = "https://localhost:7157/MengerjakanExam/";
         var IdPelatihan = $("#idPelatihan").val();
         var IdSection = $("#idSection").val();
         var NamaPelatihan = $("#namaPelatihan").val();
         var idBerikutnya;
         var NamaModul;
+        var RiwayatSection;
         var linkYt = "https://www.youtube.com/embed/";
         var pdfDirectory = "https://localhost:7157/assets/Upload/";
+
+        var elem = $(IdSection);
+
+        // Periksa apakah elemen tersebut ada dan memiliki kelas 'bi-check-circle-fill'
+        if (elem.hasClass("bi-check-circle-fill")) {
+            // Jalankan sesuatu jika kelas ada
+            console.log("Kelas bi-check-circle-fill ditemukan");
+        } else {
+            // Jalankan sesuatu jika kelas tidak ada
+            console.log("Kelas bi-check-circle-fill tidak ditemukan");
+        }
 
         function loadForm() {
             $.ajax({
@@ -173,6 +185,7 @@
                 method: 'get',
                 contentType: 'application/json',
                 success: function (response) {
+                    RiwayatSection = response.data.riwayat_section;
                     loadId(response.data.riwayat_section);
                 },
                 error: function () {
@@ -188,10 +201,14 @@
                 contentType: 'application/json',
                 success: function (response) {
                     if (response.status === 200) {
-                        idBerikutnya = response.data[riwayat].id_section;
-
-                        var newHref = rootWebHost + IdPelatihan + '/' + idBerikutnya + '/' + NamaPelatihan;
-                        window.location.href = newHref;
+                        if (response.data === null || response.data[riwayat] === undefined) {
+                            var newHref = rootWebHost3 + IdPelatihan + '/' + 2 + '/' + NamaPelatihan;
+                            window.location.href = newHref;
+                        } else {
+                            idBerikutnya = response.data[riwayat].id_section;
+                            var newHref = rootWebHost + IdPelatihan + '/' + idBerikutnya + '/' + NamaPelatihan;
+                            window.location.href = newHref;
+                        }
                     } else {
                         console.error("Failed to load sections data.");
                     }
@@ -201,6 +218,7 @@
                 }
             });
         }
+
 
         $(document).on("click", ".lanjut-btn", function () {
             var namaPelatihan = $("#namaSection").text(); // Ambil teks dari elemen dengan ID namaSection

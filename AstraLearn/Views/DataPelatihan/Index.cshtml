@@ -9,8 +9,8 @@
 
 <section class="section">
     <div class="container-fluid">
-            <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_klasifikasi" style="background-color: #066CBB">
-                <i class="fas fa-plus fa-sm"></i>Tambah Pelatihan
+        <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_klasifikasi" style="background-color: #066CBB; color:seashell; border-radius: 7px; font-size: 20px;">
+            <i class="fas fa-plus fa-sm"></i> Tambah Pelatihan
             </button>
         <!-- Table with stripped rows -->
         <div class="table-responsive">
@@ -190,9 +190,9 @@
                     targets: 6,
                     render: function (data, type, row, index) {
                         const deleteButton = '<button class="btn btn-sm btn-danger delete-button" style="background-color:#BB0000"><i class="bi bi-trash"></i></button>';
-                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pelatihan" data-id="' + row.id_pelatihan + '" style="background-color: #066CBB"><i class="bi bi-exclamation-triangle"></i></button>';
-                        const updateHrefButton = '<button class="btn btn-primary btn-sm update-href-button" data-id="' + row.id_pelatihan + '" style="background-color: #004576">Section</button>';
-                        const updateHrefButton2 = '<button class="btn btn-primary btn-sm update-href-button2" data-id="' + row.id_pelatihan + '" style="background-color: #062841"> Exam</button>';
+                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pelatihan" data-id="' + row.id_pelatihan + '" style="background-color: #066CBB; border-radius: 5px;"><i class="bi bi-exclamation-triangle"></i></button>';
+                        const updateHrefButton = '<button class="btn btn-primary btn-sm update-href-button" data-id="' + row.id_pelatihan + '" style="background-color: #004576; border-radius: 5px;">Section</button>';
+                        const updateHrefButton2 = '<button class="btn btn-primary btn-sm update-href-button2" data-id="' + row.id_pelatihan + '" style="background-color: #062841; border-radius: 5px;"> Exam</button>';
                         return editButton + " " + deleteButton + " " + updateHrefButton + " " + updateHrefButton2;
                     }
                 },

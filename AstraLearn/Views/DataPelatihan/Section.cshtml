@@ -23,27 +23,27 @@
                     <form id="myForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="NamaSection" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Nama Section</label>
+                            <label class="control-label" for="NamaSection" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Nama Section *</label>
                             <input id="NamaSection" name="NamaSection" class="form-control" />
                             <span class="text-danger" id="errorNamaSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="DeskripsiSection" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Deskripsi Section</label>
+                            <label class="control-label" for="DeskripsiSection" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Deskripsi Section *</label>
                             <input id="DeskripsiSection" name="DeskripsiSection" class="form-control" />
                             <span class="text-danger" id="errorDeskripsiSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="VidioPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Vidio Pembelajaran</label>
+                            <label class="control-label" for="VidioPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Video Pembelajaran *</label>
                             <input id="VidioPembelajaran" name="VidioPembelajaran" class="form-control" />
                             <span class="text-danger" id="errorVidioPembelajaran"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="ModulPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Modul Pembelajaran</label>
+                            <label class="control-label" for="ModulPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Modul Pembelajaran *</label>
                             <input type="file" id="ModulPembelajaran" name="ModulPembelajaran" class="form-control" />
                             <span class="text-danger" id="errorModulPembelajaran"></span>
                         </div>
                         <br>
-                        <div class="form-group">
+                        <div class="form-group text-right">
                             <input type="submit" value="Tambah" id="buttonCreate" class="btn btn-primary" />
                         </div>
                     </form>

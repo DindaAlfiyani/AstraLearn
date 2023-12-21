@@ -39,20 +39,20 @@
                 <div class="modal-body">
                     <form id="editForm">
                         <div class="form-group">
-                            <label class="control-label" for="EditUsername" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Username</label>
+                            <label class="control-label" for="EditUsername" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Username *</label>
                             <input id="EditUsername" name="EditUsername" class="form-control" readonly />
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditNama" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Nama</label>
+                            <label class="control-label" for="EditNama" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Nama *</label>
                             <input id="EditNama" name="EditNama" class="form-control" readonly/>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditHakAkses" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Hak Akses</label>
+                            <label class="control-label" for="EditHakAkses" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Hak Akses *</label>
                             <select id="EditHakAkses" name="EditHakAkses" class="form-control">
                             </select>
                         </div>
                         <br>
-                        <div class="form-group">
+                        <div class="form-group text-right">
                             <input type="submit" value="Simpan" id="buttonUpdate" class="btn btn-primary" />
                         </div>
                     </form>
@@ -102,7 +102,7 @@
                 {
                     targets: 4,
                     render: function (data, type, row, index) {
-                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pengguna" data-id="' + row.id_pengguna + '" style="background-color: #066CBB"><i class="bi bi-exclamation-triangle"></i></button>';
+                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pengguna" data-id="' + row.id_pengguna + '" style="background-color: #066CBB; border-radius: 5px;"><i class="bi bi-exclamation-triangle"></i></button>';
                         return editButton;
                     }
                 }

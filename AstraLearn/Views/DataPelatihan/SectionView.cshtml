@@ -7,22 +7,23 @@
 <input type="hidden" id="idSection" value="@ViewBag.idSection" />
 
 <section class="section">
-    <div class="container-fluid">
+    <div class="container-fluid" style="background-color: whitesmoke; border-radius: 15px; height: 850px; width: 1300px; margin-left: 30px;">
         <!-- Video YouTube -->
         <div class="nama-container">
-            <h1 id="namaSection" class="display-4 mb-4" style="font-weight: bold;"></h1>
+            <h1 id="namaSection" class="display-4 mb-4" style="color: #006CBB; font-weight: bold;"></h1>
         </div>
         <div class="video-container">
-            <iframe id="videoContainer" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="desk-container">
-            <p id="deskripsiSection" class="lead mb-4" style="max-width: 1800px; word-wrap: break-word;" style="font-weight: bold;"></p>
-        </div>
-        <div class="button-container mt-3">
-            <button class="btn btn-primary edit-btn" style="background-color: #066CBB">Ubah</button>
-            <button class="btn btn-danger delete-btn" style="background-color:#BB0000">Hapus</button>
-            <button class="btn btn-danger modul-btn" style="background-color: #004576">Unduh Modul</button>
-            <button class="btn btn-secondary update-href-btn" style="background-color: #062841">Exercise</button>
+            <iframe id="videoContainer" width="100%" height="500" src="" frameborder="0" allowfullscreen style="border-radius: 15px; height: 555px; width: 1100px;"></iframe>
+
+            <div class="desk-container" style="border-radius: 15px; padding-top: 500px;">
+                <p id="deskripsiSection" class="lead mb-4" style="margin-top: 100px; max-width: 1800px; word-wrap: break-word;"></p>
+            </div>
+            <div class="button-container mt-3">
+                <button class="btn btn-primary edit-btn" style="background-color: #066CBB; border-radius: 10px; font-size: 20px;">Ubah</button>
+                <button class="btn btn-danger delete-btn" style="background-color:#BB0000; border-radius: 10px; font-size: 20px;">Hapus</button>
+                <button class="btn btn-danger modul-btn" style="background-color: #004576; border-radius: 10px; font-size: 20px;">Unduh Modul</button>
+                <button class="btn btn-secondary update-href-btn" style="background-color: #062841; border-radius: 10px; font-size: 20px;">Exercise</button>
+            </div>
         </div>
     </div>
 
@@ -39,27 +40,27 @@
                     <form id="myForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="NamaSection" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Nama Section</label>
+                            <label class="control-label" for="NamaSection" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Nama Section *</label>
                             <input id="NamaSection" name="NamaSection" class="form-control" />
                             <span class="text-danger" id="errorNamaSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="DeskripsiSection" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Deskripsi Section</label>
+                            <label class="control-label" for="DeskripsiSection" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Deskripsi Section *</label>
                             <input id="DeskripsiSection" name="DeskripsiSection" class="form-control" />
                             <span class="text-danger" id="errorDeskripsiSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="VidioPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Vidio Pembelajaran</label>
+                            <label class="control-label" for="VidioPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Vidio Pembelajaran *</label>
                             <input id="VidioPembelajaran" name="VidioPembelajaran" class="form-control" />
                             <span class="text-danger" id="errorVidioPembelajaran"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="ModulPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Modul Pembelajaran</label>
+                            <label class="control-label" for="ModulPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Modul Pembelajaran *</label>
                             <input type="file" id="ModulPembelajaran" name="ModulPembelajaran" class="form-control" />
                             <span class="text-danger" id="errorModulPembelajaran"></span>
                         </div>
                         <br>
-                        <div class="form-group">
+                        <div class="form-group text-right">
                             <input type="submit" value="Tambah" id="buttonCreate" class="btn btn-primary" />
                         </div>
                     </form>
@@ -81,27 +82,27 @@
                     <form id="editForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <label class="control-label" for="EditNamaSection" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Nama Section</label>
+                            <label class="control-label" for="EditNamaSection" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Nama Section *</label>
                             <input id="EditNamaSection" name="EditNamaSection" class="form-control" />
                             <span class="text-danger" id="errorEditNamaSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditDeskripsiSection" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Deskripsi Section</label>
+                            <label class="control-label" for="EditDeskripsiSection" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Deskripsi Section *</label>
                             <input id="EditDeskripsiSection" name="EditDeskripsiSection" class="form-control" />
                             <span class="text-danger" id="errorEditDeskripsiSection"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditVidioPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Vidio Pembelajaran</label>
+                            <label class="control-label" for="EditVidioPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Vidio Pembelajaran *</label>
                             <input id="EditVidioPembelajaran" name="EditVidioPembelajaran" class="form-control" />
                             <span class="text-danger" id="errorEditVidioPembelajaran"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="EditModulPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif; font-weight: 600;">Modul Pembelajaran</label>
+                            <label class="control-label" for="EditModulPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Modul Pembelajaran *</label>
                             <input type="file" id="EditModulPembelajaran" name="EditModulPembelajaran" class="form-control" />
                             <span class="text-danger" id="errorEditModulPembelajaran"></span>
                         </div>
                         <br>
-                        <div class="form-group">
+                        <div class="form-group text-right">
                             <input type="submit" value="Ubah" id="buttonUpdate" class="btn btn-primary" />
                         </div>
                     </form>
