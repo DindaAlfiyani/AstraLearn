@@ -102,13 +102,14 @@
         var idBerikutnya;
         var NamaModul;
         var RiwayatSection;
+        var IdLogin = $("#idLogin").val()
         var linkYt = "https://www.youtube.com/embed/";
         var pdfDirectory = "https://localhost:7157/assets/Upload/";
 
         var elem = $(IdSection);
 
         // Periksa apakah elemen tersebut ada dan memiliki kelas 'bi-check-circle-fill'
-        if (elem.hasClass("bi-check-circle-fill")) {
+        if (elem.hasClass("bi-check-circle-fill")) {    
             // Jalankan sesuatu jika kelas ada
             console.log("Kelas bi-check-circle-fill ditemukan");
         } else {
@@ -182,7 +183,7 @@
 
         function loadRiwayat() {
             $.ajax({
-                url: rootHost + '/MengikutiPelatihan/GetMengikutiPelatihan?id_pengguna=4&id_pelatihan=' + IdPelatihan,
+                url: rootHost + '/MengikutiPelatihan/GetMengikutiPelatihan?id_pengguna='+ IdLogin + '&id_pelatihan=' + IdPelatihan,
                 method: 'get',
                 contentType: 'application/json',
                 success: function (response) {
@@ -225,7 +226,7 @@
             var namaPelatihan = $("#namaSection").text(); // Ambil teks dari elemen dengan ID namaSection
             var data = {
                 id_mengikuti: 0,
-                id_pengguna: 4,
+                id_pengguna: IdLogin,
                 id_pelatihan: IdPelatihan,
                 riwayat_section: 0,
                 riwayat_nilai: 0,

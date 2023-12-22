@@ -44,6 +44,7 @@
         var rootHost = "http://localhost:5180";
         var rootWebHost = "https://localhost:7157/SebelumMengikutiPelatihan/";
         var pelatihanId;
+        var IdLogin = $("#idLogin").val();
 
         new DataTable('#dataTable', {
             ajax: {
@@ -88,7 +89,7 @@
             var namaPelatihan = $(this).closest('tr').find('td:eq(1)').text();
             var data = {
                 id_mengikuti: 0,
-                id_pengguna: 4,
+                id_pengguna: IdLogin,
                 id_pelatihan: pelatihanId,
                 riwayat_section: 0,
                 riwayat_nilai: 0,

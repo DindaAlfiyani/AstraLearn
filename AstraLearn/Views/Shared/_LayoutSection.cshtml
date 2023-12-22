@@ -122,7 +122,7 @@
                     {
                         var IsLoggedIn = Context.Session.GetString("User");
                         var loggedInUserId = Context.Session.GetInt32("Id");
-
+                        <input type="hidden" id="idLogin" value="@loggedInUserId" />
                         <a class="nav-link nav-profile d-flex align-items-center" href="#">
                             <span class="d-none d-md-block">@IsLoggedIn </span>
                             @*<span class="d-none d-md-block">@loggedInUserId </span>*@
@@ -310,11 +310,13 @@
         var rootWebHost2 = "https://localhost:7157/Peserta/Kelas";
         var IdPelatihan = $("#idPelatihan").val();
         var rootWebHost3 = "https://localhost:7157/MengerjakanExam/";
+        var rootWebHost4 = "https://localhost:7157/ExamDone/";
         var idPembantu;
+        var IdLogin = $("#idLogin").val();
 
         function loadRiwayat() {
             $.ajax({
-                url: rootHost + '/MengikutiPelatihan/GetMengikutiPelatihan?id_pengguna=4&id_pelatihan=' + IdPelatihan,
+                url: rootHost + '/MengikutiPelatihan/GetMengikutiPelatihan?id_pengguna=' + IdLogin + '&id_pelatihan=' + IdPelatihan,
                 method: 'get',
                 contentType: 'application/json',
                 success: function (response) {
@@ -387,6 +389,7 @@
                 link.append(h5);
                 listItem.append(link);
                 sidebarNav.append(listItem);
+                $(".lanjut-btn").hide();
             }
         }
 
@@ -492,7 +495,7 @@
                 .addClass("nav-link collapsed")
                 .attr("href", "javascript:void(0)")
                 .click(function () {
-                    onExamButtonClick();
+                    onExamButtonClick2();
                 });
 
             var icon = $("<i id='" + section.id_pelatihan + "'>").addClass("bi bi-check-circle-fill");
@@ -512,6 +515,11 @@
 
         function onExamButtonClick() {
             var newHref = rootWebHost3 + IdPelatihan + '/' + 2 + '/Mengerjakan';
+            window.location.href = newHref;
+        }
+
+        function onExamButtonClick2() {
+            var newHref = rootWebHost4 + IdPelatihan + '/' + 2 + '/Mengerjakan';
             window.location.href = newHref;
         }
 

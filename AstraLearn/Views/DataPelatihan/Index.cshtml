@@ -125,7 +125,8 @@
         var rootHost = "http://localhost:5180";
         var rootWebHost = "https://localhost:7157/Section/";
         var rootWebHost2 = "https://localhost:7157/Exam/";
-
+        var IdLogin = $("#idLogin").val();
+        
         var pelatihanId;
 
         loadKlasifikasi();
@@ -164,7 +165,7 @@
 
         new DataTable('#dataTable', {
             ajax: {
-                url: rootHost + '/Pelatihan/GetAllPelatihan',
+                url: rootHost + '/Pelatihan/GetPelatihan2?id=' + IdLogin,
                 type: "GET",
                 dataSrc: function (data) {
                     return data.data;
@@ -246,7 +247,7 @@
 
             var data = {
                 id_pelatihan: 0,
-                id_pengguna: 1,
+                id_pengguna: IdLogin,
                 id_klasifikasi: klasifikasiPelatihan,
                 nama_pelatihan: namaPelatihan,
                 deskripsi_pelatihan: deskripsiPelatihan,
@@ -389,7 +390,7 @@
 
             var data = {
                 id_pelatihan: pelatihanId,
-                id_pengguna: 1,
+                id_pengguna: IdLogin,
                 id_klasifikasi: klasifikasiPelatihan,
                 nama_pelatihan: namaPelatihan,
                 deskripsi_pelatihan: deskripsiPelatihan,

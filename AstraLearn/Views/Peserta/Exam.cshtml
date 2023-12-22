@@ -68,11 +68,8 @@
         var NamaPengguna = $("#namaPengguna2").val();
         var currentDate = new Date().toLocaleDateString('en-US', { day: '2-digit', month: 'long', year: 'numeric' });
 
-
-        // Store correct answers in an object for later comparison
         var correctAnswers = {};
 
-        // Store selected answers for each question
         var selectedAnswers = {};
 
         $.ajax({
@@ -108,7 +105,7 @@
                 correctAnswers[index] = exercise.kunci_jawaban;
 
                 var exerciseHtml = `
-                            <div class="question ml-sm-5 pl-sm-5 pt-2">
+                                <div class="question ml-sm-5 pl-sm-5 pt-2" style="font-family: 'Poppins', sans-serif;">
                                 <div class="py-2 h5"><b>Soal ${index + 1}: ${exercise.soal}</b></div>
                                 <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
                                     <label class="options" data-correct="${exercise.kunci_jawaban}">
@@ -242,26 +239,64 @@
                     congratsMessage = "Selamat! Anda telah berhasil mendapatkan nilai sempurna.";
                 }
 
-                $("#scoreMessage").html("Nilai Kamu " + score.toFixed(2) + "% " + congratsMessage);
+                $("#scoreMessage").html("Nilai Kamu " + score.toFixed(0) + "% " + congratsMessage);
 
                 $("#scoreModal").modal('show');
-                // Close the modal after 5 seconds
-                setTimeout(function () {
-                    $("#scoreModal").modal('hide');
-                }, 5000);
-                // If the score is equal or higher than the minimum
-                // Display a congratulatory message after 5 seconds
-                setTimeout(function () {
-                    Swal.fire({
-                        title: 'Selamat!',
-                        text: congratsMessage,
-                        icon: 'success',
-                    });
-                }, 5000);
+                
+                var data = {
+                    id_mengikuti: 0,
+                    id_pengguna: IdLogin,
+                    id_pelatihan: IdPelatihan,
+                    riwayat_section: 0,
+                    riwayat_nilai: 0,
+                    rating: 0
+                };
+
+                $.ajax({
+                    url: rootHost + "/MengikutiPelatihan/UpdateMengikutiPelatihan",
+                    type: "post",
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (result) {
+                        loadRiwayat();
+                    },
+                    error: function () {
+                        console.error("Error fetching data.");
+                    }
+                });
+
+                var currentDate2 = new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
+                var data2 = {
+                    id_sertifikat: 0,
+                    id_pelatihan: IdPelatihan,
+                    id_pengguna: IdLogin,
+                    nilai_exam: score.toFixed(0),
+                    tanggal_selesai: currentDate2
+                };
+
+                $.ajax({
+                    url: rootHost + "/Sertifikat/InsertSertifikat",
+                    type: "post",
+                    data: JSON.stringify(data2),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (result) {
+                        // Handle success, if needed
+                        console.log("Sertifikat inserted successfully");
+                    },
+                    error: function () {
+                        console.error("Error inserting sertifikat.");
+                    }
+                });
 
                 var rootWebHost3 = "https://localhost:7157/Sertifikat/" + NamaPengguna + "/" + NamaPelatihan + "/" + currentDate;
 
                 window.open(rootWebHost3, '_blank');
+
+                location.reload();
+                
             }
         }
     });

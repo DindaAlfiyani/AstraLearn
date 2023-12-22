@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="ModulPembelajaran" style="color: #066CBB; font-family: 'Poppins', sans-serif;">Modul Pembelajaran *</label>
-                            <input type="file" id="ModulPembelajaran" name="ModulPembelajaran" class="form-control" />
+                            <input type="file" id="ModulPembelajaran" name="ModulPembelajaran" class="form-control" accept=".pdf" />
                             <span class="text-danger" id="errorModulPembelajaran"></span>
                         </div>
                         <br>
@@ -115,7 +115,7 @@
             }
 
             if (!vidio.trim()) {
-                $("#errorVidioSection").text("Deskripsi PelatihanSection tidak boleh kosong.");
+                $("#errorVidioSection").text("Vidio PelatihanSection tidak boleh kosong.");
                 return;
             } else {
                 $("#errorVidioSection").text("");
