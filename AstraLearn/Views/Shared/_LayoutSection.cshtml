@@ -307,6 +307,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         var rootHost = "http://localhost:5180";
         var rootWebHost = "https://localhost:7157/MengikutiPelatihan/";
+        var rootWebHostt = "https://localhost:7157/MengikutiPelatihan2/";
         var rootWebHost2 = "https://localhost:7157/Peserta/Kelas";
         var IdPelatihan = $("#idPelatihan").val();
         var rootWebHost3 = "https://localhost:7157/MengerjakanExam/";
@@ -377,7 +378,7 @@
                     .addClass("nav-link collapsed")
                     .attr("href", "#")
                     .click(function () {
-                        updateHref(section.id_section, section.id_pelatihan, nama);
+                        updateHref2(section.id_section, section.id_pelatihan, nama);
                     });
 
                 var icon = $("<i id='" + section.id_section + "'>").addClass("bi bi-check-circle-fill");
@@ -389,7 +390,6 @@
                 link.append(h5);
                 listItem.append(link);
                 sidebarNav.append(listItem);
-                $(".lanjut-btn").hide();
             }
         }
 
@@ -544,6 +544,11 @@
 
         function updateHref(id, id1, nama) {
             var newHref = rootWebHost + id1 + "/" + id + "/" + nama;
+            window.location.href = newHref;
+        }
+
+        function updateHref2(id, id1, nama) {
+            var newHref = rootWebHostt + id1 + "/" + id + "/" + nama;
             window.location.href = newHref;
         }
 
