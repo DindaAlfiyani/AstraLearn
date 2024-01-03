@@ -5,33 +5,36 @@
 
 <div class="pagetitle">
     <h1>Pelatihan</h1>
+    </br>
+    <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_klasifikasi" style="background-color: #066CBB; color:seashell; border-radius: 7px; font-size: 20px;">
+        <i class="fas fa-plus fa-sm"></i> Tambah Pelatihan
+    </button>
 </div>
 
 <section class="section">
-    <div class="container-fluid">
-        <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_klasifikasi" style="background-color: #066CBB; color:seashell; border-radius: 7px; font-size: 20px;">
-            <i class="fas fa-plus fa-sm"></i> Tambah Pelatihan
-            </button>
-        <!-- Table with stripped rows -->
-        <div class="table-responsive">
-            <table class="table table-striped" style="width:100%" id="dataTable">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama Pelatihan</th>
-                        <th scope="col">Deskripsi Pelatihan</th>
-                        <th scope="col">Klasifikasi Pelatihan</th>
-                        <th scope="col">Jumlah Peserta</th>
-                        <th scope="col">Nilai Minimum</th>
-                        <th scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+    <div class="card">
+        <div class="card-body">
+            <div class="container-fluid">
+                <div class="table-responsive">
+                    <table class="table table-striped" style="width:100%" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Pelatihan</th>
+                                <th scope="col">Deskripsi Pelatihan</th>
+                                <th scope="col">Klasifikasi Pelatihan</th>
+                                <th scope="col">Jumlah Peserta</th>
+                                <th scope="col">Nilai Minimum</th>
+                                <th scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="tambah_klasifikasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -109,9 +112,10 @@
         </div>
     </div>
 </section>
+
 <style>
     .section {
-        min-height: 78vh;
+        min-height: 76vh;
         display: flex;
         flex-direction: column;
     }
@@ -119,12 +123,30 @@
     .container-fluid {
         flex: 1;
     }
+
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        width: 100%; /* Set the width as needed */
+        overflow: hidden; /* To prevent table overflow */
+    }
+
+    .card-body {
+        width: 1450px;
+    }
+
+    .table {
+        margin-bottom: 0; /* Menghilangkan margin atau gutters di dalam tabel */
+    }
 </style>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var rootHost = "http://localhost:5180";
-        var rootWebHost = "https://localhost:7157/Section/";
-        var rootWebHost2 = "https://localhost:7157/Exam/";
+        var rootWebHost = "http://localhost:5017/Section/";
+        var rootWebHost2 = "http://localhost:5017/Exam/";
         var IdLogin = $("#idLogin").val();
         
         var pelatihanId;
