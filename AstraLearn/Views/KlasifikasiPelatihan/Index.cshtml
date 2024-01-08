@@ -157,8 +157,8 @@
                 {
                     targets: 3,
                     render: function (data, type, row, index) {
-                        const deleteButton = '<button class="btn btn-sm btn-danger delete-button" style="background-color:#BB0000 border-radius: 5px;"><i class="bi bi-trash"></i></button>';
-                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_klasifikasi" data-id="' + row.id_klasifikasi + '" style="background-color: #066CBB; border-radius: 5px;"><i class="bi bi-exclamation-triangle"></i></button>';
+                        const deleteButton = '<button class="btn btn-sm btn-danger delete-button" style="background-color:#BB0000"><i class="bi bi-trash"></i></button>';
+                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_klasifikasi" data-id="' + row.id_klasifikasi + '" style="background-color: #066CBB; border-radius: 5px;"><i class="fas fa-edit fa-sm"></i></button>';
                         return editButton + " " + deleteButton;
                     }
                 }
@@ -243,7 +243,6 @@
 
         $('#dataTable').on('click', 'button.edit-button', function () {
             klasifikasiId = $(this).data('id');
-            // Fetch existing data for the selected classification
             $.ajax({
                 url: rootHost + '/KlasifikasiPelatihan/GetKlasifikasiPelatihan?id=' + klasifikasiId,
                 type: 'GET',

@@ -104,7 +104,7 @@
                         </div>
                         <br>
                         <div class="form-group text-right">
-                            <input type="submit" value="Ubah" id="buttonUpdate" class="btn btn-primary" />
+                            <input type="submit" value="Simpan" id="buttonUpdate" class="btn btn-primary" />
                         </div>
                     </form>
                 </div>
@@ -213,7 +213,7 @@
                     targets: 6,
                     render: function (data, type, row, index) {
                         const deleteButton = '<button class="btn btn-sm btn-danger delete-button" style="background-color:#BB0000"><i class="bi bi-trash"></i></button>';
-                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pelatihan" data-id="' + row.id_pelatihan + '" style="background-color: #066CBB; border-radius: 5px;"><i class="bi bi-exclamation-triangle"></i></button>';
+                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_pelatihan" data-id="' + row.id_pelatihan + '" style="background-color: #066CBB; border-radius: 5px;"><i class="fas fa-edit fa-sm"></i></button>';
                         const updateHrefButton = '<button class="btn btn-primary btn-sm update-href-button" data-id="' + row.id_pelatihan + '" style="background-color: #004576; border-radius: 5px;">Section</button>';
                         const updateHrefButton2 = '<button class="btn btn-primary btn-sm update-href-button2" data-id="' + row.id_pelatihan + '" style="background-color: #062841; border-radius: 5px;"> Exam</button>';
                         return editButton + " " + deleteButton + " " + updateHrefButton + " " + updateHrefButton2;

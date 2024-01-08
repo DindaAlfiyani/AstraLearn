@@ -4,7 +4,7 @@
 }
 
 <div class="pagetitle">
-    <h1>Daftar Section</h1>
+    <h1 style="margin-top: 300px;">Daftar Section</h1>
     <h4>@(ViewBag.namaPelatihan)</h4>
     <input type="hidden" id="idPelatihan" value="@ViewBag.idPelatihan" />
 </div>
@@ -92,6 +92,7 @@
     $(document).ready(function () {
         var IdPelatihan = $("#idPelatihan").val();  
         var rootHost = "http://localhost:5180";
+
         $("#myForm").submit(function (e) {
             e.preventDefault();
 
@@ -108,14 +109,14 @@
             }
 
             if (!deskripsi.trim()) {
-                $("#errorDeskripsiSection").text("Deskripsi PelatihanSection tidak boleh kosong.");
+                $("#errorDeskripsiSection").text("Deskripsi Section tidak boleh kosong.");
                 return;
             } else {
                 $("#errorDeskripsiSection").text("");
             }
 
             if (!vidio.trim()) {
-                $("#errorVidioSection").text("Vidio PelatihanSection tidak boleh kosong.");
+                $("#errorVidioSection").text("Vidio Pembelajaran tidak boleh kosong.");
                 return;
             } else {
                 $("#errorVidioSection").text("");
@@ -187,7 +188,7 @@
         function notifikasiTambahSukses() {
             Swal.fire({
                 title: "Sukses!",
-                text: "Data Pelatihan berhasil ditambahkan.",
+                text: "Data Section berhasil ditambahkan.",
                 icon: "success",
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "OK"

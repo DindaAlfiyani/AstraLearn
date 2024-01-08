@@ -248,7 +248,7 @@
                     targets: 3,
                     render: function (data, type, row, index) {
                         const deleteButton = '<button class="btn btn-sm btn-danger delete-button" style="background-color:#BB0000; border-radius: 5px;"><i class="bi bi-trash"></i></button>';
-                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_exercise" data-id="' + row.id_pelatihan + '" style="background-color: #066CBB; border-radius: 5px;"><i class="bi bi-exclamation-triangle"></i></button>';
+                        const editButton = '<button class="btn btn-primary btn-sm edit-button" data-toggle="modal" data-target="#edit_exercise" data-id="' + row.id_pelatihan + '" style="background-color: #066CBB; border-radius: 5px;"><i class="fas fa-edit fa-sm"></i></button>';
                         const editButton2 = '<button class="btn btn-primary btn-sm edit-button2" data-toggle="modal" data-target="#detail_exercise" data-id="' + row.id_pelatihan + '"><i class="bi bi-info-circle"></i></button>';
                         return editButton + " " + deleteButton + " " + editButton2;
                     }

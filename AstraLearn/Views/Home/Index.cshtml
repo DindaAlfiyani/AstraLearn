@@ -112,7 +112,7 @@
                                         </div>
 
                                         <div class="d-grid">
-                                            <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" onclick=Login()"" style="background-color: #006CBB; border-radius: 15px;">Masuk</button>
+                                            <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" onclick="Login()" style="background-color: #006CBB; border-radius: 15px;">Masuk</button>
                                         </div>
 
                                     </form>
@@ -145,24 +145,8 @@
     <!-- Include SweetAlert for displaying alerts -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-  @*  <!-- Add this code snippet to display the alerts -->
-    @if (TempData["LoginSuccessMessage"] != null)
-    {
-        <script>
-            $(document).ready(function () {
-                Swal.fire({
-                    title: '@TempData["LoginSuccessType"]',
-                    text: '@TempData["LoginSuccessMessage"]',
-                    icon: '@TempData["LoginSuccessType"]',
-                    confirmButtonText: 'OK'
-                });
-            });
-        </script>
-    }*@
-
     <script>
         function Login(hak_akses) {
-
             var username = $('#yourUsername').val();
             var password = $('#yourPassword').val();
 
@@ -174,13 +158,24 @@
                 success: function (response) {
                     console.log(response);
                     // Check if login is successful
-                    if (response !== null) {
-                        // If successful, call DataAda function
+                    if (response.npk !== "" ) {
                         DataAda(response, hak_akses);
-                    } 
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal Login',
+                            text: 'Nama Pengguna atau Kata Sandi Salah!',
+                        });
+                    }
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Error',
+                        text: 'Tolong masukkan nama pengguna dan kata sandi.',
+                    });
                 }
             });
-            // Prevent default form submission
             return false;
         }
 
@@ -228,21 +223,6 @@
         }
 
     </script>
-
-    <!-- Display the error alert for login -->
-    @if (TempData["AlertMessage"] != null)
-    {
-        <script>
-            $(document).ready(function () {
-                Swal.fire({
-                    title: 'Error',
-                    text: '@TempData["AlertMessage"]',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-            });
-        </script>
-    }
 
 </body>
 
