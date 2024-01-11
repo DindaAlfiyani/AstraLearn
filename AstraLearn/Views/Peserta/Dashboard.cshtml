@@ -186,64 +186,33 @@
     </style>
 
 </body1>
+
 <script>
     $(document).ready(function () {
-        var IdLogin = $("#idLogin").val();
         var rootHost = "http://localhost:5180";
-        var jumlahPelatihan;
+        var IdLogin = $("#idLogin").val(); // Assuming you have IdLogin variable
 
         $.ajax({
-            url: rootHost + '/LanjutkanPelatihan/GetLanjutkanPelatihan?idPengguna=' + IdLogin,
-            method: 'get',
-            contentType: 'application/json',
+            url: rootHost + '/ViewDataPeserta/GetAllDataPesertas?id_pengguna=' + IdLogin,
+            method: "get",
+            contentType: "application/json",
             success: function (response) {
-                jumlahPelatihan = response.data.length;
-                console.log(jumlahPelatihan); // Move the console.log inside the success callback
-                $('#jumlahPelatihan').text(jumlahPelatihan);
+                console.log(response);
+
+                if (response && response.status === 200 && response.data && response.data.length > 0) {
+                    var result = response.data[0];
+
+                    // Check if the properties exist before accessing them
+                    $("#jumlahPelatihan").text(result.jumlah_pelatihan !== undefined ? result.jumlah_pelatihan : "0");
+                    $("#pelatihanBerjalan").text(result.pelatihan_berjalan !== undefined ? result.pelatihan_berjalan : "0");
+                    $("#pelatihanSelesai").text(result.pelatihan_selesai !== undefined ? result.pelatihan_selesai : "0");
+                } else {
+                    console.error("Invalid or empty response data.");
+                }
             },
             error: function () {
-                console.error("Failed to load sections data.");
+                console.error("Error fetching data.");
             }
         });
-    });
-</script>
-
-<script>
-    $(document).ready(function () {
-        var rootHost = "http://localhost:5180";
-        var jumlahPelatihan;
-        var jumlahPeserta;
-        var jumlahSelesai;
-
-        function fetchData(url) {
-            return new Promise(function (resolve, reject) {
-                $.ajax({
-                    url: rootHost + url,
-                    method: 'get',
-                    contentType: 'application/json',
-                    success: resolve,
-                    error: reject
-                });
-            });
-        }
-
-        fetchData('/Pelatihan/GetAllPelatihan')
-            .then(function (response) {
-                jumlahPelatihan = response.data.length;
-                $('#jumlahPelatihan').text(jumlahPelatihan);
-                return fetchData('/MengikutiPelatihan/GetAllMengikutiPelatihan');
-            })
-            .then(function (response) {
-                jumlahSelesai = response.data.length;
-                $('#jumlahPeserta').text(jumlahSelesai);
-                return fetchData('/Sertifikat/GetAllSertifikat');
-            })
-            .then(function (response) {
-                jumlahBerjalan = jumlahPelatihan - jumlahSelesai;
-                $('#pelatihanSelesai').text(jumlahSelesai);
-            })
-            .catch(function (error) {
-                console.error("Failed to load data:", error);
-            });
     });
 </script>

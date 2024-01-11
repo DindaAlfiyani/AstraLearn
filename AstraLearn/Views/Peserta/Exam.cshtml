@@ -141,6 +141,8 @@
 
                 exerciseContainer.append(exerciseHtml);
             });
+
+            console.log(correctAnswers);
         }
 
         // Add click event for the "Next" button
@@ -189,9 +191,14 @@
             // Loop through each question
             $(".question").each(function (index) {
                 var selectedAnswer = selectedAnswers[index];
+                console.log(selectedAnswer);
                 var correct = correctAnswers[index];
-                var isCorrect = selectedAnswer === correct;
-
+                console.log(correct);
+                var isCorrect = String(selectedAnswer).toLowerCase() === String(correct).toLowerCase();
+                console.log(isCorrect);
+                if(isCorrect){
+                    correctCount++;
+                }
                 // Highlight selected answer and mark with checkmark or cross
                 $(this).find("label.options").each(function () {
                     var optionText = $(this).text().trim(); // Trim extra spaces
@@ -204,7 +211,6 @@
                         if (isCorrect) {
                             $(this).css("color", "green");
                             $(this).append(checkmarkSpan); // Checkmark to the right
-                            correctCount++;
                         } else {
                             $(this).css("color", "red");
                             $(this).append(crossSpan); // Cross to the right
@@ -215,15 +221,14 @@
 
             var score = (correctCount / totalQuestions) * 100;
 
-            // Disable radio buttons after submission
             $(".question input[type='radio']").attr("disabled", true);
 
             if (score < nilaiMinimum) {
                 $("#scoreMessage").html("Nilai Kamu " + score.toFixed(2) + "% Silahkan Mengerjakan Ulang");
 
-                // Show the modal
-                $("#scoreModal").modal('show');
-                // Close the modal after 5 seconds
+                setTimeout(function () {
+                    $("#scoreModal").modal('show');
+                }, 1000);
                 setTimeout(function () {
                     $("#scoreModal").modal('hide');
                 }, 5000);
@@ -243,6 +248,15 @@
 
                 $("#scoreModal").modal('show');
                 
+                setTimeout(function () {
+                    $("#scoreModal").modal('show');
+                }, 1000);
+
+                $("#scoreModal").on('hidden.bs.modal', function () {
+                    var newHref = 'http://localhost:5017/Peserta/Sertifikat';
+                    window.location.href = newHref;
+                });
+
                 var data = {
                     id_mengikuti: 0,
                     id_pengguna: IdLogin,
@@ -290,13 +304,6 @@
                         console.error("Error inserting sertifikat.");
                     }
                 });
-
-                var rootWebHost3 = "http://localhost:5017/Sertifikat/" + NamaPengguna + "/" + NamaPelatihan + "/" + currentDate;
-
-                window.open(rootWebHost3, '_blank');
-
-                location.reload();
-                
             }
         }
     });

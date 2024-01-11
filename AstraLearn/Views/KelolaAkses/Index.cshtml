@@ -120,13 +120,14 @@
                 },
                 {
                     targets: 4,
-                    render: function (data, type, row, index) {+
+                    render: function (data, type, row, index) {
                         const editButton = '<button class="btn btn-sm btn-warning edit-button" data-toggle="modal" data-target="#ubah_nilai_minimum" data-id="' + row.id_pengguna + '" style="background-color: #066CBB; color:seashell; border-radius: 7px; font-size: 15px;">' +
                             '<i class="fas fa-edit fa-sm"></i> Kelola Akses' +
                             '</button>';
                         return editButton;
                     }
                 }
+
 
             ],
             createdRow: function (row, data, dataIndex) {

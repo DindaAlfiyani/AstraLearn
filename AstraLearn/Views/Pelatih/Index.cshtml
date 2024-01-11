@@ -18,7 +18,7 @@
                                         <i class="bi bi-file-earmark-text-fill" style="color: #006CBB; font-size: 4em; "></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h1 id="jumlahPelatihan" style="color: #006CBB; font-size: 50px; font-family: Poppins, sans-serif;">145</h1>
+                                        <h1 id="jumlahPelatihan" style="color: #006CBB; font-size: 50px; font-family: Poppins, sans-serif;">0</h1>
                                     </div>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
                                         <i class="bi bi-file-earmark-person-fill" style="color: #006CBB; font-size: 4em;"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h1 id="jumlahPeserta" style="color: #006CBB; font-size: 50px;">123</h1>
+                                        <h1 id="jumlahPeserta" style="color: #006CBB; font-size: 50px;">0</h1>
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                         <i class="bi bi-file-earmark-bar-graph-fill" style="color: #006CBB; font-size: 4em;"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h1 id="pelatihanBerjalan" style="color: #006CBB; font-size: 50px;">93</h1>
+                                        <h1 id="pelatihanBerjalan" style="color: #006CBB; font-size: 50px;">0</h1>
                                     </div>
                                 </div>
                             </div>
@@ -78,69 +78,33 @@
             </div>
     </section>
 </body1>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        function fetchData() {
-            $.ajax({
-                url: "http://localhost:5180/Pelatihan/GetAllPelatihan",
-                type: "GET",
-                dataType: "json",
-                success: function (result) {
-                    if (result.status === 200) {
-                        populateCards(result.data);
-                    } else {
-                        console.error("Failed to fetch data.");
-                    }
-                },
-                error: function () {
-                    console.error("Error fetching data.");
-                }
-            });
-        }
-
-        // Function to get YouTube video thumbnail link
-        function getYouTubeThumbnailLink(videoId) {
-            return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-        }
-
-        // Fetch data when the page is loaded
-        fetchData();
-    });
-</script>
 <script>
     $(document).ready(function () {
         var rootHost = "http://localhost:5180";
-        var jumlahPelatihan;
-        var jumlahPeserta;
-        var jumlahSelesai;
+        var IdLogin = $("#idLogin").val(); // Assuming you have IdLogin variable
+        
+        $.ajax({
+            url: rootHost + '/ViewPelatih/GetAllPelatihs?id_pengguna=' + IdLogin,
+            method: "get",
+            contentType: "application/json",
+            success: function (response) {
+                console.log(response);
 
-        function fetchData(url) {
-            return new Promise(function (resolve, reject) {
-                $.ajax({
-                    url: rootHost + '/ViewPelatih/GetAllPelatih?id_pengguna=' + IdLogin,
-                    method: 'get',
-                    contentType: 'application/json',
-                    success: resolve,
-                    error: reject
-                });
-            });
-        }
+                if (response && response.status === 200 && response.data && response.data.length > 0) {
+                    var result = response.data[0];
 
-        fetchData('/Pelatihan/GetAllPelatihan')
-            .then(function (response) {
-                jumlahPelatihan = response.data.length;
-                jumlahPeserta = response.data.length;
-                jumlahSelesai = response.data.length;
-                jumlahBerjalan = response.data.length;
-                $('#jumlahPelatihan').text(jumlahPelatihan);
-                $('#jumlahPeserta').text(jumlahPeserta);
-                $('#pelatihanBerjalan').text(jumlahBerjalan);
-                $('#pelatihanSelesai').text(jumlahSelesai);
-                return fetchData('/ViewPelatih/GetAllPelatihs');
-            })
-            .catch(function (error) {
-                console.error("Failed to load data:", error);
-            });
+                    // Check if the properties exist before accessing them
+                    $("#jumlahPelatihan").text(result.jumlah_pelatihan !== undefined ? result.jumlah_pelatihan : "0");
+                    $("#jumlahPeserta").text(result.jumlah_peserta !== undefined ? result.jumlah_peserta : "0");
+                    $("#pelatihanBerjalan").text(result.pelatihan_berjalan !== undefined ? result.pelatihan_berjalan : "0");
+                    $("#pelatihanSelesai").text(result.pelatihan_selesai !== undefined ? result.pelatihan_selesai : "0");
+                } else {
+                    console.error("Invalid or empty response data.");
+                }
+            },
+            error: function () {
+                console.error("Error fetching data.");
+            }
+        });
     });
 </script>

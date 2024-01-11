@@ -165,7 +165,7 @@
             $(".question").each(function (index) {
                 var selectedAnswer = selectedAnswers[index];
                 var correct = correctAnswers[index];
-                var isCorrect = selectedAnswer === correct;
+                var isCorrect = String(selectedAnswer).toLowerCase() === String(correct).toLowerCase();
 
                 // Highlight selected answer and mark with checkmark or cross
                 $(this).find("label.options").each(function () {
