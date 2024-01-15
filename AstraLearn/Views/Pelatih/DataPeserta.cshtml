@@ -82,7 +82,12 @@
                 { data: 'nama_pelatihan' },
                 { data: 'riwayat_section' },
                 { data: 'status' },
-                { data: 'presentase' },
+                {
+                    data: 'presentase',
+                    render: function (data, type, row) {
+                        return data + "%";
+                    }
+                },
             ],
             columnDefs: [
                 {

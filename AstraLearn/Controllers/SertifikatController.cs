@@ -91,7 +91,7 @@ namespace AstraLearn.Controllers
             // Continue displaying other text
             cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, pelatihan, 125, 255, 0);
             cb.SetFontAndSize(ContentFont, 14);
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "..../AL/NMPLTHN/THNPLTHN", 250, 212, 0);
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "/AL/NMPLTHN/THNPLTHN", 250, 212, 0);
             cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, tanggal, 607, 165, 0);
 
 

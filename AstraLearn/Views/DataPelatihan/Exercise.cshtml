@@ -3,34 +3,39 @@
     Layout = "_LayoutSectionPelatih";
 }
 
+
 <div class="pagetitle">
     <h1>Exercise</h1>
     <h4>@(ViewBag.namaSection)</h4>
     <input type="hidden" id="idSection" value="@ViewBag.idSection" />
     <input type="hidden" id="idPelatihan" value="@ViewBag.idPelatihan" />
+    </br>
+    <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_exercise" style="background-color: #066CBB; color:seashell; border-radius: 7px; font-size: 20px;">
+        <i class="fas fa-plus fa-sm"></i> Tambah Exercise
+    </button>
 </div>
 
-<section class="section">
-    <div class="container-fluid">
-        <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_exercise" style="background-color: #066CBB; color:seashell; border-radius: 7px; font-size: 20px;">
-            <i class="fas fa-plus fa-sm"></i> Tambah Exercise
-        </button>
-        <div class="table-responsive">
-            <table class="table table-striped" style="width:100%; border-radius: 15px;" id="dataTable">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Soal</th>
-                        <th scope="col">Jawaban</th>
-                        <th scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="table-responsive">
+                        <table class="table table-striped" style="width:100%" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Soal</th>
+                                    <th scope="col">Jawaban</th>
+                                    <th scope="col">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
     <!--<!-- Modal -->
     <!-- Add Exercise Modal -->
     <div class="modal fade" id="tambah_exercise" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -208,7 +213,7 @@
 </section>
 <style>
     .section {
-        min-height: 78vh;
+        min-height: 76vh;
         display: flex;
         flex-direction: column;
     }
@@ -216,7 +221,25 @@
     .container-fluid {
         flex: 1;
     }
+
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        width: 100%; /* Set the width as needed */
+        overflow: hidden; /* To prevent table overflow */
+    }
+
+    .card-body {
+        width: 1450px;
+    }
+
+    .table {
+        margin-bottom: 0; /* Menghilangkan margin atau gutters di dalam tabel */
+    }
 </style>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var rootHost = "http://localhost:5180";
